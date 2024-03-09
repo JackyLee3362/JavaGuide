@@ -461,6 +461,12 @@ JDK1.8 默认使用的是 Parallel Scavenge + Parallel Old，如果指定了-XX:
 
 ### CMS 收集器
 
+> [!tip]
+>
+> 陈铭松，响应时间优先
+>
+> 「标记-清除」算法
+
 **CMS（Concurrent Mark Sweep）收集器是一种以获取==最短回收停顿时间==为目标的收集器。它非常符合在注重用户体验的应用上使用。**
 
 **CMS（Concurrent Mark Sweep）收集器是 HotSpot 虚拟机第一款真正意义上的并发收集器，它第一次实现了让垃圾收集线程与用户线程（基本上）同时工作。**
