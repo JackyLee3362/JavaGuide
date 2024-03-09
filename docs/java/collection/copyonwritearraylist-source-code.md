@@ -21,7 +21,7 @@ JDK1.5 引入了 `Java.util.concurrent`（JUC）包，其中提供了很多线�
 
 ### Copy-On-Write 的思想是什么？
 
-`CopyOnWriteArrayList`名字中的“Copy-On-Write”即写时复制，简称 COW。
+`CopyOnWriteArrayList`名字中的「Copy-On-Write」即写时复制，简称 COW。
 
 下面是维基百科对 Copy-On-Write 的介绍，介绍的挺不错：
 

@@ -602,7 +602,7 @@ CREATE [OR REPLACE] [ALGORITHM = {UNDEFINED | MERGE | TEMPTABLE}] VIEW view_name
 -- 事务的原理
     利用InnoDB的自动提交(autocommit)特性完成。
     普通的MySQL执行语句后，当前的数据提交操作均可被其他客户端可见。
-    而事务是暂时关闭“自动提交”机制，需要commit提交持久化数据操作。
+    而事务是暂时关闭「自动提交」机制，需要commit提交持久化数据操作。
 -- 注意
     1. 数据定义语言（DDL）语句不能被回滚，比如创建或取消数据库的语句，和创建、取消或更改表或存储的子程序的语句。
     2. 事务不能被嵌套
@@ -918,7 +918,7 @@ SHOW VIEW   -- 允许使用SHOW CREATE VIEW
 SHUTDOWN    -- 允许使用mysqladmin shutdown
 SUPER   -- 允许使用CHANGE MASTER, KILL, PURGE MASTER LOGS和SET GLOBAL语句，mysqladmin debug命令；允许您连接（一次），即使已达到max_connections。
 UPDATE  -- 允许使用UPDATE
-USAGE   -- “无权限”的同义词
+USAGE   -- 「无权限」的同义词
 GRANT OPTION    -- 允许授予权限
 ```
 

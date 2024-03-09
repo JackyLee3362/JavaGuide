@@ -16,7 +16,7 @@ icon: "java"
 
 有很多小伙伴就会问了：**这本书适不适合编程新手阅读呢？**
 
-我个人觉得这本书还是挺适合编程新手阅读的，毕竟是 “Head First” 系列。
+我个人觉得这本书还是挺适合编程新手阅读的，毕竟是 「Head First」 系列。
 
 **[《Java 核心技术卷 1 + 卷 2》](https://book.douban.com/subject/34898994/)**
 
@@ -155,7 +155,7 @@ Java 8 算是一个里程碑式的版本，现在一般企业还是用 Java 8 �
 
 ![《Spring 实战》-豆瓣](https://oss.javaguide.cn/github/javaguide/books/image-20220424113512453.png)
 
-不建议当做入门书籍读，入门的话可以找点国人的书或者视频看。这本定位就相当于是关于 Spring 的一个概览，只有一些基本概念的介绍和示例，涵盖了 Spring 的各个方面，但都不够深入。就像作者在最后一页写的那样：“学习 Spring，这才刚刚开始”。
+不建议当做入门书籍读，入门的话可以找点国人的书或者视频看。这本定位就相当于是关于 Spring 的一个概览，只有一些基本概念的介绍和示例，涵盖了 Spring 的各个方面，但都不够深入。就像作者在最后一页写的那样：「学习 Spring，这才刚刚开始」。
 
 **[《Spring 5 高级编程》](https://book.douban.com/subject/30452637/)**
 
@@ -255,6 +255,6 @@ O'Reilly 家族书，性能调优的入门书，我个人觉得性能调优是�
 
 [JavaGuide](https://javaguide.cn/) 的面试版本，涵盖了 Java 后端方面的大部分知识点比如 集合、JVM、多线程还有数据库 MySQL 等内容。
 
-公众号后台回复：“**面试突击**” 即可免费获取，无任何套路。
+公众号后台回复：「**面试突击**」 即可免费获取，无任何套路。
 
 ![JavaGuide 官方公众号](https://oss.javaguide.cn/github/javaguide/gongzhonghaoxuanchuan.png)

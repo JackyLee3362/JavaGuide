@@ -68,7 +68,7 @@ GitHub 上也已经有大佬用 Java 实现过一个简易的数据库，介绍�
 
 ## PostgreSQL
 
-和 MySQL 一样，PostgreSQL 也是开源免费且功能强大的关系型数据库。PostgreSQL 的 Slogan 是“**世界上最先进的开源关系型数据库**” 。
+和 MySQL 一样，PostgreSQL 也是开源免费且功能强大的关系型数据库。PostgreSQL 的 Slogan 是「**世界上最先进的开源关系型数据库**」 。
 
 ![](https://oss.javaguide.cn/github/javaguide/books/image-20220702144954370.png)
 

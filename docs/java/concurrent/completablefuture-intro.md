@@ -269,7 +269,7 @@ public CompletableFuture<Void> thenAcceptAsync(Consumer<? super T> action,
 }
 ```
 
-顾名思义，`Consumer` 属于消费型接口，它可以接收 1 个输入对象然后进行“消费”。
+顾名思义，`Consumer` 属于消费型接口，它可以接收 1 个输入对象然后进行「消费」。
 
 ```java
 @FunctionalInterface
@@ -331,7 +331,7 @@ public CompletableFuture<T> whenCompleteAsync(
 }
 ```
 
-相对于 `Consumer` ， `BiConsumer` 可以接收 2 个输入对象然后进行“消费”。
+相对于 `Consumer` ， `BiConsumer` 可以接收 2 个输入对象然后进行「消费」。
 
 ```java
 @FunctionalInterface

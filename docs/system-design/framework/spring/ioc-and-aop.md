@@ -29,7 +29,7 @@ IoC （Inversion of Control ）即控制反转/反转控制。它是一种思想
 - **传统的开发方式** ：往往是在类 A 中手动通过 new 关键字来 new 一个 B 的对象出来
 - **使用 IoC 思想的开发方式** ：不通过 new 关键字来创建对象，而是通过 IoC 容器(Spring 框架) 来帮助我们实例化对象。我们需要哪个对象，直接从 IoC 容器里面去取即可。
 
-从以上两种开发方式的对比来看：我们 “丧失了一个权力” (创建、管理对象的权力)，从而也得到了一个好处（不用再考虑对象的创建、管理等一系列的事情）
+从以上两种开发方式的对比来看：我们 「丧失了一个权力」 (创建、管理对象的权力)，从而也得到了一个好处（不用再考虑对象的创建、管理等一系列的事情）
 
 **为什么叫控制反转?**
 
@@ -57,7 +57,7 @@ IoC 的思想就是两方之间不互相依赖，由第三方容器来管理相�
 
 ![](https://oss.javaguide.cn/github/javaguide/system-design/framework/spring/why-ioc.png)
 
-使用 IoC 的思想，我们将对象的控制权（创建、管理）交有 IoC 容器去管理，我们在使用的时候直接向 IoC 容器 “要” 就可以了
+使用 IoC 的思想，我们将对象的控制权（创建、管理）交有 IoC 容器去管理，我们在使用的时候直接向 IoC 容器 「要」 就可以了
 
 ![](https://oss.javaguide.cn/github/javaguide/system-design/framework/spring/why-ioc-2.png)
 

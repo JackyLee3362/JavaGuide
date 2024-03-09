@@ -73,7 +73,7 @@ Redis 内存碎片率的计算公式：`mem_fragmentation_ratio` （内存碎片
 
 一定不要误认为`used_memory_rss` 减去 `used_memory`值就是内存碎片的大小！！！这不仅包括内存碎片，还包括其他进程开销，以及共享库、堆栈等的开销。
 
-很多小伙伴可能要问了：“多大的内存碎片率才是需要清理呢？”。
+很多小伙伴可能要问了：「多大的内存碎片率才是需要清理呢？」。
 
 通常情况下，我们认为 `mem_fragmentation_ratio > 1.5` 的话才需要清理内存碎片。 `mem_fragmentation_ratio > 1.5` 意味着你使用 Redis 存储实际大小 2G 的数据需要使用大于 3G 的内存。
 

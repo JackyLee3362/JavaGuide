@@ -72,7 +72,7 @@ public class InterfaceNewImpl implements InterfaceNew , InterfaceNew1{
 
 **在 Java 8 ，接口和抽象类有什么区别的？**
 
-很多小伙伴认为：“既然 interface 也可以有自己的方法实现，似乎和 abstract class 没多大区别了。”
+很多小伙伴认为：「既然 interface 也可以有自己的方法实现，似乎和 abstract class 没多大区别了。」
 
 其实它们还是有区别的
 
@@ -913,7 +913,7 @@ public void pushWeek(){
                 + period.getYears() + "年"
                 + period.getMonths() + "月"
                 + period.getDays() + "天");
-   //打印结果是 “date1 到 date2 相隔：0年9月27天”
+   //打印结果是 「date1 到 date2 相隔：0年9月27天」
      //这里period.getDays()得到的天是抛去年月以外的天数，并不是总天数
      //如果要获取纯粹的总天数应该用下面的方法
      long day = date2.toEpochDay() - date1.toEpochDay();

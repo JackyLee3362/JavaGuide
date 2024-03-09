@@ -54,9 +54,9 @@ Gradle 是新一代的构建系统，具有高效和灵活等诸多优势，广�
 
 Gradle 官方文档是这样介绍的 Gradle Wrapper 的：
 
-> The recommended way to execute any Gradle build is with the help of the Gradle Wrapper (in short just “Wrapper”). The Wrapper is a script that invokes a declared version of Gradle, downloading it beforehand if necessary. As a result, developers can get up and running with a Gradle project quickly without having to follow manual installation processes saving your company time and money.
+> The recommended way to execute any Gradle build is with the help of the Gradle Wrapper (in short just 「Wrapper」). The Wrapper is a script that invokes a declared version of Gradle, downloading it beforehand if necessary. As a result, developers can get up and running with a Gradle project quickly without having to follow manual installation processes saving your company time and money.
 >
-> 执行 Gradle 构建的推荐方法是借助 Gradle Wrapper(简而言之就是“Wrapper”)。Wrapper 它是一个脚本，调用了已经声明的 Gradle 版本，如果需要的话，可以预先下载它。因此，开发人员可以快速启动并运行 Gradle 项目，而不必遵循手动安装过程，从而为公司节省时间和金钱。
+> 执行 Gradle 构建的推荐方法是借助 Gradle Wrapper(简而言之就是「Wrapper」)。Wrapper 它是一个脚本，调用了已经声明的 Gradle 版本，如果需要的话，可以预先下载它。因此，开发人员可以快速启动并运行 Gradle 项目，而不必遵循手动安装过程，从而为公司节省时间和金钱。
 
 我们可以称 Gradle Wrapper 为 Gradle 包装器，它将 Gradle 再次包装，让所有的 Gradle 构建方法在 Gradle 包装器的帮助下运行。
 
@@ -177,7 +177,7 @@ task helloTask{
 }
 ```
 
-创建一个 Task 后，可以根据需要给 Task 添加不同的 Action，上面的“doLast”就是给队列尾增加一个 Action。
+创建一个 Task 后，可以根据需要给 Task 添加不同的 Action，上面的「doLast」就是给队列尾增加一个 Action。
 
 ```groovy
  //在Action 队列头部添加Action

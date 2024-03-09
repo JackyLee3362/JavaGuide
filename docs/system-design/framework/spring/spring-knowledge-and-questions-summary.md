@@ -440,7 +440,7 @@ MVC 是模型(Model)、视图(View)、控制器(Controller)的简写，其核心
 
 **Model 2 时代**
 
-学过 Servlet 并做过相关 Demo 的朋友应该了解“Java Bean(Model)+ JSP（View）+Servlet（Controller） ”这种开发模式，这就是早期的 JavaWeb MVC 开发模式。
+学过 Servlet 并做过相关 Demo 的朋友应该了解「Java Bean(Model)+ JSP（View）+Servlet（Controller） 」这种开发模式，这就是早期的 JavaWeb MVC 开发模式。
 
 - Model:系统涉及的数据，也就是 dao 和 bean。
 - View：展示模型中的数据，只是用来展示。

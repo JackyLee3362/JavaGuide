@@ -195,7 +195,7 @@ public class Student {
 
 - 对象类型和引用类型之间具有继承（类）/实现（接口）的关系；
 - 引用类型变量发出的方法调用的到底是哪个类中的方法，必须在程序运行期间才能确定；
-- 多态不能调用“只在子类存在但在父类不存在”的方法；
+- 多态不能调用「只在子类存在但在父类不存在」的方法；
 - 如果子类重写了父类的方法，真正执行的是子类覆盖的方法，如果子类没有覆盖父类的方法，执行的是父类的方法。
 
 ### 接口和抽象类有什么共同点和区别？
@@ -375,7 +375,7 @@ public boolean equals(Object obj) {
 
 `equals()` 方法存在两种使用情况：
 
-- **类没有重写 `equals()`方法**：通过`equals()`比较该类的两个对象时，等价于通过“==”比较这两个对象，使用的默认是 `Object`类`equals()`方法。
+- **类没有重写 `equals()`方法**：通过`equals()`比较该类的两个对象时，等价于通过「==」比较这两个对象，使用的默认是 `Object`类`equals()`方法。
 - **类重写了 `equals()`方法**：一般我们都重写 `equals()`方法来比较两个对象中的属性是否相等；若它们的属性相等，则返回 true(即，认为这两个对象相等)。
 
 举个例子（这里只是为了举例。实际上，你按照下面这种写法的话，像 IDEA 这种比较智能的 IDE 都会提示你将 `==` 换成 `equals()` ）：
@@ -438,11 +438,11 @@ public boolean equals(Object anObject) {
 public native int hashCode();
 ```
 
-散列表存储的是键值对(key-value)，它的特点是：**能根据“键”快速的检索出对应的“值”。这其中就利用到了散列码！（可以快速找到所需要的对象）**
+散列表存储的是键值对(key-value)，它的特点是：**能根据「键」快速的检索出对应的「值」。这其中就利用到了散列码！（可以快速找到所需要的对象）**
 
 ### 为什么要有 hashCode？
 
-我们以“`HashSet` 如何检查重复”为例子来说明为什么要有 `hashCode`？
+我们以「`HashSet` 如何检查重复」为例子来说明为什么要有 `hashCode`？
 
 下面这段内容摘自我的 Java 启蒙书《Head First Java》:
 
@@ -551,7 +551,7 @@ public final class String implements java.io.Serializable, Comparable<String>, C
 >
 > ```java
 > public final class String implements java.io.Serializable,Comparable<String>, CharSequence {
->     // @Stable 注解表示变量最多被修改一次，称为“稳定的”。
+>     // @Stable 注解表示变量最多被修改一次，称为「稳定的」。
 >     @Stable
 >     private final byte[] value;
 > }
@@ -574,9 +574,9 @@ public final class String implements java.io.Serializable, Comparable<String>, C
 >
 > 这是官方的介绍：<https://openjdk.java.net/jeps/254> 。
 
-### 字符串拼接用“+” 还是 StringBuilder?
+### 字符串拼接用「+」 还是 StringBuilder?
 
-Java 语言本身并不支持运算符重载，“+”和“+=”是专门为 String 类重载过的运算符，也是 Java 中仅有的两个重载过的运算符。
+Java 语言本身并不支持运算符重载，「+」和「+=」是专门为 String 类重载过的运算符，也是 Java 中仅有的两个重载过的运算符。
 
 ```java
 String str1 = "he";
@@ -589,9 +589,9 @@ String str4 = str1 + str2 + str3;
 
 ![](https://oss.javaguide.cn/github/javaguide/java/image-20220422161637929.png)
 
-可以看出，字符串对象通过“+”的字符串拼接方式，实际上是通过 `StringBuilder` 调用 `append()` 方法实现的，拼接完成之后调用 `toString()` 得到一个 `String` 对象 。
+可以看出，字符串对象通过「+」的字符串拼接方式，实际上是通过 `StringBuilder` 调用 `append()` 方法实现的，拼接完成之后调用 `toString()` 得到一个 `String` 对象 。
 
-不过，在循环内使用“+”进行字符串的拼接的话，存在比较明显的缺陷：**编译器不会创建单个 `StringBuilder` 以复用，会导致创建过多的 `StringBuilder` 对象**。
+不过，在循环内使用「+」进行字符串的拼接的话，存在比较明显的缺陷：**编译器不会创建单个 `StringBuilder` 以复用，会导致创建过多的 `StringBuilder` 对象**。
 
 ```java
 String[] arr = {"he", "llo", "world"};
@@ -621,7 +621,7 @@ System.out.println(s);
 
 如果你使用 IDEA 的话，IDEA 自带的代码检查机制也会提示你修改代码。
 
-不过，使用 “+” 进行字符串拼接会产生大量的临时对象的问题在 JDK9 中得到了解决。在 JDK9 当中，字符串相加 “+” 改为了用动态方法 `makeConcatWithConstants()` 来实现，而不是大量的 `StringBuilder` 了。这个改进是 JDK9 的 [JEP 280](https://openjdk.org/jeps/280) 提出的，这也意味着 JDK 9 之后，你可以放心使用“+” 进行字符串拼接了。关于这部分改进的详细介绍，推荐阅读这篇文章：还在无脑用 [StringBuilder？来重温一下字符串拼接吧](https://juejin.cn/post/7182872058743750715) 。
+不过，使用 「+」 进行字符串拼接会产生大量的临时对象的问题在 JDK9 中得到了解决。在 JDK9 当中，字符串相加 「+」 改为了用动态方法 `makeConcatWithConstants()` 来实现，而不是大量的 `StringBuilder` 了。这个改进是 JDK9 的 [JEP 280](https://openjdk.org/jeps/280) 提出的，这也意味着 JDK 9 之后，你可以放心使用「+」 进行字符串拼接了。关于这部分改进的详细介绍，推荐阅读这篇文章：还在无脑用 [StringBuilder？来重温一下字符串拼接吧](https://juejin.cn/post/7182872058743750715) 。
 
 ### String#equals() 和 Object#equals() 有何区别？
 
@@ -632,10 +632,10 @@ System.out.println(s);
 **字符串常量池** 是 JVM 为了提升性能和减少内存消耗针对字符串（String 类）专门开辟的一块区域，主要目的是为了避免字符串的重复创建。
 
 ```java
-// 在堆中创建字符串对象”ab“
-// 将字符串对象”ab“的引用保存在字符串常量池中
+// 在堆中创建字符串对象」ab「
+// 将字符串对象」ab「的引用保存在字符串常量池中
 String aa = "ab";
-// 直接返回字符串常量池中字符串对象”ab“的引用
+// 直接返回字符串常量池中字符串对象」ab「的引用
 String bb = "ab";
 System.out.println(aa==bb);// true
 ```
@@ -646,7 +646,7 @@ System.out.println(aa==bb);// true
 
 会创建 1 或 2 个字符串对象。
 
-1、如果字符串常量池中不存在字符串对象“abc”的引用，那么它会在堆上创建两个字符串对象，其中一个字符串对象的引用会被保存在字符串常量池中。
+1、如果字符串常量池中不存在字符串对象「abc」的引用，那么它会在堆上创建两个字符串对象，其中一个字符串对象的引用会被保存在字符串常量池中。
 
 示例代码（JDK 1.8）：
 
@@ -660,14 +660,14 @@ String s1 = new String("abc");
 
 `ldc` 命令用于判断字符串常量池中是否保存了对应的字符串对象的引用，如果保存了的话直接返回，如果没有保存的话，会在堆中创建对应的字符串对象并将该字符串对象的引用保存到字符串常量池中。
 
-2、如果字符串常量池中已存在字符串对象“abc”的引用，则只会在堆中创建 1 个字符串对象“abc”。
+2、如果字符串常量池中已存在字符串对象「abc」的引用，则只会在堆中创建 1 个字符串对象「abc」。
 
 示例代码（JDK 1.8）：
 
 ```java
-// 字符串常量池中已存在字符串对象“abc”的引用
+// 字符串常量池中已存在字符串对象「abc」的引用
 String s1 = "abc";
-// 下面这段代码只会在堆中创建 1 个字符串对象“abc”
+// 下面这段代码只会在堆中创建 1 个字符串对象「abc」
 String s2 = new String("abc");
 ```
 
@@ -675,7 +675,7 @@ String s2 = new String("abc");
 
 ![](https://oss.javaguide.cn/github/javaguide/open-source-project/image-20220413180021072.png)
 
-这里就不对上面的字节码进行详细注释了，7 这个位置的 `ldc` 命令不会在堆中创建新的字符串对象“abc”，这是因为 0 这个位置已经执行了一次 `ldc` 命令，已经在堆中创建过一次字符串对象“abc”了。7 这个位置执行 `ldc` 命令会直接返回字符串常量池中字符串对象“abc”对应的引用。
+这里就不对上面的字节码进行详细注释了，7 这个位置的 `ldc` 命令不会在堆中创建新的字符串对象「abc」，这是因为 0 这个位置已经执行了一次 `ldc` 命令，已经在堆中创建过一次字符串对象「abc」了。7 这个位置执行 `ldc` 命令会直接返回字符串常量池中字符串对象「abc」对应的引用。
 
 ### String#intern 方法有什么作用?
 
@@ -687,14 +687,14 @@ String s2 = new String("abc");
 示例代码（JDK 1.8） :
 
 ```java
-// 在堆中创建字符串对象”Java“
-// 将字符串对象”Java“的引用保存在字符串常量池中
+// 在堆中创建字符串对象」Java「
+// 将字符串对象」Java「的引用保存在字符串常量池中
 String s1 = "Java";
-// 直接返回字符串常量池中字符串对象”Java“对应的引用
+// 直接返回字符串常量池中字符串对象」Java「对应的引用
 String s2 = s1.intern();
 // 会在堆中在单独创建一个字符串对象
 String s3 = new String("Java");
-// 直接返回字符串常量池中字符串对象”Java“对应的引用
+// 直接返回字符串常量池中字符串对象」Java「对应的引用
 String s4 = s3.intern();
 // s1 和 s2 指向的是堆中的同一个对象
 System.out.println(s1 == s2); // true
@@ -704,7 +704,7 @@ System.out.println(s3 == s4); // false
 System.out.println(s1 == s4); //true
 ```
 
-### String 类型的变量和常量做“+”运算时发生了什么？
+### String 类型的变量和常量做「+」运算时发生了什么？
 
 先来看字符串不加 `final` 关键字拼接的情况（JDK1.8）：
 
@@ -737,11 +737,11 @@ System.out.println(str4 == str5);//false
 
 - 基本数据类型( `byte`、`boolean`、`short`、`char`、`int`、`float`、`long`、`double`)以及字符串常量。
 - `final` 修饰的基本数据类型和字符串变量
-- 字符串通过 “+”拼接得到的字符串、基本数据类型之间算数运算（加减乘除）、基本数据类型的位运算（<<、\>>、\>>> ）
+- 字符串通过 「+」拼接得到的字符串、基本数据类型之间算数运算（加减乘除）、基本数据类型的位运算（<<、\>>、\>>> ）
 
 **引用的值在程序编译期是无法确定的，编译器无法对其进行优化。**
 
-对象引用和“+”的字符串拼接方式，实际上是通过 `StringBuilder` 调用 `append()` 方法实现的，拼接完成之后调用 `toString()` 得到一个 `String` 对象 。
+对象引用和「+」的字符串拼接方式，实际上是通过 `StringBuilder` 调用 `append()` 方法实现的，拼接完成之后调用 `toString()` 得到一个 `String` 对象 。
 
 ```java
 String str4 = new StringBuilder().append(str1).append(str2).toString();

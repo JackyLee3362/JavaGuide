@@ -445,7 +445,7 @@ WHERE prod_name LIKE '__ inch teddy bear';
 
 ## 连接
 
-JOIN 是“连接”的意思，顾名思义，SQL JOIN 子句用于将两个或者多个表联合起来进行查询。
+JOIN 是「连接」的意思，顾名思义，SQL JOIN 子句用于将两个或者多个表联合起来进行查询。
 
 连接表时需要在每个表中选择一个字段，并对这些字段的值进行比较，值相同的两条记录将合并为一条。**连接表的本质就是将不同表的记录合并起来，形成一张新表。当然，这张新表只是临时的，它仅存在于本次查询期间**。
 
@@ -504,7 +504,7 @@ SQL 允许在 `JOIN` 左边加上一些修饰性的关键词，从而形成不�
 
 如果不加任何修饰词，只写 `JOIN`，那么默认为 `INNER JOIN`
 
-对于 `INNER JOIN` 来说，还有一种隐式的写法，称为 “**隐式内连接**”，也就是没有 `INNER JOIN` 关键字，使用 `WHERE` 语句实现内连接的功能
+对于 `INNER JOIN` 来说，还有一种隐式的写法，称为 「**隐式内连接**」，也就是没有 `INNER JOIN` 关键字，使用 `WHERE` 语句实现内连接的功能
 
 ```sql
 # 隐式内连接
@@ -952,7 +952,7 @@ SELECT user FROM user;
 | SUPER                   | 允许用户使用其他管理操作，例如 CHANGE MASTER TO，KILL，PURGE BINARY LOGS，SET GLOBAL 和 mysqladmin 命令 | X        |        |          |          |     |     |
 | TRIGGER                 | 允许用户使用 TRIGGER 操作。                                                                             | X        | X      | X        |          |     |     |
 | UPDATE                  | 允许用户使用 UPDATE 语句                                                                                | X        | X      | X        | X        |     |     |
-| USAGE                   | 相当于“没有特权”                                                                                        |          |        |          |          |     |     |
+| USAGE                   | 相当于「没有特权」                                                                                        |          |        |          |          |     |     |
 
 ### 创建账户
 

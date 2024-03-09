@@ -32,7 +32,7 @@ Shell 编程在我们的日常开发工作中非常实用，目前 Linux 系统�
 
 ### 什么是 Shell？
 
-简单来说“Shell 编程就是对一堆 Linux 命令的逻辑化处理”。
+简单来说「Shell 编程就是对一堆 Linux 命令的逻辑化处理」。
 
 W3Cschool 上的一篇文章是这样介绍 Shell 的，如下图所示。
 ![什么是 Shell？](https://oss.javaguide.cn/github/javaguide/cs-basics/shell/19456505.jpg)

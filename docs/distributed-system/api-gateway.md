@@ -156,7 +156,7 @@ APISIX 是一款基于 OpenResty 和 etcd 的高性能、云原生、可扩展�
 
 作为 Nginx 和 Kong 的替代项目，APISIX 目前已经是 Apache 顶级开源项目，并且是最快毕业的国产开源项目。国内目前已经有很多知名企业（比如金山、有赞、爱奇艺、腾讯、贝壳）使用 APISIX 处理核心的业务流量。
 
-根据官网介绍：“APISIX 已经生产可用，功能、性能、架构全面优于 Kong”。
+根据官网介绍：「APISIX 已经生产可用，功能、性能、架构全面优于 Kong」。
 
 APISIX 同样支持定制化的插件开发。开发者除了能够使用 Lua 语言开发插件，还能通过下面两种方式开发来避开 Lua 语言的学习成本：
 
@@ -194,7 +194,7 @@ Shenyu 通过插件扩展功能，插件是 ShenYu 的灵魂，并且插件也�
 
 对于公司业务以 Java 为主要开发语言的情况下，Spring Cloud Gateway 通常是个不错的选择，其优点有：简单易用、成熟稳定、与 Spring Cloud 生态系统兼容、Spring 社区成熟等等。不过，Spring Cloud Gateway 也有一些局限性和不足之处， 一般还需要结合其他网关一起使用比如 OpenResty。并且，其性能相比较于 Kong 和 APISIX，还是差一些。如果对性能要求比较高的话，Spring Cloud Gateway 不是一个好的选择。
 
-Kong 和 APISIX 功能更丰富，性能更强大，技术架构更贴合云原生。Kong 是开源 API 网关的鼻祖，生态丰富，用户群体庞大。APISIX 属于后来者，更优秀一些，根据 APISIX 官网介绍：“APISIX 已经生产可用，功能、性能、架构全面优于 Kong”。下面简单对比一下二者：
+Kong 和 APISIX 功能更丰富，性能更强大，技术架构更贴合云原生。Kong 是开源 API 网关的鼻祖，生态丰富，用户群体庞大。APISIX 属于后来者，更优秀一些，根据 APISIX 官网介绍：「APISIX 已经生产可用，功能、性能、架构全面优于 Kong」。下面简单对比一下二者：
 
 - APISIX 基于 etcd 来做配置中心，不存在单点问题，云原生友好；而 Kong 基于 Apache Cassandra/PostgreSQL ，存在单点风险，需要额外的基础设施保障做高可用。
 - APISIX 支持热更新，并且实现了毫秒级别的热更新响应；而 Kong 不支持热更新。

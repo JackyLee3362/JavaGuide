@@ -98,7 +98,7 @@ Java 8 及之前的版本，`String` 一直是用 `char[]` 存储。在 Java 9 �
 
 ```java
 public final class String implements java.io.Serializable,Comparable<String>, CharSequence {
-    // @Stable 注解表示变量最多被修改一次，称为“稳定的”。
+    // @Stable 注解表示变量最多被修改一次，称为「稳定的」。
     @Stable
     private final byte[] value;
 }

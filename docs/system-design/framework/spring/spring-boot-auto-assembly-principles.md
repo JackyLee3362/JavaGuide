@@ -7,7 +7,7 @@ tag:
 
 > 作者：[Miki-byte-1024](https://github.com/Miki-byte-1024) & [Snailclimb](https://github.com/Snailclimb)
 
-每次问到 Spring Boot， 面试官非常喜欢问这个问题：“讲述一下 SpringBoot 自动装配原理？”。
+每次问到 Spring Boot， 面试官非常喜欢问这个问题：「讲述一下 SpringBoot 自动装配原理？」。
 
 我觉得我们可以从以下几个方面回答：
 
@@ -255,7 +255,7 @@ spring-boot/spring-boot-project/spring-boot-autoconfigure/src/main/resources/MET
 
 **第 4 步**：
 
-到这里可能面试官会问你:“`spring.factories`中这么多配置，每次启动都要全部加载么？”。
+到这里可能面试官会问你:「`spring.factories`中这么多配置，每次启动都要全部加载么？」。
 
 很明显，这是不现实的。我们 debug 到后面你会发现，`configurations` 的值变小了。
 

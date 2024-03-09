@@ -130,9 +130,9 @@ int JumpFloorII(int number) {
 
 java 中有三种移位运算符：
 
-1. “<<” : **左移运算符**，等同于乘 2 的 n 次方
-2. “>>”: **右移运算符**，等同于除 2 的 n 次方
-3. “>>>” : **无符号右移运算符**，不管移动前最高位是 0 还是 1，右移后左侧产生的空位部分都以 0 来填充。与>>类似。
+1. 「<<」 : **左移运算符**，等同于乘 2 的 n 次方
+2. 「>>」: **右移运算符**，等同于除 2 的 n 次方
+3. 「>>>」 : **无符号右移运算符**，不管移动前最高位是 0 还是 1，右移后左侧产生的空位部分都以 0 来填充。与>>类似。
 
 ```java
 int a = 16;
@@ -179,11 +179,11 @@ public boolean Find(int target, int [][] array) {
 
 **题目描述：**
 
-请实现一个函数，将一个字符串中的空格替换成“%20”。例如，当字符串为 We Are Happy.则经过替换之后的字符串为 We%20Are%20Happy。
+请实现一个函数，将一个字符串中的空格替换成「%20」。例如，当字符串为 We Are Happy.则经过替换之后的字符串为 We%20Are%20Happy。
 
 **问题分析：**
 
-这道题不难，我们可以通过循环判断字符串的字符是否为空格，是的话就利用 append()方法添加追加“%20”，否则还是追加原字符。
+这道题不难，我们可以通过循环判断字符串的字符是否为空格，是的话就利用 append()方法添加追加「%20」，否则还是追加原字符。
 
 或者最简单的方法就是利用：replaceAll(String regex,String replacement)方法了，一行代码就可以解决。
 
@@ -213,7 +213,7 @@ public String replaceSpace(StringBuffer str) {
     //return str.toString().replaceAll(" ", "%20");
     //public String replaceAll(String regex,String replacement)
     //用给定的替换替换与给定的regular expression匹配的此字符串的每个子字符串。
-    //\ 转义字符. 如果你要使用 "\" 本身, 则应该使用 "\\". String类型中的空格用“\s”表示，所以我这里猜测"\\s"就是代表空格的意思
+    //\ 转义字符. 如果你要使用 "\" 本身, 则应该使用 "\\". String类型中的空格用「\s」表示，所以我这里猜测"\\s"就是代表空格的意思
     return str.toString().replaceAll("\\s", "%20");
 }
 ```

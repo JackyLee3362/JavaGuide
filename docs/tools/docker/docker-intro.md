@@ -74,7 +74,7 @@ tag:
 
 ### 2.4 为什么要用 Docker ?
 
-- **Docker 的镜像提供了除内核外完整的运行时环境，确保了应用运行环境一致性，从而不会再出现 “这段代码在我机器上没问题啊” 这类问题；——一致的运行环境**
+- **Docker 的镜像提供了除内核外完整的运行时环境，确保了应用运行环境一致性，从而不会再出现 「这段代码在我机器上没问题啊」 这类问题；——一致的运行环境**
 - **可以做到秒级、甚至毫秒级的启动时间。大大的节约了开发、测试、部署的时间。——更快速的启动时间**
 - **避免公用的服务器，资源会容易受到其他用户的影响。——隔离性**
 - **善于处理集中爆发的服务器使用压力；——弹性伸缩，快速扩展**
@@ -241,7 +241,7 @@ docker rmi f6509bac4980 #  或者 docker rmi mysql
 
 **Docker 的概念以及常见命令基本上已经讲完，我们再来谈谈：Build, Ship, and Run。**
 
-如果你搜索 Docker 官网，会发现如下的字样：**“Docker - Build, Ship, and Run Any App, Anywhere”**。那么 Build, Ship, and Run 到底是在干什么呢？
+如果你搜索 Docker 官网，会发现如下的字样：**「Docker - Build, Ship, and Run Any App, Anywhere」**。那么 Build, Ship, and Run 到底是在干什么呢？
 
 ![](https://oss.javaguide.cn/github/javaguide/tools/docker/docker-build-ship-run.jpg)
 
