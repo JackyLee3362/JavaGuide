@@ -4,7 +4,6 @@ category: Java
 tag:
   - JVM
 ---
-
 ## 回顾一下类加载过程
 
 开始介绍类加载器和双亲委派模型之前，简单回顾一下类加载过程
@@ -38,9 +37,9 @@ tag:
 
 翻译过来大概的意思是：
 
-> 类加载器是一个负责加载类的对象。`ClassLoader` 是一个抽象类。给定类的二进制名称，类加载器应尝试定位或生成构成类定义的数据。典型的策略是将名称转换为文件名，然后从文件系统中读取该名称的「类文件」。
+> 类加载器是一个负责加载类的对象。`ClassLoader` 是一个抽象类。给定类的二进制名称，类加载器应尝试定位或生成构成类定义的数据。典型的策略是将名称转换为文件名，然后从文件系统中读取该名称的「类文件」
 >
-> 每个 Java 类都有一个引用指向加载它的 `ClassLoader`。不过，数组类不是通过 `ClassLoader` 创建的，而是 JVM 在需要的时候自动创建的，数组类通过`getClassLoader()`方法获取 `ClassLoader` 的时候和该数组的元素类型的 `ClassLoader` 是一致的。
+> 每个 Java 类都有一个引用指向加载它的 `ClassLoader`。不过，数组类不是通过 `ClassLoader` 创建的，而是 JVM 在需要的时候自动创建的，数组类通过 `getClassLoader()`方法获取 `ClassLoader` 的时候和该数组的元素类型的 `ClassLoader` 是一致的。
 
 从上面的介绍可以看出:
 
@@ -94,7 +93,7 @@ JVM 中内置了三个重要的 `ClassLoader`：
 
 > 🌈 拓展一下：
 >
-> - **`rt.jar`**：rt 代表「RunTime」，`rt.jar`是 Java 基础类库，包含 Java doc 里面看到的所有的类的类文件。也就是说，我们常用内置库 `java.xxx.*`都在里面，比如`java.util.*`、`java.io.*`、`java.nio.*`、`java.lang.*`、`java.sql.*`、`java.math.*`。
+> - **`rt.jar`**：rt 代表「RunTime」，`rt.jar`是 Java 基础类库，包含 Java doc 里面看到的所有的类的类文件。也就是说，我们常用内置库 `java.xxx.*`都在里面，比如 `java.util.*`、`java.io.*`、`java.nio.*`、`java.lang.*`、`java.sql.*`、`java.math.*`。
 > - Java 9 引入了模块系统，并且略微更改了上述的类加载器。扩展类加载器被改名为平台类加载器（platform class loader）。Java SE 中除了少数几个关键模块，比如说 `java.base` 是由启动类加载器加载之外，其他的模块均由平台类加载器所加载。
 
 除了这三种类加载器之外，用户还可以加入自定义的类加载器来进行拓展，以满足自己的特殊需求。就比如说，我们可以对 Java 类的字节码（ `.class` 文件）进行加密，加载时再利用自定义的类加载器对其解密。
@@ -103,7 +102,7 @@ JVM 中内置了三个重要的 `ClassLoader`：
 
 除了 `BootstrapClassLoader` 是 JVM 自身的一部分之外，其他所有的类加载器都是在 JVM 外部实现的，并且全都继承自 `ClassLoader`抽象类。这样做的好处是用户可以自定义类加载器，以便让应用程序自己决定如何去获取所需的类。
 
-每个 `ClassLoader` 可以通过`getParent()`获取其父 `ClassLoader`，如果获取到 `ClassLoader` 为`null`的话，那么该类是通过 `BootstrapClassLoader` 加载的。
+每个 `ClassLoader` 可以通过 `getParent()`获取其父 `ClassLoader`，如果获取到 `ClassLoader` 为 `null`的话，那么该类是通过 `BootstrapClassLoader` 加载的。
 
 ```java
 public abstract class ClassLoader {
@@ -118,7 +117,7 @@ public abstract class ClassLoader {
 }
 ```
 
-**为什么 获取到 `ClassLoader` 为`null`就是 `BootstrapClassLoader` 加载的呢？** 这是因为`BootstrapClassLoader` 由 C++ 实现，由于这个 C++ 实现的类加载器在 Java 中是没有与之对应的类的，所以拿到的结果是 null。
+**为什么 获取到 `ClassLoader` 为 `null`就是 `BootstrapClassLoader` 加载的呢？** 这是因为 `BootstrapClassLoader` 由 C++ 实现，由于这个 C++ 实现的类加载器在 Java 中是没有与之对应的类的，所以拿到的结果是 null。
 
 下面我们来看一个获取 `ClassLoader` 的小案例：
 
@@ -155,13 +154,13 @@ public class PrintClassLoaderTree {
 
 从输出结果可以看出：
 
-- 我们编写的 Java 类 `PrintClassLoaderTree` 的 `ClassLoader` 是`AppClassLoader`；
-- `AppClassLoader`的父 `ClassLoader` 是`ExtClassLoader`；
-- `ExtClassLoader`的父`ClassLoader`是`Bootstrap ClassLoader`，因此输出结果为 null。
+- 我们编写的 Java 类 `PrintClassLoaderTree` 的 `ClassLoader` 是 `AppClassLoader`；
+- `AppClassLoader`的父 `ClassLoader` 是 `ExtClassLoader`；
+- `ExtClassLoader`的父 `ClassLoader`是 `Bootstrap ClassLoader`，因此输出结果为 null。
 
 ### 自定义类加载器
 
-我们前面也说说了，除了 `BootstrapClassLoader` 其他类加载器均由 Java 实现且全部继承自`java.lang.ClassLoader`。如果我们要自定义自己的类加载器，很明显需要继承 `ClassLoader`抽象类。
+我们前面也说说了，除了 `BootstrapClassLoader` 其他类加载器均由 Java 实现且全部继承自 `java.lang.ClassLoader`。如果我们要自定义自己的类加载器，很明显需要继承 `ClassLoader`抽象类。
 
 `ClassLoader` 类有两个关键的方法：
 
@@ -172,7 +171,7 @@ public class PrintClassLoaderTree {
 
 > Subclasses of `ClassLoader` are encouraged to override `findClass(String name)`, rather than this method.
 >
-> 建议 `ClassLoader`的子类重写 `findClass(String name)`方法而不是`loadClass(String name, boolean resolve)` 方法。
+> 建议 `ClassLoader`的子类重写 `findClass(String name)`方法而不是 `loadClass(String name, boolean resolve)` 方法。
 
 如果我们不想打破双亲委派模型，就重写 `ClassLoader` 类中的 `findClass()` 方法即可，无法被父类加载器加载的类最终会通过这个方法被加载。但是，如果想打破双亲委派模型则需要重写 `loadClass()` 方法。
 
@@ -203,7 +202,7 @@ public class PrintClassLoaderTree {
 
 注意 ⚠️：双亲委派模型并不是一种强制性的约束，只是 JDK 官方推荐的一种方式。如果我们因为某些特殊需求想要打破双亲委派模型，也是可以的，后文会介绍具体的方法。
 
-其实这个双亲翻译的容易让别人误解，我们一般理解的双亲都是父母，这里的双亲更多地表达的是「父母这一辈」的人而已，并不是说真的有一个 `MotherClassLoader` 和一个`FatherClassLoader` 。个人觉得翻译成单亲委派模型更好一些，不过，国内既然翻译成了双亲委派模型并流传了，按照这个来也没问题，不要被误解了就好。
+其实这个双亲翻译的容易让别人误解，我们一般理解的双亲都是父母，这里的双亲更多地表达的是「父母这一辈」的人而已，并不是说真的有一个 `MotherClassLoader` 和一个 `FatherClassLoader` 。个人觉得翻译成单亲委派模型更好一些，不过，国内既然翻译成了双亲委派模型并流传了，按照这个来也没问题，不要被误解了就好。
 
 另外，类加载器之间的父子关系一般不是以继承的关系来实现的，而是通常使用组合关系来复用父加载器的代码。
 
@@ -307,8 +306,8 @@ Tomcat 的类加载器的层次结构如下：
 
 Tomcat 这四个自定义的类加载器对应的目录如下：
 
-- `CommonClassLoader`对应`<Tomcat>/common/*`
-- `CatalinaClassLoader`对应`<Tomcat >/server/*`
+- `CommonClassLoader`对应 `<Tomcat>/common/*`
+- `CatalinaClassLoader`对应 `<Tomcat >/server/*`
 - `SharedClassLoader`对应 `<Tomcat >/shared/*`
 - `WebAppClassloader`对应 `<Tomcat >/webapps/<app>/WEB-INF/*`
 
@@ -320,7 +319,7 @@ Tomcat 这四个自定义的类加载器对应的目录如下：
 
 单纯依靠自定义类加载器没办法满足某些场景的要求，例如，有些情况下，高层的类加载器需要加载低层的加载器才能加载的类。
 
-比如，SPI 中，SPI 的接口（如 `java.sql.Driver`）是由 Java 核心库提供的，由`BootstrapClassLoader` 加载。而 SPI 的实现（如`com.mysql.cj.jdbc.Driver`）是由第三方供应商提供的，它们是由应用程序类加载器或者自定义类加载器来加载的。默认情况下，一个类及其依赖类由同一个类加载器加载。所以，加载 SPI 的接口的类加载器（`BootstrapClassLoader`）也会用来加载 SPI 的实现。按照双亲委派模型，`BootstrapClassLoader` 是无法找到 SPI 的实现类的，因为它无法委托给子类加载器去尝试加载。
+比如，SPI 中，SPI 的接口（如 `java.sql.Driver`）是由 Java 核心库提供的，由 `BootstrapClassLoader` 加载。而 SPI 的实现（如 `com.mysql.cj.jdbc.Driver`）是由第三方供应商提供的，它们是由应用程序类加载器或者自定义类加载器来加载的。默认情况下，一个类及其依赖类由同一个类加载器加载。所以，加载 SPI 的接口的类加载器（`BootstrapClassLoader`）也会用来加载 SPI 的实现。按照双亲委派模型，`BootstrapClassLoader` 是无法找到 SPI 的实现类的，因为它无法委托给子类加载器去尝试加载。
 
 再比如，假设我们的项目中有 Spring 的 jar 包，由于其是 Web 应用之间共享的，因此会由 `SharedClassLoader` 加载（Web 服务器是 Tomcat）。我们项目中有一些用到了 Spring 的业务类，比如实现了 Spring 提供的接口、用到了 Spring 提供的注解。所以，加载 Spring 的类加载器（也就是 `SharedClassLoader`）也会用来加载这些业务类。但是业务类在 Web 应用目录下，不在 `SharedClassLoader` 的加载路径下，所以 `SharedClassLoader` 无法找到业务类，也就无法加载它们。
 
@@ -330,7 +329,7 @@ Tomcat 这四个自定义的类加载器对应的目录如下：
 
 线程线程上下文类加载器的原理是将一个类加载器保存在线程私有数据里，跟线程绑定，然后在需要的时候取出来使用。这个类加载器通常是由应用程序或者容器（如 Tomcat）设置的。
 
-`Java.lang.Thread` 中的`getContextClassLoader()`和 `setContextClassLoader(ClassLoader cl)`分别用来获取和设置线程的上下文类加载器。如果没有通过`setContextClassLoader(ClassLoader cl)`进行设置的话，线程将继承其父线程的上下文类加载器。
+`Java.lang.Thread` 中的 `getContextClassLoader()`和 `setContextClassLoader(ClassLoader cl)`分别用来获取和设置线程的上下文类加载器。如果没有通过 `setContextClassLoader(ClassLoader cl)`进行设置的话，线程将继承其父线程的上下文类加载器。
 
 Spring 获取线程线程上下文类加载器的代码如下：
 
@@ -338,15 +337,15 @@ Spring 获取线程线程上下文类加载器的代码如下：
 cl = Thread.currentThread().getContextClassLoader();
 ```
 
-感兴趣的小伙伴可以自行深入研究一下 Tomcat 打破双亲委派模型的原理，推荐资料：[《深入拆解 Tomcat & Jetty》](http://gk.link/a/10Egr)。
+感兴趣的小伙伴可以自行深入研究一下 Tomcat 打破双亲委派模型的原理，推荐资料：[《深入拆解 Tomcat &amp; Jetty》](http://gk.link/a/10Egr)。
 
 ## 推荐阅读
 
 - 《深入拆解 Java 虚拟机》
-- 深入分析 Java ClassLoader 原理：<https://blog.csdn.net/xyang81/article/details/7292380>
-- Java 类加载器(ClassLoader)：<http://gityuan.com/2016/01/24/java-classloader/>
-- Class Loaders in Java：<https://www.baeldung.com/java-classloaders>
-- Class ClassLoader - Oracle 官方文档：<https://docs.oracle.com/javase/8/docs/api/java/lang/ClassLoader.html>
-- 老大难的 Java ClassLoader 再不理解就老了：<https://zhuanlan.zhihu.com/p/51374915>
+- 深入分析 Java ClassLoader 原理：[https://blog.csdn.net/xyang81/article/details/7292380](https://blog.csdn.net/xyang81/article/details/7292380)
+- Java 类加载器(ClassLoader)：[http://gityuan.com/2016/01/24/java-classloader/](http://gityuan.com/2016/01/24/java-classloader/)
+- Class Loaders in Java：[https://www.baeldung.com/java-classloaders](https://www.baeldung.com/java-classloaders)
+- Class ClassLoader - Oracle 官方文档：[https://docs.oracle.com/javase/8/docs/api/java/lang/ClassLoader.html](https://docs.oracle.com/javase/8/docs/api/java/lang/ClassLoader.html)
+- 老大难的 Java ClassLoader 再不理解就老了：[https://zhuanlan.zhihu.com/p/51374915](https://zhuanlan.zhihu.com/p/51374915)
 
 <!-- @include: @article-footer.snippet.md -->
