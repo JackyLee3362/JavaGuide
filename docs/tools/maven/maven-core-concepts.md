@@ -317,7 +317,7 @@ mvn 阶段 [阶段2] ...[阶段n]
   <phase>post-integration-test</phase>
   <!-- 运行任何检查以验证打的包是否有效并符合质量标准。 -->
   <phase>verify</phase>
-  <!-- 	将包安装到本地仓库中，可以作为本地其他项目的依赖 -->
+  <!--     将包安装到本地仓库中，可以作为本地其他项目的依赖 -->
   <phase>install</phase>
   <!-- 将最终的项目包复制到远程仓库中与其他开发者和项目共享 -->
   <phase>deploy</phase>

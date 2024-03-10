@@ -436,7 +436,7 @@ final Node<K,V>[] resize() {
     }
     if (newThr == 0) {
         // 创建时指定了初始化容量或者负载因子，在这里进行阈值初始化，
-    	// 或者扩容前的旧容量小于16，在这里计算新的resize上限
+        // 或者扩容前的旧容量小于16，在这里计算新的resize上限
         float ft = (float)newCap * loadFactor;
         newThr = (newCap < MAXIMUM_CAPACITY && ft < (float)MAXIMUM_CAPACITY ? (int)ft : Integer.MAX_VALUE);
     }

@@ -400,13 +400,13 @@ DROP TABLE IF EXISTS exam_record_2014;
 ```sql
 -- 示例：
 -- 添加B-Tree索引：
-	CREATE INDEX idx_name(索引名) ON 表名 (字段名);   -- idx_name为索引名，以下都是
+    CREATE INDEX idx_name(索引名) ON 表名 (字段名);   -- idx_name为索引名，以下都是
 -- 创建唯一索引：
-	CREATE UNIQUE INDEX idx_name ON 表名 (字段名);
+    CREATE UNIQUE INDEX idx_name ON 表名 (字段名);
 -- 创建一个主键索引：
-	ALTER TABLE 表名 ADD PRIMARY KEY (字段名);
+    ALTER TABLE 表名 ADD PRIMARY KEY (字段名);
 -- 创建一个全文索引
-	ALTER TABLE 表名 ADD FULLTEXT INDEX idx_name (字段名);
+    ALTER TABLE 表名 ADD FULLTEXT INDEX idx_name (字段名);
 
 -- 通过以上示例，可以看出create 和 alter 都可以添加索引
 ```

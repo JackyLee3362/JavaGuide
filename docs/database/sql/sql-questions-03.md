@@ -72,18 +72,18 @@ tag:
 
 ```sql
 SELECT tag, difficulty, ROUND(AVG(score), 1) clip_avg_score
-	FROM examination_info info  INNER JOIN exam_record record
-		WHERE info.exam_id = record.exam_id
-			AND  record.exam_id = 9001
-				AND record.score NOT IN(
-					SELECT MAX(score)
-						FROM exam_record
-							WHERE exam_id = 9001
-								UNION ALL
-					SELECT MIN(score)
-						FROM exam_record
-							WHERE exam_id = 9001
-				)
+    FROM examination_info info  INNER JOIN exam_record record
+        WHERE info.exam_id = record.exam_id
+            AND  record.exam_id = 9001
+                AND record.score NOT IN(
+                    SELECT MAX(score)
+                        FROM exam_record
+                            WHERE exam_id = 9001
+                                UNION ALL
+                    SELECT MIN(score)
+                        FROM exam_record
+                            WHERE exam_id = 9001
+                )
 ```
 
 这是最直观，也是最容易想到的解法，但是还有待改进，这算是投机取巧过关，其实严格按照题目要求应该这么写：
@@ -268,11 +268,11 @@ SELECT COUNT(DISTINCT column_name1, column_name2) FROM table_name;
 
 ```sql
 SELECT
-	count(*) total_pv,
-	( SELECT count(*) FROM exam_record WHERE submit_time IS NOT NULL ) complete_pv,
-	( SELECT COUNT( DISTINCT exam_id, score IS NOT NULL OR NULL ) FROM exam_record ) complete_exam_cnt
+    count(*) total_pv,
+    ( SELECT count(*) FROM exam_record WHERE submit_time IS NOT NULL ) complete_pv,
+    ( SELECT COUNT( DISTINCT exam_id, score IS NOT NULL OR NULL ) FROM exam_record ) complete_exam_cnt
 FROM
-	exam_record
+    exam_record
 ```
 
 这里着重说一下`COUNT( DISTINCT exam_id, score IS NOT NULL OR NULL )`这一句，判断 score 是否为 null ，如果是即为真，如果不是返回 null；注意这里如果不加 `or null` 在不是 null 的情况下只会返回 false 也就是返回 0；
@@ -331,8 +331,8 @@ FROM
 -- 找出tag为‘SQL’的得分   【80, 89,87,90】
 -- 再算出这一组的平均得分
 select  ROUND(AVG(score), 1) from  examination_info info INNER JOIN exam_record record
-	where info.exam_id = record.exam_id
-	and tag= 'SQL'
+    where info.exam_id = record.exam_id
+    and tag= 'SQL'
 ```
 
 然后再找出该类试卷的最低得分，接着将结果集`【80, 89,87,90】` 去和平均分数作比较，方可得出最终答案。
@@ -445,9 +445,9 @@ GROUP BY MONTH
 ```sql
 SELECT MONTH ( submit_time ), COUNT( question_id )
 FROM
-	practice_record
+    practice_record
 GROUP BY
-	MONTH (submit_time)
+    MONTH (submit_time)
 ```
 
 接着第三列这里要用到`DAY(LAST_DAY(date_value))`函数来查找给定日期的月份中的天数。
@@ -1075,14 +1075,14 @@ ORDER BY UID
 
 ```sql
 SELECT
-	record.uid
+    record.uid
 FROM
-	exam_record record
-	INNER JOIN examination_info e_info ON record.exam_id = e_info.exam_id
-	JOIN user_info u_info ON record.uid = u_info.uid
+    exam_record record
+    INNER JOIN examination_info e_info ON record.exam_id = e_info.exam_id
+    JOIN user_info u_info ON record.uid = u_info.uid
 WHERE
-	e_info.tag = 'SQL'
-	AND e_info.difficulty = 'hard'
+    e_info.tag = 'SQL'
+    AND e_info.difficulty = 'hard'
 ```
 
 然后根据题目要求，接着再往里叠条件即可；
@@ -1233,28 +1233,28 @@ count(distinct case when year(act_time)='2021' and tag='question'then act_day en
 
 ```sql
 SELECT
-		uid,
-		exam_id AS ans_id,
-		start_time AS act_time,
-		date_format( start_time, '%Y%m' ) AS act_month,
-		date_format( start_time, '%Y%m%d' ) AS act_day,
-		'exam' AS tag
-	FROM
-		exam_record
+        uid,
+        exam_id AS ans_id,
+        start_time AS act_time,
+        date_format( start_time, '%Y%m' ) AS act_month,
+        date_format( start_time, '%Y%m%d' ) AS act_day,
+        'exam' AS tag
+    FROM
+        exam_record
 ```
 
 紧接着就是答题作答区的用户
 
 ```sql
 SELECT
-		uid,
-		question_id AS ans_id,
-		submit_time AS act_time,
-		date_format( submit_time, '%Y%m' ) AS act_month,
-		date_format( submit_time, '%Y%m%d' ) AS act_day,
-		'question' AS tag
-	FROM
-		practice_record
+        uid,
+        question_id AS ans_id,
+        submit_time AS act_time,
+        date_format( submit_time, '%Y%m' ) AS act_month,
+        date_format( submit_time, '%Y%m%d' ) AS act_day,
+        'question' AS tag
+    FROM
+        practice_record
 ```
 
 最后将两个结果进行`UNION` 最后别忘了将结果进行排序 （这题有点类似于分治法的思想）

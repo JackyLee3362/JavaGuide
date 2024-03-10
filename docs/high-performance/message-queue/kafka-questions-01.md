@@ -283,42 +283,42 @@ acks 的默认值即为 1，代表我们的消息被 leader 副本接收之后�
 看源码 `FailedRecordTracker` 类有个 `recovered` 函数，返回 Boolean 值判断是否要进行重试，下面是这个函数中判断是否重试的逻辑：
 
 ```java
-	@Override
-	public boolean recovered(ConsumerRecord << ? , ? > record, Exception exception,
-	    @Nullable MessageListenerContainer container,
-	    @Nullable Consumer << ? , ? > consumer) throws InterruptedException {
+    @Override
+    public boolean recovered(ConsumerRecord << ? , ? > record, Exception exception,
+        @Nullable MessageListenerContainer container,
+        @Nullable Consumer << ? , ? > consumer) throws InterruptedException {
 
-	    if (this.noRetries) {
+        if (this.noRetries) {
          // 不支持重试
-	        attemptRecovery(record, exception, null, consumer);
-	        return true;
-	    }
+            attemptRecovery(record, exception, null, consumer);
+            return true;
+        }
      // 取已经失败的消费记录集合
-	    Map < TopicPartition, FailedRecord > map = this.failures.get();
-	    if (map == null) {
-	        this.failures.set(new HashMap < > ());
-	        map = this.failures.get();
-	    }
+        Map < TopicPartition, FailedRecord > map = this.failures.get();
+        if (map == null) {
+            this.failures.set(new HashMap < > ());
+            map = this.failures.get();
+        }
      //  获取消费记录所在的Topic和Partition
-	    TopicPartition topicPartition = new TopicPartition(record.topic(), record.partition());
-	    FailedRecord failedRecord = getFailedRecordInstance(record, exception, map, topicPartition);
+        TopicPartition topicPartition = new TopicPartition(record.topic(), record.partition());
+        FailedRecord failedRecord = getFailedRecordInstance(record, exception, map, topicPartition);
      // 通知注册的重试监听器，消息投递失败
-	    this.retryListeners.forEach(rl - >
-	        rl.failedDelivery(record, exception, failedRecord.getDeliveryAttempts().get()));
-	    // 获取下一次重试的时间间隔
+        this.retryListeners.forEach(rl - >
+            rl.failedDelivery(record, exception, failedRecord.getDeliveryAttempts().get()));
+        // 获取下一次重试的时间间隔
     long nextBackOff = failedRecord.getBackOffExecution().nextBackOff();
-	    if (nextBackOff != BackOffExecution.STOP) {
-	        this.backOffHandler.onNextBackOff(container, exception, nextBackOff);
-	        return false;
-	    } else {
-	        attemptRecovery(record, exception, topicPartition, consumer);
-	        map.remove(topicPartition);
-	        if (map.isEmpty()) {
-	            this.failures.remove();
-	        }
-	        return true;
-	    }
-	}
+        if (nextBackOff != BackOffExecution.STOP) {
+            this.backOffHandler.onNextBackOff(container, exception, nextBackOff);
+            return false;
+        } else {
+            attemptRecovery(record, exception, topicPartition, consumer);
+            map.remove(topicPartition);
+            if (map.isEmpty()) {
+                this.failures.remove();
+            }
+            return true;
+        }
+    }
 ```
 
 其中， `BackOffExecution.STOP` 的值为 -1。
@@ -327,8 +327,8 @@ acks 的默认值即为 1，代表我们的消息被 leader 副本接收之后�
 @FunctionalInterface
 public interface BackOffExecution {
 
-	long STOP = -1;
-	long nextBackOff();
+    long STOP = -1;
+    long nextBackOff();
 
 }
 ```

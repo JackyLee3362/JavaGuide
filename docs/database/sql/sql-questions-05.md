@@ -380,53 +380,53 @@ HAVING sum(IF(er.submit_time IS NULL, 1, 0)) > 2
 
 ```sql
 SELECT
-	tmp1.uid uid,
-	sum(
-	IF
-	( er.submit_time IS NULL AND er.start_time IS NOT NULL, 1, 0 )) incomplete_cnt,
-	round(
-		sum(
-		IF
-		( er.submit_time IS NULL AND er.start_time IS NOT NULL, 1, 0 ))/ count( tmp1.uid ),
-		3
-	) incomplete_rate
+    tmp1.uid uid,
+    sum(
+    IF
+    ( er.submit_time IS NULL AND er.start_time IS NOT NULL, 1, 0 )) incomplete_cnt,
+    round(
+        sum(
+        IF
+        ( er.submit_time IS NULL AND er.start_time IS NOT NULL, 1, 0 ))/ count( tmp1.uid ),
+        3
+    ) incomplete_rate
 FROM
-	(
-	SELECT DISTINCT
-		ui.uid
-	FROM
-		user_info ui
-		LEFT JOIN exam_record er ON ui.uid = er.uid
-	WHERE
-		er.submit_time IS NULL
-		AND ui.LEVEL = 0
-	) tmp1
-	LEFT JOIN exam_record er ON tmp1.uid = er.uid
+    (
+    SELECT DISTINCT
+        ui.uid
+    FROM
+        user_info ui
+        LEFT JOIN exam_record er ON ui.uid = er.uid
+    WHERE
+        er.submit_time IS NULL
+        AND ui.LEVEL = 0
+    ) tmp1
+    LEFT JOIN exam_record er ON tmp1.uid = er.uid
 GROUP BY
-	tmp1.uid
+    tmp1.uid
 ORDER BY
-	incomplete_rate
+    incomplete_rate
 ```
 
 情况 2. 查询不存在条件要求时所有有作答记录的 yong 用户的试卷未完成率
 
 ```sql
 SELECT
-	ui.uid uid,
-	sum( CASE WHEN er.submit_time IS NULL AND er.start_time IS NOT NULL THEN 1 ELSE 0 END ) incomplete_cnt,
-	round(
-		sum(
-		IF
-		( er.submit_time IS NULL AND er.start_time IS NOT NULL, 1, 0 ))/ count( ui.uid ),
-		3
-	) incomplete_rate
+    ui.uid uid,
+    sum( CASE WHEN er.submit_time IS NULL AND er.start_time IS NOT NULL THEN 1 ELSE 0 END ) incomplete_cnt,
+    round(
+        sum(
+        IF
+        ( er.submit_time IS NULL AND er.start_time IS NOT NULL, 1, 0 ))/ count( ui.uid ),
+        3
+    ) incomplete_rate
 FROM
-	user_info ui
-	JOIN exam_record er ON ui.uid = er.uid
+    user_info ui
+    JOIN exam_record er ON ui.uid = er.uid
 GROUP BY
-	ui.uid
+    ui.uid
 ORDER BY
-	incomplete_rate
+    incomplete_rate
 ```
 
 拼在一起，就是答案
@@ -491,44 +491,44 @@ V2 版本（根据上面做出的改进，答案缩短了，逻辑更强）：
 
 ```sql
 SELECT
-	ui.uid,
-	SUM(
-	IF
-	( start_time IS NOT NULL AND score IS NULL, 1, 0 )) AS incomplete_cnt,#3.试卷未完成数
-	ROUND( AVG( IF ( start_time IS NOT NULL AND score IS NULL, 1, 0 )), 3 ) AS incomplete_rate #4.未完成率
+    ui.uid,
+    SUM(
+    IF
+    ( start_time IS NOT NULL AND score IS NULL, 1, 0 )) AS incomplete_cnt,#3.试卷未完成数
+    ROUND( AVG( IF ( start_time IS NOT NULL AND score IS NULL, 1, 0 )), 3 ) AS incomplete_rate #4.未完成率
 
 FROM
-	user_info ui
-	LEFT JOIN exam_record USING ( uid )
+    user_info ui
+    LEFT JOIN exam_record USING ( uid )
 WHERE
 CASE
 
-		WHEN (#1.当有任意一个0级用户未完成试卷数大于2时
-		SELECT
-			MAX( lv0_incom_cnt )
-		FROM
-			(
-			SELECT
-				SUM(
-				IF
-				( score IS NULL, 1, 0 )) AS lv0_incom_cnt
-			FROM
-				user_info
-				JOIN exam_record USING ( uid )
-			WHERE
-				LEVEL = 0
-			GROUP BY
-				uid
-			) table1
-			)> 2 THEN
-			uid IN ( #1.1找出每个0级用户
-			SELECT uid FROM user_info WHERE LEVEL = 0 ) ELSE uid IN ( #2.若不存在这样的用户，找出有作答记录的用户
-			SELECT DISTINCT uid FROM exam_record )
-		END
-		GROUP BY
-			ui.uid
-	ORDER BY
-	incomplete_rate #5.结果按未完成率升序排序
+        WHEN (#1.当有任意一个0级用户未完成试卷数大于2时
+        SELECT
+            MAX( lv0_incom_cnt )
+        FROM
+            (
+            SELECT
+                SUM(
+                IF
+                ( score IS NULL, 1, 0 )) AS lv0_incom_cnt
+            FROM
+                user_info
+                JOIN exam_record USING ( uid )
+            WHERE
+                LEVEL = 0
+            GROUP BY
+                uid
+            ) table1
+            )> 2 THEN
+            uid IN ( #1.1找出每个0级用户
+            SELECT uid FROM user_info WHERE LEVEL = 0 ) ELSE uid IN ( #2.若不存在这样的用户，找出有作答记录的用户
+            SELECT DISTINCT uid FROM exam_record )
+        END
+        GROUP BY
+            ui.uid
+    ORDER BY
+    incomplete_rate #5.结果按未完成率升序排序
 ```
 
 ### 各用户等级的不同得分表现占比（较难）
@@ -597,12 +597,12 @@ CASE
 
 ```sql
 CASE
-		WHEN a.score >= 90 THEN
-		'优'
-		WHEN a.score < 90 AND a.score >= 75 THEN
-		'良'
-		WHEN a.score < 75 AND a.score >= 60 THEN
-	'中' ELSE '差'
+        WHEN a.score >= 90 THEN
+        '优'
+        WHEN a.score < 90 AND a.score >= 75 THEN
+        '良'
+        WHEN a.score < 75 AND a.score >= 60 THEN
+    '中' ELSE '差'
 END
 ```
 
@@ -851,14 +851,14 @@ SUBSTRING_INDEX(str, delimiter, count)
 
 ```sql
 SELECT
-	exam_id,
-	substring_index( tag, ',', 1 ) tag,
-	substring_index( substring_index( tag, ',', 2 ), ',',- 1 ) difficulty,
-	substring_index( tag, ',',- 1 ) duration
+    exam_id,
+    substring_index( tag, ',', 1 ) tag,
+    substring_index( substring_index( tag, ',', 2 ), ',',- 1 ) difficulty,
+    substring_index( tag, ',',- 1 ) duration
 FROM
-	examination_info
+    examination_info
 WHERE
-	difficulty = ''
+    difficulty = ''
 ```
 
 ### 对过长的昵称截取处理
@@ -909,18 +909,18 @@ SELECT CHAR_LENGTH('你好'); -- 输出结果：2，因为 '你好' 中有两个
 
 ```sql
 SELECT
-	uid,
+    uid,
 CASE
 
-		WHEN CHAR_LENGTH( nick_name ) > 13 THEN
-		CONCAT( SUBSTR( nick_name, 1, 10 ), '...' ) ELSE nick_name
-	END AS nick_name
+        WHEN CHAR_LENGTH( nick_name ) > 13 THEN
+        CONCAT( SUBSTR( nick_name, 1, 10 ), '...' ) ELSE nick_name
+    END AS nick_name
 FROM
-	user_info
+    user_info
 WHERE
-	CHAR_LENGTH( nick_name ) > 10
+    CHAR_LENGTH( nick_name ) > 10
 GROUP BY
-	uid;
+    uid;
 ```
 
 ### 大小写混乱时的筛选统计（较难）

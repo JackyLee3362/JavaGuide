@@ -133,12 +133,12 @@ tag:
 
 ```java
 public void preOrder(TreeNode root){
-	if(root == null){
-		return;
-	}
-	system.out.println(root.data);
-	preOrder(root.left);
-	preOrder(root.right);
+    if(root == null){
+        return;
+    }
+    system.out.println(root.data);
+    preOrder(root.left);
+    preOrder(root.right);
 }
 ```
 
@@ -154,12 +154,12 @@ public void preOrder(TreeNode root){
 
 ```java
 public void inOrder(TreeNode root){
-	if(root == null){
-		return;
-	}
-	inOrder(root.left);
-	system.out.println(root.data);
-	inOrder(root.right);
+    if(root == null){
+        return;
+    }
+    inOrder(root.left);
+    system.out.println(root.data);
+    inOrder(root.right);
 }
 ```
 
@@ -173,12 +173,12 @@ public void inOrder(TreeNode root){
 
 ```java
 public void postOrder(TreeNode root){
-	if(root == null){
-		return;
-	}
+    if(root == null){
+        return;
+    }
  postOrder(root.left);
-	postOrder(root.right);
-	system.out.println(root.data);
+    postOrder(root.right);
+    system.out.println(root.data);
 }
 ```
 

@@ -805,28 +805,28 @@ GROUP BY exam_id,
 ```sql
 -- 截止当月的单月最大新增用户数、截止当月的累积用户数，按月份升序输出
 SELECT
-	start_month,
-	mau,
-	month_add_uv,
-	max( month_add_uv ) over ( ORDER BY start_month ),
-	sum( month_add_uv ) over ( ORDER BY start_month )
+    start_month,
+    mau,
+    month_add_uv,
+    max( month_add_uv ) over ( ORDER BY start_month ),
+    sum( month_add_uv ) over ( ORDER BY start_month )
 FROM
-	(
-	-- 统计每月的月活和新增用户数
-	SELECT
-		date_format( a.start_time, '%Y%m' ) AS start_month,
-		count( DISTINCT a.uid ) AS mau,
-		count( DISTINCT b.uid ) AS month_add_uv
-	FROM
-		exam_record a
-		LEFT JOIN (
+    (
+    -- 统计每月的月活和新增用户数
+    SELECT
+        date_format( a.start_time, '%Y%m' ) AS start_month,
+        count( DISTINCT a.uid ) AS mau,
+        count( DISTINCT b.uid ) AS month_add_uv
+    FROM
+        exam_record a
+        LEFT JOIN (
          -- 统计每个人的首次登陆月份
-		SELECT uid, min( date_format( start_time, '%Y%m' )) AS first_month FROM exam_record GROUP BY uid ) b ON date_format( a.start_time, '%Y%m' ) = b.first_month
-	GROUP BY
-		start_month
-	) main
+        SELECT uid, min( date_format( start_time, '%Y%m' )) AS first_month FROM exam_record GROUP BY uid ) b ON date_format( a.start_time, '%Y%m' ) = b.first_month
+    GROUP BY
+        start_month
+    ) main
 ORDER BY
-	start_month
+    start_month
 ```
 
 <!-- @include: @article-footer.snippet.md -->

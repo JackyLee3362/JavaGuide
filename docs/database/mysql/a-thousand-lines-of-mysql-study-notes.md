@@ -14,16 +14,16 @@ tag:
 ```sql
 /* Windows服务 */
 -- 启动 MySQL
-			net start mysql
+            net start mysql
 -- 创建Windows服务
-				sc create mysql binPath= mysqld_bin_path(注意：等号与值之间有空格)
+                sc create mysql binPath= mysqld_bin_path(注意：等号与值之间有空格)
 /* 连接与断开服务器 */
 -- 连接 MySQL
-				mysql -h 地址 -P 端口 -u 用户名 -p 密码
+                mysql -h 地址 -P 端口 -u 用户名 -p 密码
 -- 显示哪些线程正在运行
-				SHOW PROCESSLIST
+                SHOW PROCESSLIST
 -- 显示系统变量信息
-				SHOW VARIABLES
+                SHOW VARIABLES
 ```
 
 ### 数据库操作
@@ -75,7 +75,7 @@ tag:
         SHOW ENGINES -- 显示存储引擎的状态信息
         SHOW ENGINE 引擎名 {LOGS|STATUS} -- 显示存储引擎的日志或状态信息
     -- 自增起始数
-    	AUTO_INCREMENT = 行数
+        AUTO_INCREMENT = 行数
     -- 数据文件目录
         DATA DIRECTORY = '目录'
     -- 索引文件目录

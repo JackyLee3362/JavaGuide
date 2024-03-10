@@ -12,9 +12,15 @@ head:
       content: Java并发常见知识点和面试题总结（含详细解答），希望对你有帮助！
 ---
 
-<!-- @include: @small-advertisement.snippet.md -->
-
 ## 什么是线程和进程?
+
+❓ 什么是线程和进程
+
+> [!tip]
+>
+> 进程：系统运行==程序==的基本单位
+>
+> 线程：==CPU 调度==的最小单位
 
 ### 何为进程?
 
@@ -34,16 +40,16 @@ Java 程序天生就是多线程程序，我们可以通过 JMX 来看看一个�
 
 ```java
 public class MultiThread {
-	public static void main(String[] args) {
-		// 获取 Java 线程管理 MXBean
-	ThreadMXBean threadMXBean = ManagementFactory.getThreadMXBean();
-		// 不需要获取同步的 monitor 和 synchronizer 信息，仅获取线程和线程堆栈信息
-		ThreadInfo[] threadInfos = threadMXBean.dumpAllThreads(false, false);
-		// 遍历线程信息，仅打印线程 ID 和线程名称信息
-		for (ThreadInfo threadInfo : threadInfos) {
-			System.out.println("[" + threadInfo.getThreadId() + "] " + threadInfo.getThreadName());
-		}
-	}
+    public static void main(String[] args) {
+        // 获取 Java 线程管理 MXBean
+    ThreadMXBean threadMXBean = ManagementFactory.getThreadMXBean();
+        // 不需要获取同步的 monitor 和 synchronizer 信息，仅获取线程和线程堆栈信息
+        ThreadInfo[] threadInfos = threadMXBean.dumpAllThreads(false, false);
+        // 遍历线程信息，仅打印线程 ID 和线程名称信息
+        for (ThreadInfo threadInfo : threadInfos) {
+            System.out.println("[" + threadInfo.getThreadId() + "] " + threadInfo.getThreadName());
+        }
+    }
 }
 ```
 
