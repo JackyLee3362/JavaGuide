@@ -43,9 +43,3 @@ category: 开源项目
 21. [颜值吊打 Postman，这款开源 API 调试工具我超爱！！](https://mp.weixin.qq.com/s/_KXBGckyS--P97G48zXCrw)
 22. [轻量级 Spring，够优雅！！](https://mp.weixin.qq.com/s/tl2539hsYsvEm8wjmQwDEg)
 23. [这是我见过最强的 Java 版内网穿透神器！](https://mp.weixin.qq.com/s/4hyQsTICIUf9EvAVrC6wEg)
-
-推荐你在我的公众号「**JavaGuide**」回复「**开源**」在线阅读[「优质开源项目推荐」](https://mp.weixin.qq.com/mp/appmsgalbum?__biz=Mzg2OTA0Njk0OA==&action=getalbum&album_id=1345382825083895808&scene=173&from_msgid=2247516459&from_itemidx=1&count=3&nolastread=1#wechat_redirect)系列。
-
-![「JavaGuide」公众号回复「开源」](https://oss.javaguide.cn/github/javaguide/open-source-project/image-20220512211235432.png)
-
-![我的公众号](https://oss.javaguide.cn/github/javaguide/books167598cd2e17b8ec.png)

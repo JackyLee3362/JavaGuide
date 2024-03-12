@@ -335,7 +335,7 @@ JVM 这部分内容主要参考 [JVM 虚拟机规范-Java8](https://docs.oracle.
 ### API 网关
 
 - [API 网关基础知识总结](https://javaguide.cn/distributed-system/api-gateway.html)
-- [Spring Cloud Gateway 常见知识点&面试题总结](./docs/distributed-system/spring-cloud-gateway-questions.md)
+- [Spring Cloud Gateway 常见知识点&面试题总结](./docs/分布式系统/spring-cloud-gateway-questions.md)
 
 ### 分布式 ID
 
@@ -353,7 +353,7 @@ JVM 这部分内容主要参考 [JVM 虚拟机规范-Java8](https://docs.oracle.
 
 ### 分布式配置中心
 
-[分布式配置中心常见知识点&面试题总结](./docs/distributed-system/distributed-configuration-center.md)
+[分布式配置中心常见知识点&面试题总结](./docs/分布式系统/distributed-configuration-center.md)
 
 ## 高性能
 
@@ -382,23 +382,23 @@ JVM 这部分内容主要参考 [JVM 虚拟机规范-Java8](https://docs.oracle.
 
 ## 高可用
 
-[高可用系统设计指南](./docs/high-availability/high-availability-system-design.md)
+[高可用系统设计指南](./docs/高可用/high-availability-system-design.md)
 
 ### 冗余设计
 
-[冗余设计详解](./docs/high-availability/redundancy.md)
+[冗余设计详解](./docs/高可用/redundancy.md)
 
 ### 限流
 
-[服务限流详解](./docs/high-availability/limit-request.md)
+[服务限流详解](./docs/高可用/limit-request.md)
 
 ### 降级&熔断
 
-[降级&熔断详解](./docs/high-availability/fallback-and-circuit-breaker.md)
+[降级&熔断详解](./docs/高可用/fallback-and-circuit-breaker.md)
 
 ### 超时&重试
 
-[超时&重试详解](./docs/high-availability/timeout-and-retry.md)
+[超时&重试详解](./docs/高可用/timeout-and-retry.md)
 
 ### 集群
 
