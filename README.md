@@ -87,12 +87,12 @@
 JVM 这部分内容主要参考 [JVM 虚拟机规范-Java8](https://docs.oracle.com/javase/specs/jvms/se8/html/index.html) 和周志明老师的[《深入理解 Java 虚拟机（第 3 版）》](https://book.douban.com/subject/34907497/) （强烈建议阅读多遍！）。
 
 - **[Java 内存区域](./docs/java/jvm/memory-area.md)**
-- **[JVM 垃圾回收](./docs/java/jvm/jvm-garbage-collection.md)**
-- [类文件结构](./docs/java/jvm/class-file-structure.md)
-- **[类加载过程](./docs/java/jvm/class-loading-process.md)**
-- [类加载器](./docs/java/jvm/classloader.md)
-- [【待完成】最重要的 JVM 参数总结（翻译完善了一半）](./docs/java/jvm/jvm-parameters-intro.md)
-- [【加餐】大白话带你认识 JVM](./docs/java/jvm/jvm-intro.md)
+- **[JVM 垃圾回收](./docs/java/jvm/JVM垃圾回收详解-重点.md)**
+- [类文件结构](./docs/java/jvm/类文件结构详解.md)
+- **[类加载过程](./docs/java/jvm/类加载过程详解.md)**
+- [类加载器](./docs/java/jvm/类加载器详解-重点.md)
+- [【待完成】最重要的 JVM 参数总结（翻译完善了一半）](./docs/java/jvm/最重要的JVM参数总结.md)
+- [【加餐】大白话带你认识 JVM](./docs/java/jvm/大白话带你认识-JVM.md)
 - [JDK 监控和故障处理工具](./docs/java/jvm/jdk-monitoring-and-troubleshooting-tools.md)
 
 ### 新特性
