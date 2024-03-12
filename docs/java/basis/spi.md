@@ -9,12 +9,12 @@ head:
       content: Java SPI机制
   - - meta
     - name: description
-      content: SPI 即 Service Provider Interface ，字面意思就是：「服务提供者的接口」，我的理解是：专门提供给服务提供者或者扩展框架功能的开发者去使用的一个接口。SPI 将服务接口和具体的服务实现分离开来，将服务调用方和服务实现者解耦，能够提升程序的扩展性、可维护性。修改或者替换服务实现并不需要修改调用方。
+      content: SPI 即 Service Provider Interface ，字面意思就是：「服务提供者的接口」，我的理解是：专门提供给服务提供者或者扩展框架功能的开发者去使用的一个接口。SPI 将服务接口和具体的服务实现分离开来，将服务调用方和服务实现者解耦，能够提升程序的扩展性、可维护性。修改或者替换服务实现并不需要修改调用方
 ---
 
-> 本文来自 [Kingshion](https://github.com/jjx0708) 投稿。欢迎更多朋友参与到 JavaGuide 的维护工作，这是一件非常有意义的事情。详细信息请看：[JavaGuide 贡献指南](https://javaguide.cn/javaguide/contribution-guideline.html) 。
+> 本文来自 [Kingshion](https://github.com/jjx0708) 投稿。欢迎更多朋友参与到 JavaGuide 的维护工作，这是一件非常有意义的事情。详细信息请看：[JavaGuide 贡献指南](https://javaguide.cn/javaguide/contribution-guideline.html) 
 
-在面向对象的设计原则中，一般推荐模块之间基于接口编程，通常情况下调用方模块是不会感知到被调用方模块的内部具体实现。一旦代码里面涉及具体实现类，就违反了开闭原则。如果需要替换一种实现，就需要修改代码。
+在面向对象的设计原则中，一般推荐模块之间基于接口编程，通常情况下调用方模块是不会感知到被调用方模块的内部具体实现。一旦代码里面涉及具体实现类，就违反了开闭原则。如果需要替换一种实现，就需要修改代码
 
 为了实现在模块装配的时候不用在程序里面动态指明，这就需要一种服务发现机制。Java SPI 就是提供了这样一个机制：**为某个接口寻找服务实现的机制。这有点类似 IoC 的思想，将装配的控制权移交到了程序之外。**
 
@@ -22,11 +22,11 @@ head:
 
 ### 何谓 SPI?
 
-SPI 即 Service Provider Interface ，字面意思就是：「服务提供者的接口」，我的理解是：专门提供给服务提供者或者扩展框架功能的开发者去使用的一个接口。
+SPI 即 Service Provider Interface ，字面意思就是：「服务提供者的接口」，我的理解是：专门提供给服务提供者或者扩展框架功能的开发者去使用的一个接口
 
-SPI 将服务接口和具体的服务实现分离开来，将服务调用方和服务实现者解耦，能够提升程序的扩展性、可维护性。修改或者替换服务实现并不需要修改调用方。
+SPI 将服务接口和具体的服务实现分离开来，将服务调用方和服务实现者解耦，能够提升程序的扩展性、可维护性。修改或者替换服务实现并不需要修改调用方
 
-很多框架都使用了 Java 的 SPI 机制，比如：Spring 框架、数据库加载驱动、日志接口、以及 Dubbo 的扩展实现等等。
+很多框架都使用了 Java 的 SPI 机制，比如：Spring 框架、数据库加载驱动、日志接口、以及 Dubbo 的扩展实现等等
 
 ![](https://oss.javaguide.cn/github/javaguide/java/basis/spi/22e1830e0b0e4115a882751f6c417857tplv-k3u1fbpfcp-zoom-1.jpeg)
 
@@ -38,21 +38,21 @@ SPI 将服务接口和具体的服务实现分离开来，将服务调用方和�
 
 ![](https://oss.javaguide.cn/github/javaguide/java/basis/spi/1ebd1df862c34880bc26b9d494535b3dtplv-k3u1fbpfcp-watermark.png)
 
-一般模块之间都是通过通过接口进行通讯，那我们在服务调用方和服务实现方（也称服务提供者）之间引入一个「接口」。
+一般模块之间都是通过通过接口进行通讯，那我们在服务调用方和服务实现方（也称服务提供者）之间引入一个「接口」
 
-当实现方提供了接口和实现，我们可以通过调用实现方的接口从而拥有实现方给我们提供的能力，这就是 API ，这种接口和实现都是放在实现方的。
+当实现方提供了接口和实现，我们可以通过调用实现方的接口从而拥有实现方给我们提供的能力，这就是 API ，这种接口和实现都是放在实现方的
 
-当接口存在于调用方这边时，就是 SPI ，由接口调用方确定接口规则，然后由不同的厂商去根据这个规则对这个接口进行实现，从而提供服务。
+当接口存在于调用方这边时，就是 SPI ，由接口调用方确定接口规则，然后由不同的厂商去根据这个规则对这个接口进行实现，从而提供服务
 
-举个通俗易懂的例子：公司 H 是一家科技公司，新设计了一款芯片，然后现在需要量产了，而市面上有好几家芯片制造业公司，这个时候，只要 H 公司指定好了这芯片生产的标准（定义好了接口标准），那么这些合作的芯片公司（服务提供者）就按照标准交付自家特色的芯片（提供不同方案的实现，但是给出来的结果是一样的）。
+举个通俗易懂的例子：公司 H 是一家科技公司，新设计了一款芯片，然后现在需要量产了，而市面上有好几家芯片制造业公司，这个时候，只要 H 公司指定好了这芯片生产的标准（定义好了接口标准），那么这些合作的芯片公司（服务提供者）就按照标准交付自家特色的芯片（提供不同方案的实现，但是给出来的结果是一样的）
 
 ## 实战演示
 
-SLF4J （Simple Logging Facade for Java）是 Java 的一个日志门面（接口），其具体实现有几种，比如：Logback、Log4j、Log4j2 等等，而且还可以切换，在切换日志具体实现的时候我们是不需要更改项目代码的，只需要在 Maven 依赖里面修改一些 pom 依赖就好了。
+SLF4J （Simple Logging Facade for Java）是 Java 的一个日志门面（接口），其具体实现有几种，比如：Logback、Log4j、Log4j2 等等，而且还可以切换，在切换日志具体实现的时候我们是不需要更改项目代码的，只需要在 Maven 依赖里面修改一些 pom 依赖就好了
 
 ![](https://oss.javaguide.cn/github/javaguide/java/basis/spi/image-20220723213306039-165858318917813.png)
 
-这就是依赖 SPI 机制实现的，那我们接下来就实现一个简易版本的日志框架。
+这就是依赖 SPI 机制实现的，那我们接下来就实现一个简易版本的日志框架
 
 ### Service Provider Interface
 
@@ -77,7 +77,7 @@ SLF4J （Simple Logging Facade for Java）是 Java 的一个日志门面（接�
                         Main.class
 ```
 
-新建 `Logger` 接口，这个就是 SPI ， 服务提供者接口，后面的服务提供者就要针对这个接口进行实现。
+新建 `Logger` 接口，这个就是 SPI ， 服务提供者接口，后面的服务提供者就要针对这个接口进行实现
 
 ```java
 package edu.jiangxuan.up.spi;
@@ -88,7 +88,7 @@ public interface Logger {
 }
 ```
 
-接下来就是 `LoggerService` 类，这个主要是为服务使用者（调用方）提供特定功能的。这个类也是实现 Java SPI 机制的关键所在，如果存在疑惑的话可以先往后面继续看。
+接下来就是 `LoggerService` 类，这个主要是为服务使用者（调用方）提供特定功能的。这个类也是实现 Java SPI 机制的关键所在，如果存在疑惑的话可以先往后面继续看
 
 ```java
 package edu.jiangxuan.up.spi;
@@ -141,7 +141,7 @@ public class LoggerService {
 }
 ```
 
-新建 `Main` 类（服务使用者，调用方），启动程序查看结果。
+新建 `Main` 类（服务使用者，调用方），启动程序查看结果
 
 ```java
 package org.spi.service;
@@ -161,9 +161,9 @@ public class Main {
 > info 中没有发现 Logger 服务提供者
 > debug 中没有发现 Logger 服务提供者
 
-此时我们只是空有接口，并没有为 `Logger` 接口提供任何的实现，所以输出结果中没有按照预期打印相应的结果。
+此时我们只是空有接口，并没有为 `Logger` 接口提供任何的实现，所以输出结果中没有按照预期打印相应的结果
 
-你可以使用命令或者直接使用 IDEA 将整个程序直接打包成 jar 包。
+你可以使用命令或者直接使用 IDEA 将整个程序直接打包成 jar 包
 
 ### Service Provider
 
@@ -218,33 +218,33 @@ public class Logback implements Logger {
 
 ```
 
-将 `service-provider-interface` 的 jar 导入项目中。
+将 `service-provider-interface` 的 jar 导入项目中
 
-新建 lib 目录，然后将 jar 包拷贝过来，再添加到项目中。
+新建 lib 目录，然后将 jar 包拷贝过来，再添加到项目中
 
 ![](https://oss.javaguide.cn/github/javaguide/java/basis/spi/523d5e25198444d3b112baf68ce49daetplv-k3u1fbpfcp-watermark.png)
 
-再点击 OK 。
+再点击 OK 
 
 ![](https://oss.javaguide.cn/github/javaguide/java/basis/spi/f4ba0aa71e9b4d509b9159892a220850tplv-k3u1fbpfcp-watermark.png)
 
-接下来就可以在项目中导入 jar 包里面的一些类和方法了，就像 JDK 工具类导包一样的。
+接下来就可以在项目中导入 jar 包里面的一些类和方法了，就像 JDK 工具类导包一样的
 
-实现 `Logger` 接口，在 `src` 目录下新建 `META-INF/services` 文件夹，然后新建文件 `edu.jiangxuan.up.spi.Logger` （SPI 的全类名），文件里面的内容是：`edu.jiangxuan.up.spi.service.Logback` （Logback 的全类名，即 SPI 的实现类的包名 + 类名）。
+实现 `Logger` 接口，在 `src` 目录下新建 `META-INF/services` 文件夹，然后新建文件 `edu.jiangxuan.up.spi.Logger` （SPI 的全类名），文件里面的内容是：`edu.jiangxuan.up.spi.service.Logback` （Logback 的全类名，即 SPI 的实现类的包名 + 类名）
 
 **这是 JDK SPI 机制 ServiceLoader 约定好的标准。**
 
-这里先大概解释一下：Java 中的 SPI 机制就是在每次类加载的时候会先去找到 class 相对目录下的 `META-INF` 文件夹下的 services 文件夹下的文件，将这个文件夹下面的所有文件先加载到内存中，然后根据这些文件的文件名和里面的文件内容找到相应接口的具体实现类，找到实现类后就可以通过反射去生成对应的对象，保存在一个 list 列表里面，所以可以通过迭代或者遍历的方式拿到对应的实例对象，生成不同的实现。
+这里先大概解释一下：Java 中的 SPI 机制就是在每次类加载的时候会先去找到 class 相对目录下的 `META-INF` 文件夹下的 services 文件夹下的文件，将这个文件夹下面的所有文件先加载到内存中，然后根据这些文件的文件名和里面的文件内容找到相应接口的具体实现类，找到实现类后就可以通过反射去生成对应的对象，保存在一个 list 列表里面，所以可以通过迭代或者遍历的方式拿到对应的实例对象，生成不同的实现
 
-所以会提出一些规范要求：文件名一定要是接口的全类名，然后里面的内容一定要是实现类的全类名，实现类可以有多个，直接换行就好了，多个实现类的时候，会一个一个的迭代加载。
+所以会提出一些规范要求：文件名一定要是接口的全类名，然后里面的内容一定要是实现类的全类名，实现类可以有多个，直接换行就好了，多个实现类的时候，会一个一个的迭代加载
 
-接下来同样将 `service-provider` 项目打包成 jar 包，这个 jar 包就是服务提供方的实现。通常我们导入 maven 的 pom 依赖就有点类似这种，只不过我们现在没有将这个 jar 包发布到 maven 公共仓库中，所以在需要使用的地方只能手动的添加到项目中。
+接下来同样将 `service-provider` 项目打包成 jar 包，这个 jar 包就是服务提供方的实现。通常我们导入 maven 的 pom 依赖就有点类似这种，只不过我们现在没有将这个 jar 包发布到 maven 公共仓库中，所以在需要使用的地方只能手动的添加到项目中
 
 ### 效果展示
 
 为了更直观的展示效果，我这里再新建一个专门用来测试的工程项目：`java-spi-test`
 
-然后先导入 `Logger` 的接口 jar 包，再导入具体的实现类的 jar 包。
+然后先导入 `Logger` 的接口 jar 包，再导入具体的实现类的 jar 包
 
 ![](https://oss.javaguide.cn/github/javaguide/java/basis/spi/image-20220723215812708-165858469599214.png)
 
@@ -269,7 +269,7 @@ public class TestJavaSPI {
 > Logback info 打印日志：你好
 > Logback debug 打印日志：测试 Java SPI 机制
 
-说明导入 jar 包中的实现类生效了。
+说明导入 jar 包中的实现类生效了
 
 如果我们不导入具体的实现类的 jar 包，那么此时程序运行的结果就会是：
 
@@ -278,9 +278,9 @@ public class TestJavaSPI {
 
 通过使用 SPI 机制，可以看出服务（`LoggerService`）和 服务提供者两者之间的耦合度非常低，如果说我们想要换一种实现，那么其实只需要修改 `service-provider` 项目中针对 `Logger` 接口的具体实现就可以了，只需要换一个 jar 包即可，也可以有在一个项目里面有多个实现，这不就是 SLF4J 原理吗？
 
-如果某一天需求变更了，此时需要将日志输出到消息队列，或者做一些别的操作，这个时候完全不需要更改 Logback 的实现，只需要新增一个服务实现（service-provider）可以通过在本项目里面新增实现也可以从外部引入新的服务实现 jar 包。我们可以在服务(LoggerService)中选择一个具体的 服务实现(service-provider) 来完成我们需要的操作。
+如果某一天需求变更了，此时需要将日志输出到消息队列，或者做一些别的操作，这个时候完全不需要更改 Logback 的实现，只需要新增一个服务实现（service-provider）可以通过在本项目里面新增实现也可以从外部引入新的服务实现 jar 包。我们可以在服务(LoggerService)中选择一个具体的 服务实现(service-provider) 来完成我们需要的操作
 
-那么接下来我们具体来说说 Java SPI 工作的重点原理—— **ServiceLoader** 。
+那么接下来我们具体来说说 Java SPI 工作的重点原理—— **ServiceLoader** 
 
 ## ServiceLoader
 
@@ -288,7 +288,7 @@ public class TestJavaSPI {
 
 想要使用 Java 的 SPI 机制是需要依赖 `ServiceLoader` 来实现的，那么我们接下来看看 `ServiceLoader` 具体是怎么做的：
 
-`ServiceLoader` 是 JDK 提供的一个工具类， 位于`package java.util;`包下。
+`ServiceLoader` 是 JDK 提供的一个工具类， 位于`package java.util;`包下
 
 ```plain
 A facility to load implementations of a service.
@@ -296,7 +296,7 @@ A facility to load implementations of a service.
 
 这是 JDK 官方给的注释：**一种加载服务实现的工具。**
 
-再往下看，我们发现这个类是一个 `final` 类型的，所以是不可被继承修改，同时它实现了 `Iterable` 接口。之所以实现了迭代器，是为了方便后续我们能够通过迭代的方式得到对应的服务实现。
+再往下看，我们发现这个类是一个 `final` 类型的，所以是不可被继承修改，同时它实现了 `Iterable` 接口。之所以实现了迭代器，是为了方便后续我们能够通过迭代的方式得到对应的服务实现
 
 ```java
 public final class ServiceLoader<S> implements Iterable<S>{ xxx...}
@@ -332,9 +332,9 @@ public void reload() {
 }
 ```
 
-根据代码的调用顺序，在 `reload()` 方法中是通过一个内部类 `LazyIterator` 实现的。先继续往下面看。
+根据代码的调用顺序，在 `reload()` 方法中是通过一个内部类 `LazyIterator` 实现的。先继续往下面看
 
-`ServiceLoader` 实现了 `Iterable` 接口的方法后，具有了迭代的能力，在这个 `iterator` 方法被调用时，首先会在 `ServiceLoader` 的 `Provider` 缓存中进行查找，如果缓存中没有命中那么则在 `LazyIterator` 中进行查找。
+`ServiceLoader` 实现了 `Iterable` 接口的方法后，具有了迭代的能力，在这个 `iterator` 方法被调用时，首先会在 `ServiceLoader` 的 `Provider` 缓存中进行查找，如果缓存中没有命中那么则在 `LazyIterator` 中进行查找
 
 ```java
 
@@ -480,7 +480,7 @@ public class MyServiceLoader<S> {
     // 类加载器
     private final ClassLoader classLoader;
 
-    // 暴露给外部使用的方法，通过调用这个方法可以开始加载自己定制的实现流程。
+    // 暴露给外部使用的方法，通过调用这个方法可以开始加载自己定制的实现流程
     public static <S> MyServiceLoader<S> load(Class<S> service) {
         return new MyServiceLoader<>(service);
     }
@@ -522,7 +522,7 @@ public class MyServiceLoader<S> {
                         // 把当前构造的实例对象添加到 Provider的列表里面
                         providers.add(instance);
                     }
-                    // 继续读取下一行的实现类，可以有多个实现类，只需要换行就可以了。
+                    // 继续读取下一行的实现类，可以有多个实现类，只需要换行就可以了
                     className = bufferedReader.readLine();
                 }
             }
@@ -546,17 +546,17 @@ public class MyServiceLoader<S> {
 2. 读取这个文件的名称找到对应的 spi 接口，
 3. 通过 `InputStream` 流将文件里面的具体实现类的全类名读取出来，
 4. 根据获取到的全类名，先判断跟 spi 接口是否为同一类型，如果是的，那么就通过反射的机制构造对应的实例对象，
-5. 将构造出来的实例对象添加到 `Providers` 的列表中。
+5. 将构造出来的实例对象添加到 `Providers` 的列表中
 
 ## 总结
 
 其实不难发现，SPI 机制的具体实现本质上还是通过反射完成的。即：**我们按照规定将要暴露对外使用的具体实现类在 `META-INF/services/` 文件下声明。**
 
-另外，SPI 机制在很多框架中都有应用：Spring 框架的基本原理也是类似的方式。还有 Dubbo 框架提供同样的 SPI 扩展机制，只不过 Dubbo 和 spring 框架中的 SPI 机制具体实现方式跟咱们今天学得这个有些细微的区别，不过整体的原理都是一致的，相信大家通过对 JDK 中 SPI 机制的学习，能够一通百通，加深对其他高深框的理解。
+另外，SPI 机制在很多框架中都有应用：Spring 框架的基本原理也是类似的方式。还有 Dubbo 框架提供同样的 SPI 扩展机制，只不过 Dubbo 和 spring 框架中的 SPI 机制具体实现方式跟咱们今天学得这个有些细微的区别，不过整体的原理都是一致的，相信大家通过对 JDK 中 SPI 机制的学习，能够一通百通，加深对其他高深框的理解
 
 通过 SPI 机制能够大大地提高接口设计的灵活性，但是 SPI 机制也存在一些缺点，比如：
 
 1. 遍历加载所有的实现类，这样效率还是相对较低的；
-2. 当多个 `ServiceLoader` 同时 `load` 时，会有并发问题。
+2. 当多个 `ServiceLoader` 同时 `load` 时，会有并发问题
 
 <!-- @include: @article-footer.snippet.md -->

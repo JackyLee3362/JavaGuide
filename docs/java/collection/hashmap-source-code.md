@@ -11,27 +11,27 @@ tag:
 
 ## HashMap 简介
 
-HashMap 主要用来存放键值对，它基于哈希表的 Map 接口实现，是常用的 Java 集合之一，是非线程安全的。
+HashMap 主要用来存放键值对，它基于哈希表的 Map 接口实现，是常用的 Java 集合之一，是非线程安全的
 
 `HashMap` 可以存储 null 的 key 和 value，但 null 作为键只能有一个，null 作为值可以有多个
 
-JDK1.8 之前 HashMap 由 数组+链表 组成的，数组是 HashMap 的主体，链表则是主要为了解决哈希冲突而存在的（「拉链法」解决冲突）。 JDK1.8 以后的 `HashMap` 在解决哈希冲突时有了较大的变化，当链表长度大于等于阈值（默认为 8）（将链表转换成红黑树前会判断，如果当前数组的长度小于 64，那么会选择先进行数组扩容，而不是转换为红黑树）时，将链表转化为红黑树，以减少搜索时间。
+JDK1.8 之前 HashMap 由 数组+链表 组成的，数组是 HashMap 的主体，链表则是主要为了解决哈希冲突而存在的（「拉链法」解决冲突）。 JDK1.8 以后的 `HashMap` 在解决哈希冲突时有了较大的变化，当链表长度大于等于阈值（默认为 8）（将链表转换成红黑树前会判断，如果当前数组的长度小于 64，那么会选择先进行数组扩容，而不是转换为红黑树）时，将链表转化为红黑树，以减少搜索时间
 
-`HashMap` 默认的初始化大小为 16。之后每次扩充，容量变为原来的 2 倍。并且， `HashMap` 总是使用 2 的幂作为哈希表的大小。
+`HashMap` 默认的初始化大小为 16。之后每次扩充，容量变为原来的 2 倍。并且， `HashMap` 总是使用 2 的幂作为哈希表的大小
 
 ## 底层数据结构分析
 
 ### JDK1.8 之前
 
-JDK1.8 之前 HashMap 底层是 **数组和链表** 结合在一起使用也就是 **链表散列**。
+JDK1.8 之前 HashMap 底层是 **数组和链表** 结合在一起使用也就是 **链表散列**
 
-HashMap 通过 key 的 hashCode 经过扰动函数处理过后得到 hash 值，然后通过 `(n - 1) & hash` 判断当前元素存放的位置（这里的 n 指的是数组的长度），如果当前位置存在元素的话，就判断该元素与要存入的元素的 hash 值以及 key 是否相同，如果相同的话，直接覆盖，不相同就通过拉链法解决冲突。
+HashMap 通过 key 的 hashCode 经过扰动函数处理过后得到 hash 值，然后通过 `(n - 1) & hash` 判断当前元素存放的位置（这里的 n 指的是数组的长度），如果当前位置存在元素的话，就判断该元素与要存入的元素的 hash 值以及 key 是否相同，如果相同的话，直接覆盖，不相同就通过拉链法解决冲突
 
-所谓扰动函数指的就是 HashMap 的 hash 方法。使用 hash 方法也就是扰动函数是为了防止一些实现比较差的 hashCode() 方法 换句话说使用扰动函数之后可以减少碰撞。
+所谓扰动函数指的就是 HashMap 的 hash 方法。使用 hash 方法也就是扰动函数是为了防止一些实现比较差的 hashCode() 方法 换句话说使用扰动函数之后可以减少碰撞
 
 **JDK 1.8 HashMap 的 hash 方法源码:**
 
-JDK 1.8 的 hash 方法 相比于 JDK 1.7 hash 方法更加简化，但是原理不变。
+JDK 1.8 的 hash 方法 相比于 JDK 1.7 hash 方法更加简化，但是原理不变
 
 ```java
     static final int hash(Object key) {
@@ -56,15 +56,15 @@ static int hash(int h) {
 }
 ```
 
-相比于 JDK1.8 的 hash 方法 ，JDK 1.7 的 hash 方法的性能会稍差一点点，因为毕竟扰动了 4 次。
+相比于 JDK1.8 的 hash 方法 ，JDK 1.7 的 hash 方法的性能会稍差一点点，因为毕竟扰动了 4 次
 
-所谓 **「拉链法」** 就是：将链表和数组相结合。也就是说创建一个链表数组，数组中每一格就是一个链表。若遇到哈希冲突，则将冲突的值加到链表中即可。
+所谓 **「拉链法」** 就是：将链表和数组相结合。也就是说创建一个链表数组，数组中每一格就是一个链表。若遇到哈希冲突，则将冲突的值加到链表中即可
 
 ![jdk1.8 之前的内部结构-HashMap](https://oss.javaguide.cn/github/javaguide/java/collection/jdk1.7_hashmap.png)
 
 ### JDK1.8 之后
 
-相比于之前的版本，JDK1.8 以后在解决哈希冲突时有了较大的变化。
+相比于之前的版本，JDK1.8 以后在解决哈希冲突时有了较大的变化
 
 当链表长度大于阈值（默认为 8）时，会首先调用 `treeifyBin()`方法。这个方法会根据 HashMap 数组来决定是否转换为红黑树。只有当数组长度大于或者等于 64 的情况下，才会执行转换红黑树操作，以减少搜索时间。否则，就是只是执行 `resize()` 方法对数组扩容。相关源码这里就不贴了，重点关注 `treeifyBin()`方法即可！
 
@@ -92,7 +92,7 @@ public class HashMap<K,V> extends AbstractMap<K,V> implements Map<K,V>, Cloneabl
     transient Node<k,v>[] table;
     // 存放具体元素的集
     transient Set<map.entry<k,v>> entrySet;
-    // 存放元素的个数，注意这个不等于数组的长度。
+    // 存放元素的个数，注意这个不等于数组的长度
     transient int size;
     // 每次扩容和更改map结构的计数器
     transient int modCount;
@@ -105,15 +105,15 @@ public class HashMap<K,V> extends AbstractMap<K,V> implements Map<K,V>, Cloneabl
 
 - **loadFactor 负载因子**
 
-  loadFactor 负载因子是控制数组存放数据的疏密程度，loadFactor 越趋近于 1，那么 数组中存放的数据(entry)也就越多，也就越密，也就是会让链表的长度增加，loadFactor 越小，也就是趋近于 0，数组中存放的数据(entry)也就越少，也就越稀疏。
+  loadFactor 负载因子是控制数组存放数据的疏密程度，loadFactor 越趋近于 1，那么 数组中存放的数据(entry)也就越多，也就越密，也就是会让链表的长度增加，loadFactor 越小，也就是趋近于 0，数组中存放的数据(entry)也就越少，也就越稀疏
 
-  **loadFactor 太大导致查找元素效率低，太小导致数组的利用率低，存放的数据会很分散。loadFactor 的默认值为 0.75f 是官方给出的一个比较好的临界值**。
+  **loadFactor 太大导致查找元素效率低，太小导致数组的利用率低，存放的数据会很分散。loadFactor 的默认值为 0.75f 是官方给出的一个比较好的临界值**
 
-  给定的默认容量为 16，负载因子为 0.75。Map 在使用过程中不断的往里面存放数据，当数量超过了 16 \* 0.75 = 12 就需要将当前 16 的容量进行扩容，而扩容这个过程涉及到 rehash、复制数据等操作，所以非常消耗性能。
+  给定的默认容量为 16，负载因子为 0.75。Map 在使用过程中不断的往里面存放数据，当数量超过了 16 \* 0.75 = 12 就需要将当前 16 的容量进行扩容，而扩容这个过程涉及到 rehash、复制数据等操作，所以非常消耗性能
 
 - **threshold**
 
-  **threshold = capacity \* loadFactor**，**当 Size>threshold**的时候，那么就要考虑对数组的扩增了，也就是说，这个的意思就是 **衡量数组是否需要扩增的一个标准**。
+  **threshold = capacity \* loadFactor**，**当 Size>threshold**的时候，那么就要考虑对数组的扩增了，也就是说，这个的意思就是 **衡量数组是否需要扩增的一个标准**
 
 **Node 节点类源码:**
 
@@ -187,7 +187,7 @@ static final class TreeNode<K,V> extends LinkedHashMap.Entry<K,V> {
 HashMap 中有四个构造方法，它们分别如下：
 
 ```java
-    // 默认构造函数。
+    // 默认构造函数
     public HashMap() {
         this.loadFactor = DEFAULT_LOAD_FACTOR; // all   other fields defaulted
      }
@@ -217,7 +217,7 @@ HashMap 中有四个构造方法，它们分别如下：
      }
 ```
 
-> 值得注意的是上述四个构造方法中，都初始化了负载因子 loadFactor，由于 HashMap 中没有 capacity 这样的字段，即使指定了初始化容量 initialCapacity ，也只是通过 tableSizeFor 将其扩容到与 initialCapacity 最接近的 2 的幂次方大小，然后暂时赋值给 threshold ，后续通过 resize 方法将 threshold 赋值给 newCap 进行 table 的初始化。
+> 值得注意的是上述四个构造方法中，都初始化了负载因子 loadFactor，由于 HashMap 中没有 capacity 这样的字段，即使指定了初始化容量 initialCapacity ，也只是通过 tableSizeFor 将其扩容到与 initialCapacity 最接近的 2 的幂次方大小，然后暂时赋值给 threshold ，后续通过 resize 方法将 threshold 赋值给 newCap 进行 table 的初始化
 
 **putMapEntries 方法：**
 
@@ -236,7 +236,7 @@ final void putMapEntries(Map<? extends K, ? extends V> m, boolean evict) {
                     (int)ft : MAXIMUM_CAPACITY);
             /*
              * 根据构造函数可知，table未初始化，threshold实际上是存放的初始化容量，如果添加s个元素所
-             * 需的最小容量大于初始化容量，则将最小容量扩容为最接近的2的幂次方大小作为初始化。
+             * 需的最小容量大于初始化容量，则将最小容量扩容为最接近的2的幂次方大小作为初始化
              * 注意这里不是初始化阈值
              */
             if (t > threshold)
@@ -257,12 +257,12 @@ final void putMapEntries(Map<? extends K, ? extends V> m, boolean evict) {
 
 ### put 方法
 
-HashMap 只提供了 put 用于添加元素，putVal 方法只是给 put 方法调用的一个方法，并没有提供给用户使用。
+HashMap 只提供了 put 用于添加元素，putVal 方法只是给 put 方法调用的一个方法，并没有提供给用户使用
 
 **对 putVal 方法添加元素的分析如下：**
 
-1. 如果定位到的数组位置没有元素 就直接插入。
-2. 如果定位到的数组位置有元素就和要插入的 key 比较，如果 key 相同就直接覆盖，如果 key 不相同，就判断 p 是否是一个树节点，如果是就调用`e = ((TreeNode<K,V>)p).putTreeVal(this, tab, hash, key, value)`将元素添加进入。如果不是就遍历链表插入(插入的是链表尾部)。
+1. 如果定位到的数组位置没有元素 就直接插入
+2. 如果定位到的数组位置有元素就和要插入的 key 比较，如果 key 相同就直接覆盖，如果 key 不相同，就判断 p 是否是一个树节点，如果是就调用`e = ((TreeNode<K,V>)p).putTreeVal(this, tab, hash, key, value)`将元素添加进入。如果不是就遍历链表插入(插入的是链表尾部)
 
 ![ ](https://oss.javaguide.cn/github/javaguide/database/sql/put.png)
 
@@ -283,7 +283,7 @@ final V putVal(int hash, K key, V value, boolean onlyIfAbsent,
     // 桶中已经存在元素（处理hash冲突）
     else {
         Node<K,V> e; K k;
-        //快速判断第一个节点table[i]的key是否与插入的key一样，若相同就直接使用插入的值p替换掉旧的值e。
+        //快速判断第一个节点table[i]的key是否与插入的key一样，若相同就直接使用插入的值p替换掉旧的值e
         if (p.hash == hash &&
             ((k = p.key) == key || (key != null && key.equals(k))))
                 e = p;
@@ -300,8 +300,8 @@ final V putVal(int hash, K key, V value, boolean onlyIfAbsent,
                     // 在尾部插入新结点
                     p.next = newNode(hash, key, value, null);
                     // 结点数量达到阈值(默认为 8 )，执行 treeifyBin 方法
-                    // 这个方法会根据 HashMap 数组来决定是否转换为红黑树。
-                    // 只有当数组长度大于或者等于 64 的情况下，才会执行转换红黑树操作，以减少搜索时间。否则，就是只是对数组扩容。
+                    // 这个方法会根据 HashMap 数组来决定是否转换为红黑树
+                    // 只有当数组长度大于或者等于 64 的情况下，才会执行转换红黑树操作，以减少搜索时间。否则，就是只是对数组扩容
                     if (binCount >= TREEIFY_THRESHOLD - 1) // -1 for 1st
                         treeifyBin(tab, hash);
                     // 跳出循环
@@ -345,8 +345,8 @@ final V putVal(int hash, K key, V value, boolean onlyIfAbsent,
 
 **对于 put 方法的分析如下：**
 
-- ① 如果定位到的数组位置没有元素 就直接插入。
-- ② 如果定位到的数组位置有元素，遍历以这个元素为头结点的链表，依次和插入的 key 比较，如果 key 相同就直接覆盖，不同就采用头插法插入元素。
+- ① 如果定位到的数组位置没有元素 就直接插入
+- ② 如果定位到的数组位置有元素，遍历以这个元素为头结点的链表，依次和插入的 key 比较，如果 key 相同就直接覆盖，不同就采用头插法插入元素
 
 ```java
 public V put(K key, V value)
@@ -408,7 +408,7 @@ final Node<K,V> getNode(int hash, Object key) {
 
 ### resize 方法
 
-进行扩容，会伴随着一次重新 hash 分配，并且会遍历 hash 表中所有的元素，是非常耗时的。在编写程序中，要尽量避免 resize。resize 方法实际上是将 table 初始化和 table 扩容 进行了整合，底层的行为都是给 table 赋值一个新的数组。
+进行扩容，会伴随着一次重新 hash 分配，并且会遍历 hash 表中所有的元素，是非常耗时的。在编写程序中，要尽量避免 resize。resize 方法实际上是将 table 初始化和 table 扩容 进行了整合，底层的行为都是给 table 赋值一个新的数组
 
 ```java
 final Node<K,V>[] resize() {
@@ -454,8 +454,8 @@ final Node<K,V>[] resize() {
                     // 只有一个节点，直接计算元素新的位置即可
                     newTab[e.hash & (newCap - 1)] = e;
                 else if (e instanceof TreeNode)
-                    // 将红黑树拆分成2棵子树，如果子树节点数小于等于 UNTREEIFY_THRESHOLD（默认为 6），则将子树转换为链表。
-                    // 如果子树节点数大于 UNTREEIFY_THRESHOLD，则保持子树的树结构。
+                    // 将红黑树拆分成2棵子树，如果子树节点数小于等于 UNTREEIFY_THRESHOLD（默认为 6），则将子树转换为链表
+                    // 如果子树节点数大于 UNTREEIFY_THRESHOLD，则保持子树的树结构
                     ((TreeNode<K,V>)e).split(this, newTab, j, oldCap);
                 else {
                     Node<K,V> loHead = null, loTail = null;
@@ -545,8 +545,8 @@ public class HashMapDemo {
 
         }
         /**
-         * 如果既要遍历key又要value，那么建议这种方式，因为如果先获取keySet然后再执行map.get(key)，map内部会执行两次遍历。
-         * 一次是在获取keySet的时候，一次是在遍历所有key的时候。
+         * 如果既要遍历key又要value，那么建议这种方式，因为如果先获取keySet然后再执行map.get(key)，map内部会执行两次遍历
+         * 一次是在获取keySet的时候，一次是在遍历所有key的时候
          */
         // 当我调用put(key,value)方法的时候，首先会把key和value封装到
         // Entry这个静态内部类对象中，把Entry对象再添加到数组中，所以我们想获取

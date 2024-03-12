@@ -7,7 +7,7 @@ tag:
 
 ## Docker 介绍
 
-开始之前，还是简单介绍一下 Docker，更多 Docker 概念介绍可以看前一篇文章[Docker 核心概念总结](./docker-intro.md)。
+开始之前，还是简单介绍一下 Docker，更多 Docker 概念介绍可以看前一篇文章[Docker 核心概念总结](./Docker核心概念总结.md)。
 
 ### 什么是 Docker？
 

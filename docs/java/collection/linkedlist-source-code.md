@@ -9,29 +9,29 @@ tag:
 
 ## LinkedList 简介
 
-`LinkedList` 是一个基于双向链表实现的集合类，经常被拿来和 `ArrayList` 做比较。关于 `LinkedList` 和`ArrayList`的详细对比，我们 [Java 集合常见面试题总结(上)](./java-collection-questions-01.md)有详细介绍到。
+`LinkedList` 是一个基于双向链表实现的集合类，经常被拿来和 `ArrayList` 做比较。关于 `LinkedList` 和`ArrayList`的详细对比，我们 [Java 集合常见面试题总结(上)](./java-collection-questions-01.md)有详细介绍到
 
 ![双向链表](https://oss.javaguide.cn/github/javaguide/cs-basics/data-structure/bidirectional-linkedlist.png)
 
-不过，我们在项目中一般是不会使用到 `LinkedList` 的，需要用到 `LinkedList` 的场景几乎都可以使用 `ArrayList` 来代替，并且，性能通常会更好！就连 `LinkedList` 的作者约书亚 · 布洛克（Josh Bloch）自己都说从来不会使用 `LinkedList` 。
+不过，我们在项目中一般是不会使用到 `LinkedList` 的，需要用到 `LinkedList` 的场景几乎都可以使用 `ArrayList` 来代替，并且，性能通常会更好！就连 `LinkedList` 的作者约书亚 · 布洛克（Josh Bloch）自己都说从来不会使用 `LinkedList` 
 
 ![](https://oss.javaguide.cn/github/javaguide/redisimage-20220412110853807.png)
 
-另外，不要下意识地认为 `LinkedList` 作为链表就最适合元素增删的场景。我在上面也说了，`LinkedList` 仅仅在头尾插入或者删除元素的时候时间复杂度近似 O(1)，其他情况增删元素的平均时间复杂度都是 O(n) 。
+另外，不要下意识地认为 `LinkedList` 作为链表就最适合元素增删的场景。我在上面也说了，`LinkedList` 仅仅在头尾插入或者删除元素的时候时间复杂度近似 O(1)，其他情况增删元素的平均时间复杂度都是 O(n) 
 
 ### LinkedList 插入和删除元素的时间复杂度？
 
-- 头部插入/删除：只需要修改头结点的指针即可完成插入/删除操作，因此时间复杂度为 O(1)。
-- 尾部插入/删除：只需要修改尾结点的指针即可完成插入/删除操作，因此时间复杂度为 O(1)。
-- 指定位置插入/删除：需要先移动到指定位置，再修改指定节点的指针完成插入/删除，因此需要移动平均 n/2 个元素，时间复杂度为 O(n)。
+- 头部插入/删除：只需要修改头结点的指针即可完成插入/删除操作，因此时间复杂度为 O(1)
+- 尾部插入/删除：只需要修改尾结点的指针即可完成插入/删除操作，因此时间复杂度为 O(1)
+- 指定位置插入/删除：需要先移动到指定位置，再修改指定节点的指针完成插入/删除，因此需要移动平均 n/2 个元素，时间复杂度为 O(n)
 
 ### LinkedList 为什么不能实现 RandomAccess 接口？
 
-`RandomAccess` 是一个标记接口，用来表明实现该接口的类支持随机访问（即可以通过索引快速访问元素）。由于 `LinkedList` 底层数据结构是链表，内存地址不连续，只能通过指针来定位，不支持随机快速访问，所以不能实现 `RandomAccess` 接口。
+`RandomAccess` 是一个标记接口，用来表明实现该接口的类支持随机访问（即可以通过索引快速访问元素）。由于 `LinkedList` 底层数据结构是链表，内存地址不连续，只能通过指针来定位，不支持随机快速访问，所以不能实现 `RandomAccess` 接口
 
 ## LinkedList 源码分析
 
-这里以 JDK1.8 为例，分析一下 `LinkedList` 的底层核心源码。
+这里以 JDK1.8 为例，分析一下 `LinkedList` 的底层核心源码
 
 `LinkedList` 的类定义如下：
 
@@ -44,16 +44,16 @@ public class LinkedList<E>
 }
 ```
 
-`LinkedList` 继承了 `AbstractSequentialList` ，而 `AbstractSequentialList` 又继承于 `AbstractList` 。
+`LinkedList` 继承了 `AbstractSequentialList` ，而 `AbstractSequentialList` 又继承于 `AbstractList` 
 
-阅读过 `ArrayList` 的源码我们就知道，`ArrayList` 同样继承了 `AbstractList` ， 所以 `LinkedList` 会有大部分方法和 `ArrayList` 相似。
+阅读过 `ArrayList` 的源码我们就知道，`ArrayList` 同样继承了 `AbstractList` ， 所以 `LinkedList` 会有大部分方法和 `ArrayList` 相似
 
 `LinkedList` 实现了以下接口：
 
-- `List` : 表明它是一个列表，支持添加、删除、查找等操作，并且可以通过下标进行访问。
-- `Deque` ：继承自 `Queue` 接口，具有双端队列的特性，支持从两端插入和删除元素，方便实现栈和队列等数据结构。需要注意，`Deque` 的发音为 "deck" [dɛk]，这个大部分人都会读错。
-- `Cloneable` ：表明它具有拷贝能力，可以进行深拷贝或浅拷贝操作。
-- `Serializable` : 表明它可以进行序列化操作，也就是可以将对象转换为字节流进行持久化存储或网络传输，非常方便。
+- `List` : 表明它是一个列表，支持添加、删除、查找等操作，并且可以通过下标进行访问
+- `Deque` ：继承自 `Queue` 接口，具有双端队列的特性，支持从两端插入和删除元素，方便实现栈和队列等数据结构。需要注意，`Deque` 的发音为 "deck" [dɛk]，这个大部分人都会读错
+- `Cloneable` ：表明它具有拷贝能力，可以进行深拷贝或浅拷贝操作
+- `Serializable` : 表明它可以进行序列化操作，也就是可以将对象转换为字节流进行持久化存储或网络传输，非常方便
 
 ![LinkedList 类图](https://oss.javaguide.cn/github/javaguide/java/collection/linkedlist--class-diagram.png)
 
@@ -76,7 +76,7 @@ private static class Node<E> {
 
 ### 初始化
 
-`LinkedList` 中有一个无参构造函数和一个有参构造函数。
+`LinkedList` 中有一个无参构造函数和一个有参构造函数
 
 ```java
 // 创建一个空的链表对象
@@ -92,14 +92,14 @@ public LinkedList(Collection<? extends E> c) {
 
 ### 插入元素
 
-`LinkedList` 除了实现了 `List` 接口相关方法，还实现了 `Deque` 接口的很多方法，所以我们有很多种方式插入元素。
+`LinkedList` 除了实现了 `List` 接口相关方法，还实现了 `Deque` 接口的很多方法，所以我们有很多种方式插入元素
 
-我们这里以 `List` 接口中相关的插入方法为例进行源码讲解，对应的是`add()` 方法。
+我们这里以 `List` 接口中相关的插入方法为例进行源码讲解，对应的是`add()` 方法
 
 `add()` 方法有两个版本：
 
-- `add(E e)`：用于在 `LinkedList` 的尾部插入元素，即将新元素作为链表的最后一个元素，时间复杂度为 O(1)。
-- `add(int index, E element)`:用于在指定位置插入元素。这种插入方式需要先移动到指定位置，再修改指定节点的指针完成插入/删除，因此需要移动平均 n/2 个元素，时间复杂度为 O(n)。
+- `add(E e)`：用于在 `LinkedList` 的尾部插入元素，即将新元素作为链表的最后一个元素，时间复杂度为 O(1)
+- `add(int index, E element)`:用于在指定位置插入元素。这种插入方式需要先移动到指定位置，再修改指定节点的指针完成插入/删除，因此需要移动平均 n/2 个元素，时间复杂度为 O(n)
 
 ```java
 // 在链表尾部插入元素
@@ -166,9 +166,9 @@ void linkBefore(E e, Node<E> succ) {
 
 `LinkedList`获取元素相关的方法一共有 3 个：
 
-1. `getFirst()`：获取链表的第一个元素。
-2. `getLast()`：获取链表的最后一个元素。
-3. `get(int index)`：获取链表指定位置的元素。
+1. `getFirst()`：获取链表的第一个元素
+2. `getLast()`：获取链表的最后一个元素
+3. `get(int index)`：获取链表指定位置的元素
 
 ```java
 // 获取链表的第一个元素
@@ -219,19 +219,19 @@ Node<E> node(int index) {
 }
 ```
 
-`get(int index)` 或 `remove(int index)` 等方法内部都调用了该方法来获取对应的节点。
+`get(int index)` 或 `remove(int index)` 等方法内部都调用了该方法来获取对应的节点
 
-从这个方法的源码可以看出，该方法通过比较索引值与链表 size 的一半大小来确定从链表头还是尾开始遍历。如果索引值小于 size 的一半，就从链表头开始遍历，反之从链表尾开始遍历。这样可以在较短的时间内找到目标节点，充分利用了双向链表的特性来提高效率。
+从这个方法的源码可以看出，该方法通过比较索引值与链表 size 的一半大小来确定从链表头还是尾开始遍历。如果索引值小于 size 的一半，就从链表头开始遍历，反之从链表尾开始遍历。这样可以在较短的时间内找到目标节点，充分利用了双向链表的特性来提高效率
 
 ### 删除元素
 
 `LinkedList`删除元素相关的方法一共有 5 个：
 
-1. `removeFirst()`：删除并返回链表的第一个元素。
-2. `removeLast()`：删除并返回链表的最后一个元素。
-3. `remove(E e)`：删除链表中首次出现的指定元素，如果不存在该元素则返回 false。
-4. `remove(int index)`：删除指定索引处的元素，并返回该元素的值。
-5. `void clear()`：移除此链表中的所有元素。
+1. `removeFirst()`：删除并返回链表的第一个元素
+2. `removeLast()`：删除并返回链表的最后一个元素
+3. `remove(E e)`：删除链表中首次出现的指定元素，如果不存在该元素则返回 false
+4. `remove(int index)`：删除指定索引处的元素，并返回该元素的值
+5. `void clear()`：移除此链表中的所有元素
 
 ```java
 // 删除并返回链表的第一个元素
@@ -332,7 +332,7 @@ E unlink(Node<E> x) {
    - 如果 x 不是头节点也不是尾节点，执行下一步操作
 3. 将待删除节点 x 的前驱的后继指向待删除节点的后继 next，断开 x 和 x.prev 之间的链接；
 4. 将待删除节点 x 的后继的前驱指向待删除节点的前驱 prev，断开 x 和 x.next 之间的链接；
-5. 将待删除节点 x 的元素置空，修改链表长度。
+5. 将待删除节点 x 的元素置空，修改链表长度
 
 可以参考下图理解（图源：[LinkedList 源码分析(JDK 1.8)](https://www.tianxiaobo.com/2018/01/31/LinkedList-%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90-JDK-1-8/)）：
 
@@ -340,7 +340,7 @@ E unlink(Node<E> x) {
 
 ### 遍历链表
 
-推荐使用`for-each` 循环来遍历 `LinkedList` 中的元素， `for-each` 循环最终会转换成迭代器形式。
+推荐使用`for-each` 循环来遍历 `LinkedList` 中的元素， `for-each` 循环最终会转换成迭代器形式
 
 ```java
 LinkedList<String> list = new LinkedList<>();
@@ -353,7 +353,7 @@ for (String fruit : list) {
 }
 ```
 
-`LinkedList` 的遍历的核心就是它的迭代器的实现。
+`LinkedList` 的遍历的核心就是它的迭代器的实现
 
 ```java
 // 双向迭代器
@@ -364,13 +364,13 @@ private class ListItr implements ListIterator<E> {
     private Node<E> next;
     // 表示下一个要遍历的节点的下标，也就是当前节点的后继节点的下标；
     private int nextIndex;
-    // 表示当前遍历期望的修改计数值，用于和 LinkedList 的 modCount 比较，判断链表是否被其他线程修改过。
+    // 表示当前遍历期望的修改计数值，用于和 LinkedList 的 modCount 比较，判断链表是否被其他线程修改过
     private int expectedModCount = modCount;
     …………
 }
 ```
 
-下面我们对迭代器 `ListItr` 中的核心方法进行详细介绍。
+下面我们对迭代器 `ListItr` 中的核心方法进行详细介绍
 
 我们先来看下从头到尾方向的迭代：
 
@@ -418,7 +418,7 @@ public E previous() {
 }
 ```
 
-如果需要删除或插入元素，也可以使用迭代器进行操作。
+如果需要删除或插入元素，也可以使用迭代器进行操作
 
 ```java
 LinkedList<String> list = new LinkedList<>();

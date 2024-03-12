@@ -7,21 +7,21 @@ tag:
 
 ## 何为反射？
 
-如果说大家研究过框架的底层原理或者咱们自己写过框架的话，一定对反射这个概念不陌生。
+如果说大家研究过框架的底层原理或者咱们自己写过框架的话，一定对反射这个概念不陌生
 
-反射之所以被称为框架的灵魂，主要是因为它赋予了我们在运行时分析类以及执行类中方法的能力。
+反射之所以被称为框架的灵魂，主要是因为它赋予了我们在运行时分析类以及执行类中方法的能力
 
-通过反射你可以获取任意一个类的所有属性和方法，你还可以调用这些方法和属性。
+通过反射你可以获取任意一个类的所有属性和方法，你还可以调用这些方法和属性
 
 ## 反射的应用场景了解么？
 
-像咱们平时大部分时候都是在写业务代码，很少会接触到直接使用反射机制的场景。
+像咱们平时大部分时候都是在写业务代码，很少会接触到直接使用反射机制的场景
 
-但是，这并不代表反射没有用。相反，正是因为反射，你才能这么轻松地使用各种框架。像 Spring/Spring Boot、MyBatis 等等框架中都大量使用了反射机制。
+但是，这并不代表反射没有用。相反，正是因为反射，你才能这么轻松地使用各种框架。像 Spring/Spring Boot、MyBatis 等等框架中都大量使用了反射机制
 
 **这些框架中也大量使用了动态代理，而动态代理的实现也依赖反射。**
 
-比如下面是通过 JDK 实现动态代理的示例代码，其中就使用了反射类 `Method` 来调用指定的方法。
+比如下面是通过 JDK 实现动态代理的示例代码，其中就使用了反射类 `Method` 来调用指定的方法
 
 ```java
 public class DebugInvocationHandler implements InvocationHandler {
@@ -45,11 +45,11 @@ public class DebugInvocationHandler implements InvocationHandler {
 
 ```
 
-另外，像 Java 中的一大利器 **注解** 的实现也用到了反射。
+另外，像 Java 中的一大利器 **注解** 的实现也用到了反射
 
 为什么你使用 Spring 的时候 ，一个`@Component`注解就声明了一个类为 Spring Bean 呢？为什么你通过一个 `@Value`注解就读取到配置文件中的值呢？究竟是怎么起作用的呢？
 
-这些都是因为你可以基于反射分析类，然后获取到类/属性/方法/方法的参数上的注解。你获取到注解之后，就可以做进一步的处理。
+这些都是因为你可以基于反射分析类，然后获取到类/属性/方法/方法的参数上的注解。你获取到注解之后，就可以做进一步的处理
 
 ## 谈谈反射机制的优缺点
 
@@ -94,7 +94,7 @@ ClassLoader.getSystemClassLoader().loadClass("cn.javaguide.TargetObject");
 
 ### 反射的一些基本操作
 
-1. 创建一个我们要使用反射操作的类 `TargetObject`。
+1. 创建一个我们要使用反射操作的类 `TargetObject`
 
 ```java
 package cn.javaguide;
@@ -177,8 +177,8 @@ I love JavaGuide
 value is JavaGuide
 ```
 
-**注意** : 有读者提到上面代码运行会抛出 `ClassNotFoundException` 异常,具体原因是你没有下面把这段代码的包名替换成自己创建的 `TargetObject` 所在的包 。
-可以参考：<https://www.cnblogs.com/chanshuyi/p/head_first_of_reflection.html> 这篇文章。
+**注意** : 有读者提到上面代码运行会抛出 `ClassNotFoundException` 异常,具体原因是你没有下面把这段代码的包名替换成自己创建的 `TargetObject` 所在的包 
+可以参考：<https://www.cnblogs.com/chanshuyi/p/head_first_of_reflection.html> 这篇文章
 
 ```java
 Class<?> targetClass = Class.forName("cn.javaguide.TargetObject");

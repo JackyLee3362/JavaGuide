@@ -7,22 +7,22 @@ tag:
 
 > 本文来自[cowbi](https://github.com/cowbi)的投稿~
 
-Oracle 于 2014 发布了 Java8（jdk1.8），诸多原因使它成为目前市场上使用最多的 jdk 版本。虽然发布距今已将近 7 年，但很多程序员对其新特性还是不够了解，尤其是用惯了 Java8 之前版本的老程序员，比如我。
+Oracle 于 2014 发布了 Java8（jdk1.8），诸多原因使它成为目前市场上使用最多的 jdk 版本。虽然发布距今已将近 7 年，但很多程序员对其新特性还是不够了解，尤其是用惯了 Java8 之前版本的老程序员，比如我
 
-为了不脱离队伍太远，还是有必要对这些新特性做一些总结梳理。它较 jdk.7 有很多变化或者说是优化，比如 interface 里可以有静态方法，并且可以有方法体，这一点就颠覆了之前的认知；`java.util.HashMap` 数据结构里增加了红黑树；还有众所周知的 Lambda 表达式等等。本文不能把所有的新特性都给大家一一分享，只列出比较常用的新特性给大家做详细讲解。更多相关内容请看[官网关于 Java8 的新特性的介绍](https://www.oracle.com/java/technologies/javase/8-whats-new.html)。
+为了不脱离队伍太远，还是有必要对这些新特性做一些总结梳理。它较 jdk.7 有很多变化或者说是优化，比如 interface 里可以有静态方法，并且可以有方法体，这一点就颠覆了之前的认知；`java.util.HashMap` 数据结构里增加了红黑树；还有众所周知的 Lambda 表达式等等。本文不能把所有的新特性都给大家一一分享，只列出比较常用的新特性给大家做详细讲解。更多相关内容请看[官网关于 Java8 的新特性的介绍](https://www.oracle.com/java/technologies/javase/8-whats-new.html)
 
 ## Interface
 
-interface 的设计初衷是面向抽象，提高扩展性。这也留有一点遗憾，Interface 修改的时候，实现它的类也必须跟着改。
+interface 的设计初衷是面向抽象，提高扩展性。这也留有一点遗憾，Interface 修改的时候，实现它的类也必须跟着改
 
-为了解决接口的修改与现有的实现不兼容的问题。新 interface 的方法可以用`default` 或 `static`修饰，这样就可以有方法体，实现类也不必重写此方法。
+为了解决接口的修改与现有的实现不兼容的问题。新 interface 的方法可以用`default` 或 `static`修饰，这样就可以有方法体，实现类也不必重写此方法
 
-一个 interface 中可以有多个方法被它们修饰，这 2 个修饰符的区别主要也是普通方法和静态方法的区别。
+一个 interface 中可以有多个方法被它们修饰，这 2 个修饰符的区别主要也是普通方法和静态方法的区别
 
-1. `default`修饰的方法，是普通实例方法，可以用`this`调用，可以被子类继承、重写。
-2. `static`修饰的方法，使用上和一般类静态方法一样。但它不能被子类继承，只能用`Interface`调用。
+1. `default`修饰的方法，是普通实例方法，可以用`this`调用，可以被子类继承、重写
+2. `static`修饰的方法，使用上和一般类静态方法一样。但它不能被子类继承，只能用`Interface`调用
 
-我们来看一个实际的例子。
+我们来看一个实际的例子
 
 ```java
 public interface InterfaceNew {
@@ -50,7 +50,7 @@ public interface InterfaceNew1 {
 }
 ```
 
-如果有一个类既实现了 `InterfaceNew` 接口又实现了 `InterfaceNew1`接口，它们都有`def()`，并且 `InterfaceNew` 接口和 `InterfaceNew1`接口没有继承关系的话，这时就必须重写`def()`。不然的话，编译的时候就会报错。
+如果有一个类既实现了 `InterfaceNew` 接口又实现了 `InterfaceNew1`接口，它们都有`def()`，并且 `InterfaceNew` 接口和 `InterfaceNew1`接口没有继承关系的话，这时就必须重写`def()`。不然的话，编译的时候就会报错
 
 ```java
 public class InterfaceNewImpl implements InterfaceNew , InterfaceNew1{
@@ -81,29 +81,29 @@ public class InterfaceNewImpl implements InterfaceNew , InterfaceNew1{
    - 接口多实现，类单继承
    - 接口的方法是 public abstract 修饰，变量是 public static final 修饰。 abstract class 可以用其他修饰符
 
-2. interface 的方法是更像是一个扩展插件。而 abstract class 的方法是要继承的。
+2. interface 的方法是更像是一个扩展插件。而 abstract class 的方法是要继承的
 
-开始我们也提到，interface 新增`default`和`static`修饰的方法，为了解决接口的修改与现有的实现不兼容的问题，并不是为了要替代`abstract class`。在使用上，该用 abstract class 的地方还是要用 abstract class，不要因为 interface 的新特性而将之替换。
+开始我们也提到，interface 新增`default`和`static`修饰的方法，为了解决接口的修改与现有的实现不兼容的问题，并不是为了要替代`abstract class`。在使用上，该用 abstract class 的地方还是要用 abstract class，不要因为 interface 的新特性而将之替换
 
 **记住接口永远和类不一样。**
 
 ## functional interface 函数式接口
 
-**定义**：也称 SAM 接口，即 Single Abstract Method interfaces，有且只有一个抽象方法，但可以有多个非抽象方法的接口。
+**定义**：也称 SAM 接口，即 Single Abstract Method interfaces，有且只有一个抽象方法，但可以有多个非抽象方法的接口
 
-在 java 8 中专门有一个包放函数式接口`java.util.function`，该包下的所有接口都有 `@FunctionalInterface` 注解，提供函数式编程。
+在 java 8 中专门有一个包放函数式接口`java.util.function`，该包下的所有接口都有 `@FunctionalInterface` 注解，提供函数式编程
 
 在其他包中也有函数式接口，其中一些没有`@FunctionalInterface` 注解，但是只要符合函数式接口的定义就是函数式接口，与是否有
 
-`@FunctionalInterface`注解无关，注解只是在编译时起到强制规范定义的作用。其在 Lambda 表达式中有广泛的应用。
+`@FunctionalInterface`注解无关，注解只是在编译时起到强制规范定义的作用。其在 Lambda 表达式中有广泛的应用
 
 ## Lambda 表达式
 
-接下来谈众所周知的 Lambda 表达式。它是推动 Java 8 发布的最重要新特性。是继泛型(`Generics`)和注解(`Annotation`)以来最大的变化。
+接下来谈众所周知的 Lambda 表达式。它是推动 Java 8 发布的最重要新特性。是继泛型(`Generics`)和注解(`Annotation`)以来最大的变化
 
-使用 Lambda 表达式可以使代码变的更加简洁紧凑。让 java 也能支持简单的*函数式编程*。
+使用 Lambda 表达式可以使代码变的更加简洁紧凑。让 java 也能支持简单的*函数式编程*
 
-> Lambda 表达式是一个匿名函数，java 8 允许把函数作为参数传递进方法中。
+> Lambda 表达式是一个匿名函数，java 8 允许把函数作为参数传递进方法中
 
 ### 语法格式
 
@@ -167,7 +167,7 @@ button.addItemListener(e -> e.getItem());
 
 **4.自定义接口**
 
-上面的 3 个例子是我们在开发过程中最常见的，从中也能体会到 Lambda 带来的便捷与清爽。它只保留实际用到的代码，把无用代码全部省略。那它对接口有没有要求呢？我们发现这些匿名内部类只重写了接口的一个方法，当然也只有一个方法须要重写。这就是我们上文提到的**函数式接口**，也就是说只要方法的参数是函数式接口都可以用 Lambda 表达式。
+上面的 3 个例子是我们在开发过程中最常见的，从中也能体会到 Lambda 带来的便捷与清爽。它只保留实际用到的代码，把无用代码全部省略。那它对接口有没有要求呢？我们发现这些匿名内部类只重写了接口的一个方法，当然也只有一个方法须要重写。这就是我们上文提到的**函数式接口**，也就是说只要方法的参数是函数式接口都可以用 Lambda 表达式
 
 ```java
 @FunctionalInterface
@@ -217,7 +217,7 @@ void lamndaFor() {
 
 #### 方法的引用
 
-Java 8 允许使用 `::` 关键字来传递方法或者构造函数引用，无论如何，表达式返回的类型必须是 functional-interface。
+Java 8 允许使用 `::` 关键字来传递方法或者构造函数引用，无论如何，表达式返回的类型必须是 functional-interface
 
 ```java
 public class LambdaClassSuper {
@@ -260,15 +260,15 @@ Collections.sort(strings, (Integer o1, Integer o2) -> o1 - i);
 //i =3;
 ```
 
-lambda 表达式可以引用外边变量，但是该变量默认拥有 final 属性，不能被修改，如果修改，编译时就报错。
+lambda 表达式可以引用外边变量，但是该变量默认拥有 final 属性，不能被修改，如果修改，编译时就报错
 
 ## Stream
 
-java 新增了 `java.util.stream` 包，它和之前的流大同小异。之前接触最多的是资源流，比如`java.io.FileInputStream`，通过流把文件从一个地方输入到另一个地方，它只是内容搬运工，对文件内容不做任何*CRUD*。
+java 新增了 `java.util.stream` 包，它和之前的流大同小异。之前接触最多的是资源流，比如`java.io.FileInputStream`，通过流把文件从一个地方输入到另一个地方，它只是内容搬运工，对文件内容不做任何*CRUD*
 
-`Stream`依然不存储数据，不同的是它可以检索(Retrieve)和逻辑处理集合数据、包括筛选、排序、统计、计数等。可以想象成是 Sql 语句。
+`Stream`依然不存储数据，不同的是它可以检索(Retrieve)和逻辑处理集合数据、包括筛选、排序、统计、计数等。可以想象成是 Sql 语句
 
-它的源数据可以是 `Collection`、`Array` 等。由于它的方法参数都是函数式接口类型，所以一般和 Lambda 配合使用。
+它的源数据可以是 `Collection`、`Array` 等。由于它的方法参数都是函数式接口类型，所以一般和 Lambda 配合使用
 
 ### 流类型
 
@@ -296,7 +296,7 @@ default Stream<E> parallelStream()
 public static<T> Stream<T> of(T t)
 
 /**
-* 返回其元素是指定值的顺序流。
+* 返回其元素是指定值的顺序流
 */
 public static<T> Stream<T> of(T... values) {
     return Arrays.stream(values);
@@ -309,17 +309,17 @@ public static<T> Stream<T> of(T... values) {
 Stream<T> filter(Predicate<? super T> predicate);
 
 /**
-* 此流的所有元素是否与提供的predicate匹配。
+* 此流的所有元素是否与提供的predicate匹配
 */
 boolean allMatch(Predicate<? super T> predicate)
 
 /**
-* 此流任意元素是否有与提供的predicate匹配。
+* 此流任意元素是否有与提供的predicate匹配
 */
 boolean anyMatch(Predicate<? super T> predicate);
 
 /**
-* 返回一个 Stream的构建器。
+* 返回一个 Stream的构建器
 */
 public static<T> Builder<T> builder();
 
@@ -329,12 +329,12 @@ public static<T> Builder<T> builder();
 <R, A> R collect(Collector<? super T, A, R> collector);
 
 /**
- * 返回此流中的元素数。
+ * 返回此流中的元素数
 */
 long count();
 
 /**
-* 返回由该流的不同元素（根据 Object.equals(Object) ）组成的流。
+* 返回由该流的不同元素（根据 Object.equals(Object) ）组成的流
 */
 Stream<T> distinct();
 
@@ -344,7 +344,7 @@ Stream<T> distinct();
 void forEach(Consumer<? super T> action);
 
 /**
-* 用于获取指定数量的流，截短长度不能超过 maxSize 。
+* 用于获取指定数量的流，截短长度不能超过 maxSize 
 */
 Stream<T> limit(long maxSize);
 
@@ -354,22 +354,22 @@ Stream<T> limit(long maxSize);
 <R> Stream<R> map(Function<? super T, ? extends R> mapper);
 
 /**
-* 根据提供的 Comparator进行排序。
+* 根据提供的 Comparator进行排序
 */
 Stream<T> sorted(Comparator<? super T> comparator);
 
 /**
-* 在丢弃流的第一个 n元素后，返回由该流的 n元素组成的流。
+* 在丢弃流的第一个 n元素后，返回由该流的 n元素组成的流
 */
 Stream<T> skip(long n);
 
 /**
-* 返回一个包含此流的元素的数组。
+* 返回一个包含此流的元素的数组
 */
 Object[] toArray();
 
 /**
-* 使用提供的 generator函数返回一个包含此流的元素的数组，以分配返回的数组，以及分区执行或调整大小可能需要的任何其他数组。
+* 使用提供的 generator函数返回一个包含此流的元素的数组，以分配返回的数组，以及分区执行或调整大小可能需要的任何其他数组
 */
 <A> A[] toArray(IntFunction<A[]> generator);
 
@@ -381,7 +381,7 @@ public static <T> Stream<T> concat(Stream<? extends T> a, Stream<? extends T> b)
 
 ### 实战
 
-本文列出 `Stream` 具有代表性的方法之使用，更多的使用方法还是要看 Api。
+本文列出 `Stream` 具有代表性的方法之使用，更多的使用方法还是要看 Api
 
 ```java
 @Test
@@ -424,7 +424,7 @@ public void test() {
     List<String> strings2 = Arrays.asList("xyz", "jqx");
     Stream.concat(strings2.stream(),strings.stream()).count();
 
-    //注意 一个Stream只能操作一次，不能断开，否则会报错。
+    //注意 一个Stream只能操作一次，不能断开，否则会报错
     Stream stream = strings.stream();
     //第一次使用
     stream.limit(2);
@@ -439,9 +439,9 @@ public void test() {
 
 ### 延迟执行
 
-在执行返回 `Stream` 的方法时，并不立刻执行，而是等返回一个非 `Stream` 的方法后才执行。因为拿到 `Stream` 并不能直接用，而是需要处理成一个常规类型。这里的 `Stream` 可以想象成是二进制流（2 个完全不一样的东东），拿到也看不懂。
+在执行返回 `Stream` 的方法时，并不立刻执行，而是等返回一个非 `Stream` 的方法后才执行。因为拿到 `Stream` 并不能直接用，而是需要处理成一个常规类型。这里的 `Stream` 可以想象成是二进制流（2 个完全不一样的东东），拿到也看不懂
 
-我们下面分解一下 `filter` 方法。
+我们下面分解一下 `filter` 方法
 
 ```java
 @Test
@@ -466,9 +466,9 @@ Predicate.test 执行
 Predicate.test 执行
 ```
 
-按执行顺序应该是先打印 4 次「`Predicate.test` 执行」，再打印「`count` 执行」。实际结果恰恰相反。说明 filter 中的方法并没有立刻执行，而是等调用`count()`方法后才执行。
+按执行顺序应该是先打印 4 次「`Predicate.test` 执行」，再打印「`count` 执行」。实际结果恰恰相反。说明 filter 中的方法并没有立刻执行，而是等调用`count()`方法后才执行
 
-上面都是串行 `Stream` 的实例。并行 `parallelStream` 在使用方法上和串行一样。主要区别是 `parallelStream` 可多线程执行，是基于 ForkJoin 框架实现的，有时间大家可以了解一下 `ForkJoin` 框架和 `ForkJoinPool`。这里可以简单的理解它是通过线程池来实现的，这样就会涉及到线程安全，线程消耗等问题。下面我们通过代码来体验一下并行流的多线程执行。
+上面都是串行 `Stream` 的实例。并行 `parallelStream` 在使用方法上和串行一样。主要区别是 `parallelStream` 可多线程执行，是基于 ForkJoin 框架实现的，有时间大家可以了解一下 `ForkJoin` 框架和 `ForkJoinPool`。这里可以简单的理解它是通过线程池来实现的，这样就会涉及到线程安全，线程消耗等问题。下面我们通过代码来体验一下并行流的多线程执行
 
 ```java
 @Test
@@ -483,15 +483,15 @@ ForkJoinPool.commonPool-worker-11>>1
 ForkJoinPool.commonPool-worker-9>>2
 ```
 
-从结果中我们看到，for-each 用到的是多线程。
+从结果中我们看到，for-each 用到的是多线程
 
 ### 小结
 
 从源码和实例中我们可以总结出一些 stream 的特点
 
-1. 通过简单的链式编程，使得它可以方便地对遍历处理后的数据进行再处理。
+1. 通过简单的链式编程，使得它可以方便地对遍历处理后的数据进行再处理
 2. 方法参数都是函数式接口类型
-3. 一个 Stream 只能操作一次，操作完就关闭了，继续使用这个 stream 会报错。
+3. 一个 Stream 只能操作一次，操作完就关闭了，继续使用这个 stream 会报错
 4. Stream 不保存数据，不改变数据源
 
 ## Optional
@@ -500,25 +500,25 @@ ForkJoinPool.commonPool-worker-9>>2
 
 > 防止 NPE，是程序员的基本修养，注意 NPE 产生的场景：
 >
-> 1） 返回类型为基本数据类型，return 包装数据类型的对象时，自动拆箱有可能产生 NPE。
+> 1） 返回类型为基本数据类型，return 包装数据类型的对象时，自动拆箱有可能产生 NPE
 >
-> 反例：public int f() { return Integer 对象}， 如果为 null，自动解箱抛 NPE。
+> 反例：public int f() { return Integer 对象}， 如果为 null，自动解箱抛 NPE
 >
-> 2） 数据库的查询结果可能为 null。
+> 2） 数据库的查询结果可能为 null
 >
-> 3） 集合里的元素即使 isNotEmpty，取出的数据元素也可能为 null。
+> 3） 集合里的元素即使 isNotEmpty，取出的数据元素也可能为 null
 >
-> 4） 远程调用返回对象时，一律要求进行空指针判断，防止 NPE。
+> 4） 远程调用返回对象时，一律要求进行空指针判断，防止 NPE
 >
-> 5） 对于 Session 中获取的数据，建议进行 NPE 检查，避免空指针。
+> 5） 对于 Session 中获取的数据，建议进行 NPE 检查，避免空指针
 >
-> 6） 级联调用 obj.getA().getB().getC()；一连串调用，易产生 NPE。
+> 6） 级联调用 obj.getA().getB().getC()；一连串调用，易产生 NPE
 >
-> 正例：使用 JDK8 的 Optional 类来防止 NPE 问题。
+> 正例：使用 JDK8 的 Optional 类来防止 NPE 问题
 
-他建议使用 `Optional` 解决 NPE（`java.lang.NullPointerException`）问题，它就是为 NPE 而生的，其中可以包含空值或非空值。下面我们通过源码逐步揭开 `Optional` 的红盖头。
+他建议使用 `Optional` 解决 NPE（`java.lang.NullPointerException`）问题，它就是为 NPE 而生的，其中可以包含空值或非空值。下面我们通过源码逐步揭开 `Optional` 的红盖头
 
-假设有一个 `Zoo` 类，里面有个属性 `Dog`，需求要获取 `Dog` 的 `age`。
+假设有一个 `Zoo` 类，里面有个属性 `Dog`，需求要获取 `Dog` 的 `age`
 
 ```java
 class Zoo {
@@ -557,7 +557,7 @@ Optional.ofNullable(zoo).map(o -> o.getDog()).map(d -> d.getAge()).ifPresent(age
 
 ### 如何创建一个 Optional
 
-上例中`Optional.ofNullable`是其中一种创建 Optional 的方式。我们先看一下它的含义和其他创建 Optional 的源码方法。
+上例中`Optional.ofNullable`是其中一种创建 Optional 的方式。我们先看一下它的含义和其他创建 Optional 的源码方法
 
 ```java
 /**
@@ -605,13 +605,13 @@ public static <T> T requireNonNull(T obj) {
 }
 ```
 
-`ofNullable` 方法和`of`方法唯一区别就是当 value 为 null 时，`ofNullable` 返回的是`EMPTY`，of 会抛出 `NullPointerException` 异常。如果需要把 `NullPointerException` 暴漏出来就用 `of`，否则就用 `ofNullable`。
+`ofNullable` 方法和`of`方法唯一区别就是当 value 为 null 时，`ofNullable` 返回的是`EMPTY`，of 会抛出 `NullPointerException` 异常。如果需要把 `NullPointerException` 暴漏出来就用 `of`，否则就用 `ofNullable`
 
 **`map()` 和 `flatMap()` 有什么区别的？**
 
-`map` 和 `flatMap` 都是将一个函数应用于集合中的每个元素，但不同的是`map`返回一个新的集合，`flatMap`是将每个元素都映射为一个集合，最后再将这个集合展平。
+`map` 和 `flatMap` 都是将一个函数应用于集合中的每个元素，但不同的是`map`返回一个新的集合，`flatMap`是将每个元素都映射为一个集合，最后再将这个集合展平
 
-在实际应用场景中，如果`map`返回的是数组，那么最后得到的是一个二维数组，使用`flatMap`就是为了将这个二维数组展平变成一个一维数组。
+在实际应用场景中，如果`map`返回的是数组，那么最后得到的是一个二维数组，使用`flatMap`就是为了将这个二维数组展平变成一个一维数组
 
 ```java
 public class MapAndFlatMapExample {
@@ -650,9 +650,9 @@ Using flatMap:
 [APPLE, BANANA, CHERRY, ORANGE, GRAPE, PEAR, KIWI, MELON, PINEAPPLE]
 ```
 
-最简单的理解就是`flatMap()`可以将`map()`的结果展开。
+最简单的理解就是`flatMap()`可以将`map()`的结果展开
 
-在`Optional`里面，当使用`map()`时，如果映射函数返回的是一个普通值，它会将这个值包装在一个新的`Optional`中。而使用`flatMap`时，如果映射函数返回的是一个`Optional`，它会将这个返回的`Optional`展平，不再包装成嵌套的`Optional`。
+在`Optional`里面，当使用`map()`时，如果映射函数返回的是一个普通值，它会将这个值包装在一个新的`Optional`中。而使用`flatMap`时，如果映射函数返回的是一个`Optional`，它会将这个返回的`Optional`展平，不再包装成嵌套的`Optional`
 
 下面是一个对比的示例代码：
 
@@ -689,7 +689,7 @@ public static void main(String[] args) {
     }
 ```
 
-在`Stream`和`Optional`中正确使用`flatMap`可以减少很多不必要的代码。
+在`Stream`和`Optional`中正确使用`flatMap`可以减少很多不必要的代码
 
 ### 判断 value 是否为 null
 
@@ -739,7 +739,7 @@ public <X extends Throwable> T orElseThrow(Supplier<? extends X> exceptionSuppli
         }
 }
 /**
-* value为null抛出NoSuchElementException，不为空返回value。
+* value为null抛出NoSuchElementException，不为空返回value
 */
 public T get() {
   if (value == null) {
@@ -767,7 +767,7 @@ public Optional<T> filter(Predicate<? super T> predicate) {
 
 ### 小结
 
-看完 `Optional` 源码，`Optional` 的方法真的非常简单，值得注意的是如果坚决不想看见 `NPE`，就不要用 `of()`、 `get()`、`flatMap(..)`。最后再综合用一下 `Optional` 的高频方法。
+看完 `Optional` 源码，`Optional` 的方法真的非常简单，值得注意的是如果坚决不想看见 `NPE`，就不要用 `of()`、 `get()`、`flatMap(..)`。最后再综合用一下 `Optional` 的高频方法
 
 ```java
 Optional.ofNullable(zoo).map(o -> o.getDog()).map(d -> d.getAge()).filter(v->v==1).orElse(3);
@@ -780,9 +780,9 @@ Optional.ofNullable(zoo).map(o -> o.getDog()).map(d -> d.getAge()).filter(v->v==
 1. 非线程安全
 2. 时区处理麻烦
 3. 各种格式化、和时间计算繁琐
-4. 设计有缺陷，Date 类同时包含日期和时间；还有一个 java.sql.Date，容易混淆。
+4. 设计有缺陷，Date 类同时包含日期和时间；还有一个 java.sql.Date，容易混淆
 
-我们从常用的时间实例来对比 java.util.Date 和新 Date 有什么区别。用`java.util.Date`的代码该改改了。
+我们从常用的时间实例来对比 java.util.Date 和新 Date 有什么区别。用`java.util.Date`的代码该改改了
 
 ### java.time 主要类
 
@@ -863,11 +863,11 @@ LocalTime time = LocalTime.of(12, 12, 22);
 LocalTime.parse("12:12:22");
 ```
 
-**Java 8 之前** 转换都需要借助 `SimpleDateFormat` 类，而**Java 8 之后**只需要 `LocalDate`、`LocalTime`、`LocalDateTime`的 `of` 或 `parse` 方法。
+**Java 8 之前** 转换都需要借助 `SimpleDateFormat` 类，而**Java 8 之后**只需要 `LocalDate`、`LocalTime`、`LocalDateTime`的 `of` 或 `parse` 方法
 
 ### 日期计算
 
-下面仅以**一周后日期**为例，其他单位（年、月、日、1/2 日、时等等）大同小异。另外，这些单位都在 _java.time.temporal.ChronoUnit_ 枚举中定义。
+下面仅以**一周后日期**为例，其他单位（年、月、日、1/2 日、时等等）大同小异。另外，这些单位都在 _java.time.temporal.ChronoUnit_ 枚举中定义
 
 **Java 8 之前:**
 
@@ -924,7 +924,7 @@ public void pushWeek(){
 
 ### 获取指定日期
 
-除了日期计算繁琐，获取特定一个日期也很麻烦，比如获取本月最后一天，第一天。
+除了日期计算繁琐，获取特定一个日期也很麻烦，比如获取本月最后一天，第一天
 
 **Java 8 之前:**
 
@@ -968,12 +968,12 @@ public void getDayNew() {
     LocalDate nextDay = lastDayOfThisMonth.plusDays(1);
     //当年最后一天
     LocalDate lastday = today.with(TemporalAdjusters.lastDayOfYear());
-    //2021年最后一个周日，如果用Calendar是不得烦死。
+    //2021年最后一个周日，如果用Calendar是不得烦死
     LocalDate lastMondayOf2021 = LocalDate.parse("2021-12-31").with(TemporalAdjusters.lastInMonth(DayOfWeek.SUNDAY));
 }
 ```
 
-`java.time.temporal.TemporalAdjusters` 里面还有很多便捷的算法，这里就不带大家看 Api 了，都很简单，看了秒懂。
+`java.time.temporal.TemporalAdjusters` 里面还有很多便捷的算法，这里就不带大家看 Api 了，都很简单，看了秒懂
 
 ### JDBC 和 java8
 
@@ -983,13 +983,13 @@ public void getDayNew() {
 2. `Time` ---> `LocalTime`
 3. `Timestamp` ---> `LocalDateTime`
 
-而之前统统对应 `Date`，也只有 `Date`。
+而之前统统对应 `Date`，也只有 `Date`
 
 ### 时区
 
-> 时区：正式的时区划分为每隔经度 15° 划分一个时区，全球共 24 个时区，每个时区相差 1 小时。但为了行政上的方便，常将 1 个国家或 1 个省份划在一起，比如我国幅员宽广，大概横跨 5 个时区，实际上只用东八时区的标准时即北京时间为准。
+> 时区：正式的时区划分为每隔经度 15° 划分一个时区，全球共 24 个时区，每个时区相差 1 小时。但为了行政上的方便，常将 1 个国家或 1 个省份划在一起，比如我国幅员宽广，大概横跨 5 个时区，实际上只用东八时区的标准时即北京时间为准
 
-`java.util.Date` 对象实质上存的是 1970 年 1 月 1 日 0 点（ GMT）至 Date 对象所表示时刻所经过的毫秒数。也就是说不管在哪个时区 new Date，它记录的毫秒数都一样，和时区无关。但在使用上应该把它转换成当地时间，这就涉及到了时间的国际化。`java.util.Date` 本身并不支持国际化，需要借助 `TimeZone`。
+`java.util.Date` 对象实质上存的是 1970 年 1 月 1 日 0 点（ GMT）至 Date 对象所表示时刻所经过的毫秒数。也就是说不管在哪个时区 new Date，它记录的毫秒数都一样，和时区无关。但在使用上应该把它转换成当地时间，这就涉及到了时间的国际化。`java.util.Date` 本身并不支持国际化，需要借助 `TimeZone`
 
 ```java
 //北京时间：Wed Jan 27 14:05:29 CST 2021
@@ -1010,7 +1010,7 @@ System.out.println(date);
 //Wed Jan 27 14:05:29 CST 2021
 ```
 
-在新特性中引入了 `java.time.ZonedDateTime` 来表示带时区的时间。它可以看成是 `LocalDateTime + ZoneId`。
+在新特性中引入了 `java.time.ZonedDateTime` 来表示带时区的时间。它可以看成是 `LocalDateTime + ZoneId`
 
 ```java
 //当前时区时间
@@ -1039,7 +1039,7 @@ System.out.println("本地时区时间: " + localZoned);
 
 ### 小结
 
-通过上面比较新老 `Date` 的不同，当然只列出部分功能上的区别，更多功能还得自己去挖掘。总之 date-time-api 给日期操作带来了福利。在日常工作中遇到 date 类型的操作，第一考虑的是 date-time-api，实在解决不了再考虑老的 Date。
+通过上面比较新老 `Date` 的不同，当然只列出部分功能上的区别，更多功能还得自己去挖掘。总之 date-time-api 给日期操作带来了福利。在日常工作中遇到 date 类型的操作，第一考虑的是 date-time-api，实在解决不了再考虑老的 Date
 
 ## 总结
 
@@ -1051,6 +1051,6 @@ System.out.println("本地时区时间: " + localZoned);
 - Optional
 - Date time-api
 
-这些都是开发当中比较常用的特性。梳理下来发现它们真香，而我却没有更早的应用。总觉得学习 java 8 新特性比较麻烦，一直使用老的实现方式。其实这些新特性几天就可以掌握，一但掌握，效率会有很大的提高。其实我们涨工资也是涨的学习的钱，不学习终究会被淘汰，35 岁危机会提前来临。
+这些都是开发当中比较常用的特性。梳理下来发现它们真香，而我却没有更早的应用。总觉得学习 java 8 新特性比较麻烦，一直使用老的实现方式。其实这些新特性几天就可以掌握，一但掌握，效率会有很大的提高。其实我们涨工资也是涨的学习的钱，不学习终究会被淘汰，35 岁危机会提前来临
 
 <!-- @include: @article-footer.snippet.md -->

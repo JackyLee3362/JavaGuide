@@ -5,7 +5,7 @@ tag:
   - Java基础
 ---
 
-《阿里巴巴 Java 开发手册》中提到：「为了避免精度丢失，可以使用 `BigDecimal` 来进行浮点数的运算」。
+《阿里巴巴 Java 开发手册》中提到：「为了避免精度丢失，可以使用 `BigDecimal` 来进行浮点数的运算」
 
 浮点数的运算竟然还会有精度丢失的风险吗？确实会！
 
@@ -21,13 +21,13 @@ System.out.println(a == b);// false
 
 **为什么浮点数 `float` 或 `double` 运算的时候会有精度丢失的风险呢？**
 
-这个和计算机保存浮点数的机制有很大关系。我们知道计算机是二进制的，而且计算机在表示一个数字时，宽度是有限的，无限循环的小数存储在计算机时，只能被截断，所以就会导致小数精度发生损失的情况。这也就是解释了为什么浮点数没有办法用二进制精确表示。
+这个和计算机保存浮点数的机制有很大关系。我们知道计算机是二进制的，而且计算机在表示一个数字时，宽度是有限的，无限循环的小数存储在计算机时，只能被截断，所以就会导致小数精度发生损失的情况。这也就是解释了为什么浮点数没有办法用二进制精确表示
 
 就比如说十进制下的 0.2 就没办法精确转换成二进制小数：
 
 ```java
 // 0.2 转换为二进制数的过程为，不断乘以 2，直到不存在小数为止，
-// 在这个计算过程中，得到的整数部分从上到下排列就是二进制的结果。
+// 在这个计算过程中，得到的整数部分从上到下排列就是二进制的结果
 0.2 * 2 = 0.4 -> 0
 0.4 * 2 = 0.8 -> 0
 0.8 * 2 = 1.6 -> 1
@@ -36,21 +36,21 @@ System.out.println(a == b);// false
 ...
 ```
 
-关于浮点数的更多内容，建议看一下[计算机系统基础（四）浮点数](http://kaito-kidd.com/2018/08/08/computer-system-float-point/)这篇文章。
+关于浮点数的更多内容，建议看一下[计算机系统基础（四）浮点数](http://kaito-kidd.com/2018/08/08/computer-system-float-point/)这篇文章
 
 ## BigDecimal 介绍
 
-`BigDecimal` 可以实现对浮点数的运算，不会造成精度丢失。
+`BigDecimal` 可以实现对浮点数的运算，不会造成精度丢失
 
-通常情况下，大部分需要浮点数精确运算结果的业务场景（比如涉及到钱的场景）都是通过 `BigDecimal` 来做的。
+通常情况下，大部分需要浮点数精确运算结果的业务场景（比如涉及到钱的场景）都是通过 `BigDecimal` 来做的
 
 《阿里巴巴 Java 开发手册》中提到：**浮点数之间的等值判断，基本数据类型不能用 == 来比较，包装数据类型不能用 equals 来判断。**
 
 ![](https://oss.javaguide.cn/javaguide/image-20211213101646884.png)
 
-具体原因我们在上面已经详细介绍了，这里就不多提了。
+具体原因我们在上面已经详细介绍了，这里就不多提了
 
-想要解决浮点数运算精度丢失这个问题，可以直接使用 `BigDecimal` 来定义浮点数的值，然后再进行浮点数的运算操作即可。
+想要解决浮点数运算精度丢失这个问题，可以直接使用 `BigDecimal` 来定义浮点数的值，然后再进行浮点数的运算操作即可
 
 ```java
 BigDecimal a = new BigDecimal("1.0");
@@ -67,15 +67,15 @@ System.out.println(x.compareTo(y));// 0
 
 ### 创建
 
-我们在使用 `BigDecimal` 时，为了防止精度丢失，推荐使用它的`BigDecimal(String val)`构造方法或者 `BigDecimal.valueOf(double val)` 静态方法来创建对象。
+我们在使用 `BigDecimal` 时，为了防止精度丢失，推荐使用它的`BigDecimal(String val)`构造方法或者 `BigDecimal.valueOf(double val)` 静态方法来创建对象
 
-《阿里巴巴 Java 开发手册》对这部分内容也有提到，如下图所示。
+《阿里巴巴 Java 开发手册》对这部分内容也有提到，如下图所示
 
 ![](https://oss.javaguide.cn/javaguide/image-20211213102222601.png)
 
 ### 加减乘除
 
-`add` 方法用于将两个 `BigDecimal` 对象相加，`subtract` 方法用于将两个 `BigDecimal` 对象相减。`multiply` 方法用于将两个 `BigDecimal` 对象相乘，`divide` 方法用于将两个 `BigDecimal` 对象相除。
+`add` 方法用于将两个 `BigDecimal` 对象相加，`subtract` 方法用于将两个 `BigDecimal` 对象相减。`multiply` 方法用于将两个 `BigDecimal` 对象相乘，`divide` 方法用于将两个 `BigDecimal` 对象相除
 
 ```java
 BigDecimal a = new BigDecimal("1.0");
@@ -87,7 +87,7 @@ System.out.println(a.divide(b));// 无法除尽，抛出 ArithmeticException 异
 System.out.println(a.divide(b, 2, RoundingMode.HALF_UP));// 1.11
 ```
 
-这里需要注意的是，在我们使用 `divide` 方法的时候尽量使用 3 个参数版本，并且`RoundingMode` 不要选择 `UNNECESSARY`，否则很可能会遇到 `ArithmeticException`（无法除尽出现无限循环小数的时候），其中 `scale` 表示要保留几位小数，`roundingMode` 代表保留规则。
+这里需要注意的是，在我们使用 `divide` 方法的时候尽量使用 3 个参数版本，并且`RoundingMode` 不要选择 `UNNECESSARY`，否则很可能会遇到 `ArithmeticException`（无法除尽出现无限循环小数的时候），其中 `scale` 表示要保留几位小数，`roundingMode` 代表保留规则
 
 ```java
 public BigDecimal divide(BigDecimal divisor, int scale, RoundingMode roundingMode) {
@@ -120,7 +120,7 @@ public enum RoundingMode {
 
 ### 大小比较
 
-`a.compareTo(b)` : 返回 -1 表示 `a` 小于 `b`，0 表示 `a` 等于 `b` ， 1 表示 `a` 大于 `b`。
+`a.compareTo(b)` : 返回 -1 表示 `a` 小于 `b`，0 表示 `a` 等于 `b` ， 1 表示 `a` 大于 `b`
 
 ```java
 BigDecimal a = new BigDecimal("1.0");
@@ -130,7 +130,7 @@ System.out.println(a.compareTo(b));// 1
 
 ### 保留几位小数
 
-通过 `setScale`方法设置保留几位小数以及保留规则。保留规则有挺多种，不需要记，IDEA 会提示。
+通过 `setScale`方法设置保留几位小数以及保留规则。保留规则有挺多种，不需要记，IDEA 会提示
 
 ```java
 BigDecimal m = new BigDecimal("1.255433");
@@ -152,13 +152,13 @@ BigDecimal b = new BigDecimal("1.0");
 System.out.println(a.equals(b));//false
 ```
 
-这是因为 `equals()` 方法不仅仅会比较值的大小（value）还会比较精度（scale），而 `compareTo()` 方法比较的时候会忽略精度。
+这是因为 `equals()` 方法不仅仅会比较值的大小（value）还会比较精度（scale），而 `compareTo()` 方法比较的时候会忽略精度
 
-1.0 的 scale 是 1，1 的 scale 是 0，因此 `a.equals(b)` 的结果是 false。
+1.0 的 scale 是 1，1 的 scale 是 0，因此 `a.equals(b)` 的结果是 false
 
 ![](https://oss.javaguide.cn/github/javaguide/java/basis/image-20220714164706390.png)
 
-`compareTo()` 方法可以比较两个 `BigDecimal` 的值，如果相等就返回 0，如果第 1 个数比第 2 个数大则返回 1，反之返回-1。
+`compareTo()` 方法可以比较两个 `BigDecimal` 的值，如果相等就返回 0，如果第 1 个数比第 2 个数大则返回 1，反之返回-1
 
 ```java
 BigDecimal a = new BigDecimal("1");
@@ -168,7 +168,7 @@ System.out.println(a.compareTo(b));//0
 
 ## BigDecimal 工具类分享
 
-网上有一个使用人数比较多的 `BigDecimal` 工具类，提供了多个静态方法来简化 `BigDecimal` 的操作。
+网上有一个使用人数比较多的 `BigDecimal` 工具类，提供了多个静态方法来简化 `BigDecimal` 的操作
 
 我对其进行了简单改进，分享一下源码：
 
@@ -190,7 +190,7 @@ public class BigDecimalUtil {
     }
 
     /**
-     * 提供精确的加法运算。
+     * 提供精确的加法运算
      *
      * @param v1 被加数
      * @param v2 加数
@@ -203,7 +203,7 @@ public class BigDecimalUtil {
     }
 
     /**
-     * 提供精确的减法运算。
+     * 提供精确的减法运算
      *
      * @param v1 被减数
      * @param v2 减数
@@ -216,7 +216,7 @@ public class BigDecimalUtil {
     }
 
     /**
-     * 提供精确的乘法运算。
+     * 提供精确的乘法运算
      *
      * @param v1 被乘数
      * @param v2 乘数
@@ -230,7 +230,7 @@ public class BigDecimalUtil {
 
     /**
      * 提供（相对）精确的除法运算，当发生除不尽的情况时，精确到
-     * 小数点以后10位，以后的数字四舍五入。
+     * 小数点以后10位，以后的数字四舍五入
      *
      * @param v1 被除数
      * @param v2 除数
@@ -242,11 +242,11 @@ public class BigDecimalUtil {
 
     /**
      * 提供（相对）精确的除法运算。当发生除不尽的情况时，由scale参数指
-     * 定精度，以后的数字四舍五入。
+     * 定精度，以后的数字四舍五入
      *
      * @param v1    被除数
      * @param v2    除数
-     * @param scale 表示表示需要精确到小数点以后几位。
+     * @param scale 表示表示需要精确到小数点以后几位
      * @return 两个参数的商
      */
     public static double divide(double v1, double v2, int scale) {
@@ -260,7 +260,7 @@ public class BigDecimalUtil {
     }
 
     /**
-     * 提供精确的小数位四舍五入处理。
+     * 提供精确的小数位四舍五入处理
      *
      * @param v     需要四舍五入的数字
      * @param scale 小数点后保留几位
@@ -351,14 +351,14 @@ public class BigDecimalUtil {
 }
 ```
 
-相关 issue：[建议对保留规则设置为 RoundingMode.HALF_EVEN,即四舍六入五成双,#2129](https://github.com/Snailclimb/JavaGuide/issues/2129) 。
+相关 issue：[建议对保留规则设置为 RoundingMode.HALF_EVEN,即四舍六入五成双,#2129](https://github.com/Snailclimb/JavaGuide/issues/2129) 
 
 ![RoundingMode.HALF_EVEN](https://oss.javaguide.cn/github/javaguide/java/basis/RoundingMode.HALF_EVEN.png)
 
 ## 总结
 
-浮点数没有办法用二进制精确表示，因此存在精度丢失的风险。
+浮点数没有办法用二进制精确表示，因此存在精度丢失的风险
 
-不过，Java 提供了`BigDecimal` 来操作浮点数。`BigDecimal` 的实现利用到了 `BigInteger` （用来操作大整数）, 所不同的是 `BigDecimal` 加入了小数位的概念。
+不过，Java 提供了`BigDecimal` 来操作浮点数。`BigDecimal` 的实现利用到了 `BigInteger` （用来操作大整数）, 所不同的是 `BigDecimal` 加入了小数位的概念
 
 <!-- @include: @article-footer.snippet.md -->
