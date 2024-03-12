@@ -9,10 +9,8 @@ head:
       content: Redis基础,Redis常见数据结构,Redis线程模型,Redis内存管理,Redis事务,Redis性能优化
   - - meta
     - name: description
-      content: 一篇文章总结Redis常见的知识点和面试题，涵盖Redis基础、Redis常见数据结构、Redis线程模型、Redis内存管理、Redis事务、Redis性能优化等内容。
+      content: 一篇文章总结Redis常见的知识点和面试题，涵盖Redis基础、Redis常见数据结构、Redis线程模型、Redis内存管理、Redis事务、Redis性能优化等内容
 ---
-
-<!-- @include: @small-advertisement.snippet.md -->
 
 ## Redis 基础
 
@@ -32,7 +30,11 @@ Redis 没有外部依赖，Linux 和 OS X 是 Redis 开发和测试最多的两�
 
 全世界有非常多的网站使用到了 Redis ，[techstacks.io](https://techstacks.io/) 专门维护了一个[使用 Redis 的热门站点列表](https://techstacks.io/tech/redis) ，感兴趣的话可以看看。
 
-### Redis 为什么这么快？
+### ❓ Redis 为什么这么快？
+
+> [!TIP]
+>
+> 内存，Reactor模式，优化的数据结构（SDS，跳表）
 
 Redis 内部做了非常多的性能优化，比较重要的有下面 3 点：
 
@@ -61,7 +63,13 @@ Memcached 是分布式缓存最开始兴起的那会，比较常用的。后来�
 
 不过，个人还是建议分布式缓存首选 Redis ，毕竟经过这么多年的生考验，生态也这么优秀，资料也很全面。
 
-### 说一下 Redis 和 Memcached 的区别和共同点
+### ❓ 说一下 Redis 和 Memcached 的区别和共同点
+
+> [!TIP]
+>
+> 共同：内存数据库，都有过期策略，性能高
+>
+> 不同：Redis：数据类型丰富，数据持久化+容灾（RDB），原生集群
 
 现在公司一般都是用 Redis 来实现缓存，而且 Redis 自身也越来越强大了！不过，了解 Redis 和 Memcached 的区别和共同点，有助于我们在做相应的技术选型的时候，能够做到有理有据！
 
@@ -84,7 +92,11 @@ Memcached 是分布式缓存最开始兴起的那会，比较常用的。后来�
 
 相信看了上面的对比之后，我们已经没有什么理由可以选择使用 Memcached 来作为自己项目的分布式缓存了。
 
-### 为什么要用 Redis/为什么要用缓存？
+### ❓ 为什么要用 Redis / 为什么要用缓存？
+
+> [!TIP]
+>
+> 高性能（内存 > 磁盘） + 高并发（MySQL 1w，Redis 10w）
 
 下面我们主要从「高性能」和「高并发」这两点来回答这个问题。
 
@@ -102,9 +114,13 @@ Memcached 是分布式缓存最开始兴起的那会，比较常用的。后来�
 
 由此可见，直接操作缓存能够承受的数据库请求数量是远远大于直接访问数据库的，所以我们可以考虑把数据库中的部分数据转移到缓存中去，这样用户的一部分请求会直接到缓存这里而不用经过数据库。进而，我们也就提高了系统整体的并发。
 
-### 常见的缓存读写策略有哪些？
+### ❓ 常见的缓存读写策略有哪些？
 
-关于常见的缓存读写策略的详细介绍，可以看我写的这篇文章：[3 种常用的缓存读写策略详解](https://javaguide.cn/database/redis/3-commonly-used-cache-read-and-write-strategies.html) 。
+> [!TIP]
+>
+> 旁路缓存、读写穿透、异步读写
+
+关于常见的缓存读写策略的详细介绍：[3 种常用的缓存读写策略详解](03-3种常用的缓存读写策略详解.md) 
 
 ### 什么是 Redis Module？有什么用？
 
@@ -127,19 +143,24 @@ Redis 从 4.0 版本开始，支持通过 Module 来扩展其功能以满足特�
 
 ## Redis 应用
 
-### Redis 除了做缓存，还能做什么？
+### ❓ Redis 除了做缓存，还能做什么？
 
-- **分布式锁**：通过 Redis 来做分布式锁是一种比较常见的方式。通常情况下，我们都是基于 Redisson 来实现分布式锁。关于 Redis 实现分布式锁的详细介绍，可以看我写的这篇文章：[分布式锁详解](https://javaguide.cn/distributed-system/distributed-lock.html) 。
-- **限流**：一般是通过 Redis + Lua 脚本的方式来实现限流。相关阅读：[《我司用了 6 年的 Redis 分布式限流器，可以说是非常厉害了！》](https://mp.weixin.qq.com/s/kyFAWH3mVNJvurQDt4vchA)。
-- **消息队列**：Redis 自带的 List 数据结构可以作为一个简单的队列使用。Redis 5.0 中增加的 Stream 类型的数据结构更加适合用来做消息队列。它比较类似于 Kafka，有主题和消费组的概念，支持消息持久化以及 ACK 机制。
-- **延时队列**：Redisson 内置了延时队列（基于 Sorted Set 实现的）。
-- **分布式 Session** ：利用 String 或者 Hash 数据类型保存 Session 数据，所有的服务器都可以访问。
-- **复杂业务场景**：通过 Redis 以及 Redis 扩展（比如 Redisson）提供的数据结构，我们可以很方便地完成很多复杂的业务场景比如通过 Bitmap 统计活跃用户、通过 Sorted Set 维护排行榜。
+> [!TIP]
+>
+> - 分布式锁 `SETNX key value`，`SETNX`：当 key 不存在时创建，实现简单的分布式锁
+> - 消息队列，比如是用队列 `RPUSH LPOP`
+
+- **分布式锁**：通过 Redis 来做分布式锁是一种比较常见的方式。通常情况下，我们都是基于 Redisson 来实现分布式锁。关于 Redis 实现分布式锁的详细介绍，可以看我写的这篇文章：[分布式锁详解](https://javaguide.cn/distributed-system/distributed-lock.html) 
+- **限流**：一般是通过 Redis + Lua 脚本的方式来实现限流。相关阅读：[《我司用了 6 年的 Redis 分布式限流器，可以说是非常厉害了！》](https://mp.weixin.qq.com/s/kyFAWH3mVNJvurQDt4vchA)
+- **消息队列**：Redis 自带的 List 数据结构可以作为一个简单的队列使用。Redis 5.0 中增加的 Stream 类型的数据结构更加适合用来做消息队列。它比较类似于 Kafka，有主题和消费组的概念，支持消息持久化以及 ACK 机制
+- **延时队列**：Redisson 内置了延时队列（基于 Sorted Set 实现的）
+- **分布式 Session** ：利用 String 或者 Hash 数据类型保存 Session 数据，所有的服务器都可以访问
+- **复杂业务场景**：通过 Redis 以及 Redis 扩展（比如 Redisson）提供的数据结构，我们可以很方便地完成很多复杂的业务场景比如通过 Bitmap 统计活跃用户、通过 Sorted Set 维护排行榜
 - ……
 
 ### 如何基于 Redis 实现分布式锁？
 
-关于 Redis 实现分布式锁的详细介绍，可以看我写的这篇文章：[分布式锁详解](https://javaguide.cn/distributed-system/distributed-lock.html) 。
+关于 Redis 实现分布式锁的详细介绍，可以看我写的这篇文章：[分布式锁详解](https://javaguide.cn/distributed-system/distributed-lock.html) 
 
 ### Redis 可以做消息队列么？
 
@@ -381,7 +402,7 @@ struct sdshdr {
 - 用户 id 为 key
 - 商品 id 为 field，商品数量为 value
 
-![Hash维护简单的购物车信息](https://oss.javaguide.cn/github/javaguide/database/redis/hash-shopping-cart.png)
+![Hash维护简单的购物车信息](assets/hash-shopping-cart.png)
 
 那用户购物车信息的维护具体应该怎么操作呢？
 
@@ -399,13 +420,23 @@ Redis 中有一个叫做 `Sorted Set` （有序集合）的数据类型经常被
 
 相关的一些 Redis 命令: `ZRANGE` (从小到大排序)、 `ZREVRANGE` （从大到小排序）、`ZREVRANK` (指定元素排名)。
 
-![](https://oss.javaguide.cn/github/javaguide/database/redis/2021060714195385.png)
+![](assets/2021060714195385.png)
 
 [《Java 面试指北》](https://javaguide.cn/zhuanlan/java-mian-shi-zhi-bei.html) 的「技术面试题篇」就有一篇文章详细介绍如何使用 Sorted Set 来设计制作一个排行榜，感兴趣的小伙伴可以看看。
 
-![](https://oss.javaguide.cn/github/javaguide/database/redis/image-20220719071115140.png)
+![](assets/image-20220719071115140.png)
 
-### Redis 的有序集合底层为什么要用跳表，而不用平衡树、红黑树或者 B+树？
+### ❓ Redis 的有序集合底层为什么要用跳表，而不用平衡树、红黑树或者 B+树？
+
+> [!TIP]
+>
+> |        | 跳表                                |
+> | ------ | ----------------------------------- |
+> | 平衡树 | 平衡树旋转操作耗时                  |
+> | 红黑树 | 红黑树旋转染色耗时                  |
+> | B+树   | 数据库+文件系统用得多，目的是减少IO |
+>
+> 
 
 这道面试题很多大厂比较喜欢问，难度还是有点大的。
 
@@ -413,7 +444,7 @@ Redis 中有一个叫做 `Sorted Set` （有序集合）的数据类型经常被
 - 红黑树 vs 跳表：相比较于红黑树来说，跳表的实现也更简单一些，不需要通过旋转和染色（红黑变换）来保证黑平衡。并且，按照区间来查找数据这个操作，红黑树的效率没有跳表高。
 - B+树 vs 跳表：B+树更适合作为数据库和文件系统中常用的索引结构之一，它的核心思想是通过可能少的 IO 定位到尽可能多的索引来获得查询数据。对于 Redis 这种内存数据库来说，它对这些并不感冒，因为 Redis 作为内存数据库它不可能存储大量的数据，所以对于索引不需要通过 B+树这种方式进行维护，只需按照概率进行随机维护即可，节约内存。而且使用跳表实现 zset 时相较前者来说更简单一些，在进行插入时只需通过索引将数据插入到链表中合适的位置再随机维护一定高度的索引即可，也不需要像 B+树那样插入时发现失衡时还需要对节点分裂与合并。
 
-另外，我还单独写了一篇文章从有序集合的基本使用到跳表的源码分析和实现，让你会对 Redis 的有序集合底层实现的跳表有着更深刻的理解和掌握 ：[Redis 为什么用跳表实现有序集合](./redis-skiplist.md)。
+另外，我还单独写了一篇文章从有序集合的基本使用到跳表的源码分析和实现，让你会对 Redis 的有序集合底层实现的跳表有着更深刻的理解和掌握 ：[Redis 为什么用跳表实现有序集合](./06-Redis为什么用跳表实现有序集合.md)。
 
 ### Set 的应用场景是什么？
 
@@ -491,11 +522,15 @@ PFADD PAGE_1:UV USER1 USER2 ...... USERn
 PFCOUNT PAGE_1:UV
 ```
 
-## Redis 持久化机制（重要）
+## ❓ Redis 持久化机制（重要）
 
-Redis 持久化机制（RDB 持久化、AOF 持久化、RDB 和 AOF 的混合持久化） 相关的问题比较多，也比较重要，于是我单独抽了一篇文章来总结 Redis 持久化机制相关的知识点和问题：[Redis 持久化机制详解](https://javaguide.cn/database/redis/redis-persistence.html) 。
+> [!TIP]
+>
+> RDB + AOF
 
-## Redis 线程模型（重要）
+Redis 持久化机制（RDB 持久化、AOF 持久化、RDB 和 AOF 的混合持久化） 相关的问题比较多，也比较重要，于是我单独抽了一篇文章来总结 Redis 持久化机制相关的知识点和问题：[Redis 持久化机制详解](./07-Redis持久化机制详解.md) 。
+
+## ❓ Redis 线程模型（重要）
 
 对于读写命令来说，Redis 一直是单线程模型。不过，在 Redis 4.0 版本之后引入了多线程来执行一些大键值对的异步删除操作， Redis 6.0 版本之后引入了多线程来处理网络请求（提高网络 IO 读写性能）。
 
@@ -639,11 +674,15 @@ OK
 
 如果使用传统的数据库来处理的话，一般都是自己判断过期，这样更麻烦并且性能要差很多。
 
-### Redis 是如何判断数据是否过期的呢？
+### ❓ Redis 是如何判断数据是否过期的呢？
+
+> [!TIP]
+>
+> 过期字典 Hash 表
 
 Redis 通过一个叫做过期字典（可以看作是 hash 表）来保存数据过期的时间。过期字典的键指向 Redis 数据库中的某个 key(键)，过期字典的值是一个 long long 类型的整数，这个整数保存了 key 所指向的数据库键的过期时间（毫秒精度的 UNIX 时间戳）。
 
-![redis过期字典](https://oss.javaguide.cn/github/javaguide/database/redis/redis-expired-dictionary.png)
+![redis过期字典](assets/redis-expired-dictionary.png)
 
 过期字典是存储在 redisDb 这个结构里的：
 
@@ -657,7 +696,11 @@ typedef struct redisDb {
 } redisDb;
 ```
 
-### 过期的数据的删除策略了解么？
+### ❓ 过期的数据的删除策略了解么？
+
+> [!TIP]
+>
+> 惰性删除 + 定期删除
 
 如果假设你设置了一批 key 只能存活 1 分钟，那么 1 分钟后，Redis 是怎么对这批 key 进行删除的呢？
 

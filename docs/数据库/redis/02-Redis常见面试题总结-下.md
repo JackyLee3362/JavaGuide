@@ -12,8 +12,6 @@ head:
       content: 一篇文章总结Redis常见的知识点和面试题，涵盖Redis基础、Redis常见数据结构、Redis线程模型、Redis内存管理、Redis事务、Redis性能优化等内容。
 ---
 
-<!-- @include: @article-header.snippet.md -->
-
 ## Redis 事务
 
 ### 什么是 Redis 事务？
@@ -186,7 +184,7 @@ Redis 从 2.6 版本开始支持执行 Lua 脚本，它的功能和事务非常�
 
 另外，Redis 7.0 新增了 [Redis functions](https://redis.io/docs/manual/programmability/functions-intro/) 特性，你可以将 Redis functions 看作是比 Lua 更强大的脚本。
 
-## Redis 性能优化（重要）
+## ❓ Redis 性能优化（重要）
 
 除了下面介绍的内容之外，再推荐两篇不错的文章：
 
@@ -265,7 +263,7 @@ Lua 脚本同样支持批量操作多条命令。一段 Lua 脚本可以视作�
 - 如果 Lua 脚本运行时出错并中途结束，之后的操作不会进行，但是之前已经发生的写操作不会撤销，所以即使使用了 Lua 脚本，也不能实现类似数据库回滚的原子性。
 - Redis Cluster 下 Lua 脚本的原子操作也无法保证了，原因同样是无法保证所有的 key 都在同一个 **hash slot**（哈希槽）上。
 
-### 大量 key 集中过期问题
+### ❓ 大量 key 集中过期问题
 
 我在前面提到过：对于过期 key，Redis 采用的是 **定期删除+惰性/懒汉式删除** 策略。
 
@@ -299,7 +297,7 @@ bigkey 通常是由于下面这些原因产生的：
 
 bigkey 除了会消耗更多的内存空间和带宽，还会对性能造成比较大的影响。
 
-在 [Redis 常见阻塞原因总结](./redis-common-blocking-problems-summary.md)这篇文章中我们提到：大 key 还会造成阻塞问题。具体来说，主要体现在下面三个方面：
+在 [Redis 常见阻塞原因总结](./09-Redis常见阻塞原因总结.md)这篇文章中我们提到：大 key 还会造成阻塞问题。具体来说，主要体现在下面三个方面：
 
 1. 客户端超时阻塞：由于 Redis 执行命令是单线程处理，然后在操作大 key 时会比较耗时，那么就会阻塞 Redis，从客户端这一视角看，就是很久很久都没有响应。
 2. 网络阻塞：每次获取大 key 产生的网络流量较大，如果一个 key 的大小是 1 MB，每秒访问量为 1000，那么每秒会产生 1000MB 的流量，这对于普通千兆网卡的服务器来说是灾难性的。
@@ -374,7 +372,7 @@ Biggest string found '"ballcat:oauth:refresh_auth:f6cdb384-9a9d-4f2f-af01-dc3f28
 
 ![阿里云Key分析](https://oss.javaguide.cn/github/javaguide/database/redis/aliyun-key-analysis.png)
 
-#### 如何处理 bigkey？
+#### ❓ 如何处理 bigkey？
 
 bigkey 的常见处理以及优化办法如下（这些方法可以配合起来使用）：
 
@@ -430,9 +428,9 @@ maxmemory-policy volatile-lfu
 maxmemory-policy allkeys-lfu
 ```
 
-需要注意的是，`hotkeys` 参数命令也会增加 Redis 实例的 CPU 和内存消耗（全局扫描），因此需要谨慎使用。
+需要注意的是，`hotkeys` 参数命令也会增加 Redis 实例的 CPU 和内存消耗（全局扫描），因此需要谨慎使用
 
-**2、使用`MONITOR` 命令。**
+**2、使用 `MONITOR` 命令。**
 
 `MONITOR` 命令是 Redis 提供的一种实时查看 Redis 的所有操作的方式，可以用于临时监控 Redis 实例的操作情况，包括读写、删除等操作。
 
@@ -459,7 +457,7 @@ OK
 
 京东零售的 [hotkey](https://gitee.com/jd-platform-opensource/hotkey) 这个项目不光支持 hotkey 的发现，还支持 hotkey 的处理。
 
-![京东零售开源的 hotkey](https://oss.javaguide.cn/github/javaguide/database/redis/jd-hotkey.png)
+![京东零售开源的 hotkey](assets/jd-hotkey.png)
 
 **4、根据业务情况提前预估。**
 
@@ -475,7 +473,7 @@ OK
 
 这里以阿里云 Redis 为例说明，它支持 hotkey 实时分析、发现，文档地址：<https://www.alibabacloud.com/help/zh/apsaradb-for-redis/latest/use-the-real-time-key-statistics-feature> 。
 
-![阿里云Key分析](https://oss.javaguide.cn/github/javaguide/database/redis/aliyun-key-analysis.png)
+![阿里云Key分析](assets/aliyun-key-analysis.png)
 
 #### 如何解决 hotkey？
 
@@ -489,7 +487,7 @@ hotkey 的常见处理以及优化办法如下（这些方法可以配合起来�
 
 这里以阿里云 Redis 为例说明，它支持通过代理查询缓存功能（Proxy Query Cache）优化热点 Key 问题。
 
-![通过阿里云的Proxy Query Cache优化热点Key问题](https://oss.javaguide.cn/github/javaguide/database/redis/aliyun-hotkey-proxy-query-cache.png)
+![通过阿里云的Proxy Query Cache优化热点Key问题](assets/aliyun-hotkey-proxy-query-cache.png)
 
 ### 慢查询命令
 
@@ -598,15 +596,21 @@ OK
 
 **参考答案**：[Redis 内存碎片详解](https://javaguide.cn/database/redis/redis-memory-fragmentation.html)。
 
-## Redis 生产问题（重要）
+## ❓ Redis 生产问题（重要）
 
 ### 缓存穿透
 
-#### 什么是缓存穿透？
+#### ❓ 什么是缓存穿透？
 
-缓存穿透说简单点就是大量请求的 key 是不合理的，**根本不存在于缓存中，也不存在于数据库中** 。这就导致这些请求直接到了数据库上，根本没有经过缓存这一层，对数据库造成了巨大的压力，可能直接就被这么多请求弄宕机了。
+> [!TIP]
+>
+> 大量不合理的 key，不存在于缓存中，也不存在数据库中
+>
+> 使用 布隆过滤器
 
-![缓存穿透](https://oss.javaguide.cn/github/javaguide/database/redis/redis-cache-penetration.png)
+缓存穿透说简单点就是大量请求的 key 是不合理的，**根本不存在于缓存中，也不存在于数据库中** 。这就导致这些请求直接到了数据库上，根本没有经过缓存这一层，对数据库造成了巨大的压力，可能直接就被这么多请求弄宕机了
+
+![缓存穿透](assets/redis-cache-penetration.png)
 
 举个例子：某个黑客故意制造一些非法的 key 发起大量请求，导致大量请求落到数据库，结果数据库上也没有查到对应的数据。也就是说这些请求最终都落到了数据库上，对数据库造成了巨大的压力。
 
@@ -645,19 +649,19 @@ public Object getObjectInclNullById(Integer id) {
 
 **2）布隆过滤器**
 
-布隆过滤器是一个非常神奇的数据结构，通过它我们可以非常方便地判断一个给定数据是否存在于海量数据中。我们可以把它看作由二进制向量（或者说位数组）和一系列随机映射函数（哈希函数）两部分组成的数据结构。相比于我们平时常用的 List、Map、Set 等数据结构，它占用空间更少并且效率更高，但是缺点是其返回的结果是概率性的，而不是非常准确的。理论情况下添加到集合中的元素越多，误报的可能性就越大。并且，存放在布隆过滤器的数据不容易删除。
+布隆过滤器是一个非常神奇的数据结构，通过它我们可以非常方便地判断一个给定数据是否存在于海量数据中。我们可以把它看作由二进制向量（或者说位数组）和一系列随机映射函数（哈希函数）两部分组成的数据结构。相比于我们平时常用的 List、Map、Set 等数据结构，它占用空间更少并且效率更高，但是缺点是其返回的结果是概率性的，而不是非常准确的。理论情况下添加到集合中的元素越多，误报的可能性就越大。并且，存放在布隆过滤器的数据不容易删除
 
-![Bloom Filter 的简单原理示意图](https://oss.javaguide.cn/github/javaguide/cs-basics/algorithms/bloom-filter-simple-schematic-diagram.png)
+![Bloom Filter 的简单原理示意图](assets/bloom-filter-simple-schematic-diagram.png)
 
 Bloom Filter 会使用一个较大的 bit 数组来保存所有的数据，数组中的每个元素都只占用 1 bit ，并且每个元素只能是 0 或者 1（代表 false 或者 true），这也是 Bloom Filter 节省内存的核心所在。这样来算的话，申请一个 100w 个元素的位数组只占用 1000000Bit / 8 = 125000 Byte = 125000/1024 KB ≈ 122KB 的空间。
 
-![位数组](https://oss.javaguide.cn/github/javaguide/cs-basics/algorithms/bloom-filter-bit-table.png)
+![位数组](assets/bloom-filter-bit-table.png)
 
-具体是这样做的：把所有可能存在的请求的值都存放在布隆过滤器中，当用户请求过来，先判断用户发来的请求的值是否存在于布隆过滤器中。不存在的话，直接返回请求参数错误信息给客户端，存在的话才会走下面的流程。
+具体是这样做的：把所有可能存在的请求的值都存放在布隆过滤器中，当用户请求过来，先判断用户发来的请求的值是否存在于布隆过滤器中。不存在的话，直接返回请求参数错误信息给客户端，存在的话才会走下面的流程
 
-加入布隆过滤器之后的缓存处理流程图如下。
+加入布隆过滤器之后的缓存处理流程图如下
 
-![加入布隆过滤器之后的缓存处理流程图](https://oss.javaguide.cn/github/javaguide/database/redis/redis-cache-penetration-bloom-filter.png)
+![加入布隆过滤器之后的缓存处理流程图](assets/redis-cache-penetration-bloom-filter.png)
 
 更多关于布隆过滤器的详细介绍可以看看我的这篇原创：[不了解布隆过滤器？一文给你整的明明白白！](https://javaguide.cn/cs-basics/data-structure/bloom-filter.html) ，强烈推荐。
 
@@ -667,11 +671,11 @@ Bloom Filter 会使用一个较大的 bit 数组来保存所有的数据，数�
 
 ### 缓存击穿
 
-#### 什么是缓存击穿？
+#### ❓ 什么是缓存击穿？
 
 缓存击穿中，请求的 key 对应的是 **热点数据** ，该数据 **存在于数据库中，但不存在于缓存中（通常是因为缓存中的那份数据已经过期）** 。这就可能会导致瞬时大量的请求直接打到了数据库上，对数据库造成了巨大的压力，可能直接就被这么多请求弄宕机了。
 
-![缓存击穿](https://oss.javaguide.cn/github/javaguide/database/redis/redis-cache-breakdown.png)
+![缓存击穿](assets/redis-cache-breakdown.png)
 
 举个例子：秒杀进行过程中，缓存中的某个秒杀商品的数据突然过期，这就导致瞬时大量对该商品的请求直接落到数据库上，对数据库造成了巨大的压力。
 
@@ -689,7 +693,7 @@ Bloom Filter 会使用一个较大的 bit 数组来保存所有的数据，数�
 
 ### 缓存雪崩
 
-#### 什么是缓存雪崩？
+#### ❓ 什么是缓存雪崩？
 
 我发现缓存雪崩这名字起的有点意思，哈哈。
 
@@ -697,7 +701,7 @@ Bloom Filter 会使用一个较大的 bit 数组来保存所有的数据，数�
 
 另外，缓存服务宕机也会导致缓存雪崩现象，导致所有的请求都落到了数据库上。
 
-![缓存雪崩](https://oss.javaguide.cn/github/javaguide/database/redis/redis-cache-avalanche.png)
+![缓存雪崩](assets/redis-cache-avalanche.png)
 
 举个例子：数据库中的大量数据在同一时间过期，这个时候突然有大量的请求需要访问这些过期的数据。这就导致大量的请求直接落到数据库上，对数据库造成了巨大的压力。
 
