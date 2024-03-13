@@ -76,7 +76,7 @@
 
 - [JMM（Java 内存模型）详解](./docs/java/concurrent/jmm.md)
 - **线程池**：[Java 线程池详解](./docs/java/concurrent/java-thread-pool-summary.md)、[Java 线程池最佳实践](./docs/java/concurrent/java-thread-pool-best-practices.md)
-- [ThreadLocal 详解](./docs/java/concurrent/threadlocal.md)
+- [ThreadLocal 详解](./docs/java/concurrent/ThreadLocal-详解.md)
 - [Java 并发容器总结](./docs/java/concurrent/java-concurrent-collections.md)
 - [Atomic 原子类总结](./docs/java/concurrent/atomic-classes.md)
 - [AQS 详解](./docs/java/concurrent/aqs.md)
@@ -86,7 +86,7 @@
 
 JVM 这部分内容主要参考 [JVM 虚拟机规范-Java8](https://docs.oracle.com/javase/specs/jvms/se8/html/index.html) 和周志明老师的[《深入理解 Java 虚拟机（第 3 版）》](https://book.douban.com/subject/34907497/) （强烈建议阅读多遍！）。
 
-- **[Java 内存区域](./docs/java/jvm/memory-area.md)**
+- **[Java 内存区域](./docs/java/jvm/Java内存区域详解-重点.md)**
 - **[JVM 垃圾回收](./docs/java/jvm/JVM垃圾回收详解-重点.md)**
 - [类文件结构](./docs/java/jvm/类文件结构详解.md)
 - **[类加载过程](./docs/java/jvm/类加载过程详解.md)**
@@ -192,7 +192,7 @@ JVM 这部分内容主要参考 [JVM 虚拟机规范-Java8](https://docs.oracle.
 **重要知识点：**
 
 - [MySQL 索引详解](./docs/数据库/mysql/mysql-index.md)
-- [MySQL 事务隔离级别图文详解)](./docs/数据库/mysql/transaction-isolation-level.md)
+- [MySQL 事务隔离级别图文详解)](./docs/数据库/mysql/MySQL事务隔离级别详解.md)
 - [MySQL 三大日志(binlog、redo log 和 undo log)详解](./docs/数据库/mysql/MySQL三大日志详解.md)
 - [InnoDB 存储引擎对 MVCC 的实现](./docs/数据库/mysql/innodb-implementation-of-mvcc.md)
 - [SQL 语句在 MySQL 中的执行过程](./docs/数据库/mysql/how-sql-executed-in-mysql.md)

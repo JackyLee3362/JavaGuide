@@ -30,7 +30,7 @@ head:
 
 如下图所示，在 Windows 中通过查看任务管理器的方式，我们就可以清楚看到 Windows 当前运行的进程（`.exe` 文件的运行）
 
-![进程示例图片-Windows](assets/进程示例图片-Windows.png)
+![进程示例图片-Windows](assets/进程示例图片-Windows-1710296246557-1.png)
 
 ### 何为线程？
 
@@ -84,7 +84,7 @@ JDK 1.2 之前，Java 线程是基于绿色线程（Green Threads）实现的，
 2. 多对一（多个用户线程映射到一个内核线程）
 3. 多对多（多个用户线程映射到多个内核线程）
 
-![常见的三种线程模型](assets/three-types-of-thread-models.png)
+![常见的三种线程模型](assets/three-types-of-thread-models-1710296250697-3.png)
 
 在 Windows 和 Linux 等主流操作系统中，Java 线程采用的是一对一的线程模型，也就是一个 Java 线程对应一个系统内核线程。Solaris 系统是一个特例（Solaris 系统本身就支持多对多的线程模型），HotSpot VM 在 Solaris 上支持多对多和一对一。具体可以参考 R 大的回答: [JVM 中的线程模型是用户级的么？](https://www.zhihu.com/question/23096638/answer/29617153)
 
@@ -98,7 +98,7 @@ JDK 1.2 之前，Java 线程是基于绿色线程（Green Threads）实现的，
 
 下图是 Java 内存区域，通过下图我们从 JVM 的角度来说一下线程和进程之间的关系
 
-![Java 运行时数据区域（JDK1.8 之后）](https://oss.javaguide.cn/github/javaguide/java/jvm/java-runtime-data-areas-jdk1.8.png)
+![Java 运行时数据区域（JDK1.8 之后）](assets/java-runtime-data-areas-jdk1.8.png)
 
 从上图可以看出：一个进程中可以有多个线程，多个线程共享进程的**堆**和**方法区 （JDK1.8 之后的元空间）**资源，但是每个线程有自己的**程序计数器**、**虚拟机栈** 和 **本地方法栈**
 
@@ -218,7 +218,7 @@ Java 线程在运行的生命周期中的指定时刻只可能处于下面 6 种
 
 Java 线程状态变迁图(图源：[挑错 |《Java 并发编程的艺术》中关于线程状态的三处错误](https://mp.weixin.qq.com/s/UOrXql_LhOD8dhTq_EPI0w))：
 
-![Java 线程状态变迁图](https://oss.javaguide.cn/github/javaguide/java/concurrent/640.png)
+![Java 线程状态变迁图](assets/640.png)
 
 由上图可以看出：线程创建之后它将处于 **NEW（新建）** 状态，调用 `start()` 方法后开始运行，线程这时候处于 **READY（可运行）** 状态。可运行状态的线程获得了 CPU 时间片（timeslice）后就处于 **RUNNING（运行）** 状态
 
@@ -312,6 +312,10 @@ Thread[线程 2,5,main]waiting get resource1
 
 ❓ 死锁产生的四个必要条件，如何【预防】和【避免】死锁
 
+> [!TIP]
+>
+> 互斥、请求与保持、不可剥夺、循环与等待
+
 上面的例子符合产生死锁的四个必要条件：
 
 1. 互斥：该资源任意一个时刻只由一个线程占用
@@ -395,5 +399,3 @@ Process finished with exit code 0
 new 一个 `Thread`，线程进入了新建状态。调用 `start()`方法，会启动一个线程并使线程进入了就绪状态，当分配到时间片后就可以开始运行了。 `start()` 会执行线程的相应准备工作，然后自动执行 `run()` 方法的内容，这是真正的多线程工作。 但是，直接执行 `run()` 方法，会把 `run()` 方法当成一个 main 线程下的普通方法去执行，并不会在某个线程中执行它，所以这并不是多线程工作
 
 **总结：调用 `start()` 方法方可启动线程并使线程进入就绪状态，直接执行 `run()` 方法的话不会以多线程的方式执行。**
-
-<!-- @include: @article-footer.snippet.md -->
