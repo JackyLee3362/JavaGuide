@@ -10,7 +10,7 @@ tag:
 
 ## 检索数据
 
-`SELECT` 用于从数据库中查询数据。
+`SELECT` 用于从数据库中查询数据
 
 ### 从 Customers 表中检索所有的 ID
 
@@ -22,7 +22,7 @@ tag:
 | B       |
 | C       |
 
-编写 SQL 语句，从 `Customers` 表中检索所有的 `cust_id`。
+编写 SQL 语句，从 `Customers` 表中检索所有的 `cust_id`
 
 答案：
 
@@ -33,7 +33,7 @@ FROM Customers
 
 ### 检索并列出已订购产品的清单
 
-表 `OrderItems` 含有非空的列 `prod_id` 代表商品 id，包含了所有已订购的商品（有些已被订购多次）。
+表 `OrderItems` 含有非空的列 `prod_id` 代表商品 id，包含了所有已订购的商品（有些已被订购多次）
 
 | prod_id |
 | ------- |
@@ -45,7 +45,7 @@ FROM Customers
 | a6      |
 | a7      |
 
-编写 SQL 语句，检索并列出所有已订购商品（`prod_id`）的去重后的清单。
+编写 SQL 语句，检索并列出所有已订购商品（`prod_id`）的去重后的清单
 
 答案：
 
@@ -54,7 +54,7 @@ SELECT DISTINCT prod_id
 FROM OrderItems
 ```
 
-知识点：`DISTINCT` 用于返回列中的唯一不同值。
+知识点：`DISTINCT` 用于返回列中的唯一不同值
 
 ### 检索所有列
 
@@ -70,7 +70,7 @@ FROM OrderItems
 | a6      | lee       |
 | a7      | hex       |
 
-需要编写 SQL 语句，检索所有列。
+需要编写 SQL 语句，检索所有列
 
 答案：
 
@@ -81,11 +81,11 @@ FROM Customers
 
 ## 排序检索数据
 
-`ORDER BY` 用于对结果集按照一个列或者多个列进行排序。默认按照升序对记录进行排序，如果需要按照降序对记录进行排序，可以使用 `DESC` 关键字。
+`ORDER BY` 用于对结果集按照一个列或者多个列进行排序。默认按照升序对记录进行排序，如果需要按照降序对记录进行排序，可以使用 `DESC` 关键字
 
 ### 检索顾客名称并且排序
 
-有表 `Customers`，`cust_id` 代表客户 id，`cust_name` 代表客户姓名。
+有表 `Customers`，`cust_id` 代表客户 id，`cust_name` 代表客户姓名
 
 | cust_id | cust_name |
 | ------- | --------- |
@@ -97,7 +97,7 @@ FROM Customers
 | a6      | lee       |
 | a7      | hex       |
 
-从 `Customers` 中检索所有的顾客名称（`cust_name`），并按从 Z 到 A 的顺序显示结果。
+从 `Customers` 中检索所有的顾客名称（`cust_name`），并按从 Z 到 A 的顺序显示结果
 
 答案：
 
@@ -118,7 +118,7 @@ ORDER BY cust_name DESC
 | bob     | cccc      | 2021-01-10 12:00:00 |
 | dick    | dddd      | 2021-01-11 00:00:00 |
 
-编写 SQL 语句，从 `Orders` 表中检索顾客 ID（`cust_id`）和订单号（`order_num`），并先按顾客 ID 对结果进行排序，再按订单日期倒序排列。
+编写 SQL 语句，从 `Orders` 表中检索顾客 ID（`cust_id`）和订单号（`order_num`），并先按顾客 ID 对结果进行排序，再按订单日期倒序排列
 
 答案：
 
@@ -130,7 +130,7 @@ FROM Orders
 ORDER BY cust_id,order_date DESC
 ```
 
-知识点：`order by` 对多列排序的时候，先排序的列放前面，后排序的列放后面。并且，不同的列可以有不同的排序规则。
+知识点：`order by` 对多列排序的时候，先排序的列放前面，后排序的列放后面。并且，不同的列可以有不同的排序规则
 
 ### 按照数量和价格排序
 
@@ -142,7 +142,7 @@ ORDER BY cust_id,order_date DESC
 | 10       | 1003       |
 | 2        | 500        |
 
-编写 SQL 语句，显示 `OrderItems` 表中的数量（`quantity`）和价格（`item_price`），并按数量由多到少、价格由高到低排序。
+编写 SQL 语句，显示 `OrderItems` 表中的数量（`quantity`）和价格（`item_price`），并按数量由多到少、价格由高到低排序
 
 答案：
 
@@ -162,7 +162,7 @@ ORDER BY quantity DESC,item_price DESC
 | 小龙坎    |
 | 大龙燚    |
 
-下面的 SQL 语句有问题吗？尝试将它改正确，使之能够正确运行，并且返回结果根据`vend_name` 逆序排列。
+下面的 SQL 语句有问题吗？尝试将它改正确，使之能够正确运行，并且返回结果根据`vend_name` 逆序排列
 
 ```sql
 SELECT vend_name,
@@ -180,12 +180,12 @@ ORDER BY vend_name DESC
 
 知识点：
 
-- 逗号作用是用来隔开列与列之间的。
-- ORDER BY 是有 BY 的，需要撰写完整，且位置正确。
+- 逗号作用是用来隔开列与列之间的
+- ORDER BY 是有 BY 的，需要撰写完整，且位置正确
 
 ## 过滤数据
 
-`WHERE` 可以过滤返回的数据。
+`WHERE` 可以过滤返回的数据
 
 下面的运算符可以在 `WHERE` 子句中使用：
 
@@ -211,7 +211,7 @@ ORDER BY vend_name DESC
 | a0019   | iphone13       | 600        |
 | b0018   | gucci t-shirts | 1000       |
 
-【问题】从 `Products` 表中检索产品 ID（`prod_id`）和产品名称（`prod_name`），只返回价格为 9.49 美元的产品。
+【问题】从 `Products` 表中检索产品 ID（`prod_id`）和产品名称（`prod_name`），只返回价格为 9.49 美元的产品
 
 答案：
 
@@ -231,7 +231,7 @@ WHERE prod_price = 9.49
 | a0019   | iphone13       | 600        |
 | b0019   | gucci t-shirts | 1000       |
 
-【问题】编写 SQL 语句，从 `Products` 表中检索产品 ID（`prod_id`）和产品名称（`prod_name`），只返回价格为 9 美元或更高的产品。
+【问题】编写 SQL 语句，从 `Products` 表中检索产品 ID（`prod_id`）和产品名称（`prod_name`），只返回价格为 9 美元或更高的产品
 
 答案：
 
@@ -251,7 +251,7 @@ WHERE prod_price >= 9
 | a0019   | sockets   | 4          |
 | b0019   | coffee    | 15         |
 
-【问题】编写 SQL 语句，返回 `Products` 表中所有价格在 3 美元到 6 美元之间的产品的名称（`prod_name`）和价格（`prod_price`），然后按价格对结果进行排序。
+【问题】编写 SQL 语句，返回 `Products` 表中所有价格在 3 美元到 6 美元之间的产品的名称（`prod_name`）和价格（`prod_price`），然后按价格对结果进行排序
 
 答案：
 
@@ -282,7 +282,7 @@ ORDER BY prod_price
 | a2        | 19       |
 | a7        | 5        |
 
-【问题】从 `OrderItems` 表中检索出所有不同且不重复的订单号（`order_num`），其中每个订单都要包含 100 个或更多的产品。
+【问题】从 `OrderItems` 表中检索出所有不同且不重复的订单号（`order_num`），其中每个订单都要包含 100 个或更多的产品
 
 答案：
 
@@ -295,7 +295,7 @@ HAVING SUM(quantity) >= 100
 
 ## 高级数据过滤
 
-`AND` 和 `OR` 运算符用于基于一个以上的条件对记录进行过滤，两者可以结合使用。`AND` 必须 2 个条件都成立，`OR`只要 2 个条件中的一个成立即可。
+`AND` 和 `OR` 运算符用于基于一个以上的条件对记录进行过滤，两者可以结合使用。`AND` 必须 2 个条件都成立，`OR`只要 2 个条件中的一个成立即可
 
 ### 检索供应商名称
 
@@ -319,7 +319,7 @@ WHERE vend_country = 'USA' AND vend_state = 'CA'
 
 ### 检索并列出已订购产品的清单
 
-`OrderItems` 表包含了所有已订购的产品（有些已被订购多次）。
+`OrderItems` 表包含了所有已订购的产品（有些已被订购多次）
 
 | prod_id | order_num | quantity |
 | ------- | --------- | -------- |
@@ -331,7 +331,7 @@ WHERE vend_country = 'USA' AND vend_state = 'CA'
 | BR02    | a2        | 19       |
 | BR017   | a7        | 5        |
 
-【问题】编写 SQL 语句，查找所有订购了数量至少 100 个的 `BR01`、`BR02` 或 `BR03` 的订单。你需要返回 `OrderItems` 表的订单号（`order_num`）、产品 ID（`prod_id`）和数量（`quantity`），并按产品 ID 和数量进行过滤。
+【问题】编写 SQL 语句，查找所有订购了数量至少 100 个的 `BR01`、`BR02` 或 `BR03` 的订单。你需要返回 `OrderItems` 表的订单号（`order_num`）、产品 ID（`prod_id`）和数量（`quantity`），并按产品 ID 和数量进行过滤
 
 答案：
 
@@ -351,7 +351,7 @@ WHERE prod_id IN ('BR01', 'BR02', 'BR03') AND quantity >= 100
 | a0019   | sockets   | 4          |
 | b0019   | coffee    | 15         |
 
-【问题】编写 SQL 语句，返回所有价格在 3 美元到 6 美元之间的产品的名称（`prod_name`）和价格（`prod_price`），使用 AND 操作符，然后按价格对结果进行升序排序。
+【问题】编写 SQL 语句，返回所有价格在 3 美元到 6 美元之间的产品的名称（`prod_name`）和价格（`prod_price`），使用 AND 操作符，然后按价格对结果进行升序排序
 
 答案：
 
@@ -372,7 +372,7 @@ ORDER BY prod_price
 | vivo      | CNA          | shenzhen   |
 | huawei    | CNA          | xian       |
 
-【问题】修改正确下面 sql，使之正确返回。
+【问题】修改正确下面 sql，使之正确返回
 
 ```sql
 SELECT vend_name
@@ -390,7 +390,7 @@ WHERE vend_country = 'USA' AND vend_state = 'CA'
 ORDER BY vend_name
 ```
 
-`ORDER BY` 语句必须放在 `WHERE` 之后。
+`ORDER BY` 语句必须放在 `WHERE` 之后
 
 ## 用通配符进行过滤
 
@@ -417,7 +417,7 @@ SQL 通配符必须与 `LIKE` 运算符一起使用
 | c0019     | gucci toy      |
 | d0019     | lego toy       |
 
-【问题】编写 SQL 语句，从 `Products` 表中检索产品名称（`prod_name`）和描述（`prod_desc`），仅返回描述中包含 `toy` 一词的产品名称。
+【问题】编写 SQL 语句，从 `Products` 表中检索产品名称（`prod_name`）和描述（`prod_desc`），仅返回描述中包含 `toy` 一词的产品名称
 
 答案：
 
@@ -439,7 +439,7 @@ WHERE prod_desc LIKE '%toy%'
 | c0019     | gucci toy      |
 | d0019     | lego toy       |
 
-【问题】编写 SQL 语句，从 `Products` 表中检索产品名称（`prod_name`）和描述（`prod_desc`），仅返回描述中未出现 `toy` 一词的产品，最后按」产品名称「对结果进行排序。
+【问题】编写 SQL 语句，从 `Products` 表中检索产品名称（`prod_name`）和描述（`prod_desc`），仅返回描述中未出现 `toy` 一词的产品，最后按」产品名称「对结果进行排序
 
 答案：
 
@@ -462,7 +462,7 @@ ORDER BY prod_name
 | c0019     | gucci toy        |
 | d0019     | lego carrots toy |
 
-【问题】编写 SQL 语句，从 `Products` 表中检索产品名称（`prod_name`）和描述（`prod_desc`），仅返回描述中同时出现 `toy` 和 `carrots` 的产品。有好几种方法可以执行此操作，但对于这个挑战题，请使用 `AND` 和两个 `LIKE` 比较。
+【问题】编写 SQL 语句，从 `Products` 表中检索产品名称（`prod_name`）和描述（`prod_desc`），仅返回描述中同时出现 `toy` 和 `carrots` 的产品。有好几种方法可以执行此操作，但对于这个挑战题，请使用 `AND` 和两个 `LIKE` 比较
 
 答案：
 
@@ -484,7 +484,7 @@ WHERE prod_desc LIKE '%toy%' AND prod_desc LIKE "%carrots%"
 | c0019     | gucci toy        |
 | d0019     | lego toy carrots |
 
-【问题】编写 SQL 语句，从 Products 表中检索产品名称（prod_name）和描述（prod_desc），仅返回在描述中以**先后顺序**同时出现 toy 和 carrots 的产品。提示：只需要用带有三个 `%` 符号的 `LIKE` 即可。
+【问题】编写 SQL 语句，从 Products 表中检索产品名称（prod_name）和描述（prod_desc），仅返回在描述中以**先后顺序**同时出现 toy 和 carrots 的产品。提示：只需要用带有三个 `%` 符号的 `LIKE` 即可
 
 答案：
 
@@ -498,7 +498,7 @@ WHERE prod_desc LIKE '%toy%carrots%'
 
 ### 别名
 
-别名的常见用法是在检索出的结果中重命名表的列字段（为了符合特定的报表要求或客户需求）。有表 `Vendors` 代表供应商信息，`vend_id` 供应商 id、`vend_name` 供应商名称、`vend_address` 供应商地址、`vend_city` 供应商城市。
+别名的常见用法是在检索出的结果中重命名表的列字段（为了符合特定的报表要求或客户需求）。有表 `Vendors` 代表供应商信息，`vend_id` 供应商 id、`vend_name` 供应商名称、`vend_address` 供应商地址、`vend_city` 供应商城市
 
 | vend_id | vend_name     | vend_address | vend_city |
 | ------- | ------------- | ------------ | --------- |
@@ -507,7 +507,7 @@ WHERE prod_desc LIKE '%toy%carrots%'
 | a003    | aliyun cloud  | address3     | hangzhou  |
 | a003    | netease cloud | address4     | guangzhou |
 
-【问题】编写 SQL 语句，从 `Vendors` 表中检索 `vend_id`、`vend_name`、`vend_address` 和 `vend_city`，将 `vend_name` 重命名为 `vname`，将 `vend_city` 重命名为 `vcity`，将 `vend_address` 重命名为 `vaddress`，按供应商名称对结果进行升序排序。
+【问题】编写 SQL 语句，从 `Vendors` 表中检索 `vend_id`、`vend_name`、`vend_address` 和 `vend_city`，将 `vend_name` 重命名为 `vname`，将 `vend_city` 重命名为 `vcity`，将 `vend_address` 重命名为 `vaddress`，按供应商名称对结果进行升序排序
 
 答案：
 
@@ -523,9 +523,9 @@ ORDER BY vname
 
 ### 打折
 
-我们的示例商店正在进行打折促销，所有产品均降价 10%。`Products` 表包含 `prod_id` 产品 id、`prod_price` 产品价格。
+我们的示例商店正在进行打折促销，所有产品均降价 10%。`Products` 表包含 `prod_id` 产品 id、`prod_price` 产品价格
 
-【问题】编写 SQL 语句，从 `Products` 表中返回 `prod_id`、`prod_price` 和 `sale_price`。`sale_price` 是一个包含促销价格的计算字段。提示：可以乘以 0.9，得到原价的 90%（即 10%的折扣）。
+【问题】编写 SQL 语句，从 `Products` 表中返回 `prod_id`、`prod_price` 和 `sale_price`。`sale_price` 是一个包含促销价格的计算字段。提示：可以乘以 0.9，得到原价的 90%（即 10%的折扣）
 
 答案：
 
@@ -534,13 +534,13 @@ SELECT prod_id, prod_price, prod_price * 0.9 AS sale_price
 FROM Products
 ```
 
-注意：`sale_price` 是对计算结果的命名，而不是原有的列名。
+注意：`sale_price` 是对计算结果的命名，而不是原有的列名
 
 ## 使用函数处理数据
 
 ### 顾客登录名
 
-我们的商店已经上线了，正在创建顾客账户。所有用户都需要登录名，默认登录名是其名称和所在城市的组合。
+我们的商店已经上线了，正在创建顾客账户。所有用户都需要登录名，默认登录名是其名称和所在城市的组合
 
 给出 `Customers` 表 如下：
 
@@ -554,7 +554,7 @@ FROM Products
 | a6      | Lee Chen  | Lee Chen     | Oak Park  |
 | a7      | Hex Liu   | Hex Liu      | Oak Park  |
 
-【问题】编写 SQL 语句，返回顾客 ID（`cust_id`）、顾客名称（`cust_name`）和登录名（`user_login`），其中登录名全部为大写字母，并由顾客联系人的前两个字符（`cust_contact`）和其所在城市的前三个字符（`cust_city`）组成。提示：需要使用函数、拼接和别名。
+【问题】编写 SQL 语句，返回顾客 ID（`cust_id`）、顾客名称（`cust_name`）和登录名（`user_login`），其中登录名全部为大写字母，并由顾客联系人的前两个字符（`cust_contact`）和其所在城市的前三个字符（`cust_city`）组成。提示：需要使用函数、拼接和别名
 
 答案：
 
@@ -566,9 +566,9 @@ FROM Customers
 知识点：
 
 - 截取函数`SUBSTRING()`：截取字符串，`substring(str ,n ,m)`（n 表示起始截取位置，m 表示要截取的字符个数）表示返回字符串 str 从第 n 个字符开始截取 m 个字符；
-- 拼接函数`CONCAT()`：将两个或多个字符串连接成一个字符串，select concat(A,B)：连接字符串 A 和 B。
+- 拼接函数`CONCAT()`：将两个或多个字符串连接成一个字符串，select concat(A,B)：连接字符串 A 和 B
 
-- 大写函数 `UPPER()`：将指定字符串转换为大写。
+- 大写函数 `UPPER()`：将指定字符串转换为大写
 
 ### 返回 2020 年 1 月的所有订单的订单号和订单日期
 
@@ -642,7 +642,7 @@ ORDER BY order_date
 
 ### 确定已售出产品的总数
 
-`OrderItems` 表代表售出的产品，`quantity` 代表售出商品数量。
+`OrderItems` 表代表售出的产品，`quantity` 代表售出商品数量
 
 | quantity |
 | -------- |
@@ -653,7 +653,7 @@ ORDER BY order_date
 | 2        |
 | 15       |
 
-【问题】编写 SQL 语句，确定已售出产品的总数。
+【问题】编写 SQL 语句，确定已售出产品的总数
 
 答案：
 
@@ -664,7 +664,7 @@ FROM OrderItems
 
 ### 确定已售出产品项 BR01 的总数
 
-`OrderItems` 表代表售出的产品，`quantity` 代表售出商品数量，产品项为 `prod_id`。
+`OrderItems` 表代表售出的产品，`quantity` 代表售出商品数量，产品项为 `prod_id`
 
 | quantity | prod_id |
 | -------- | ------- |
@@ -673,7 +673,7 @@ FROM OrderItems
 | 1000     | BR01    |
 | 10001    | BR010   |
 
-【问题】修改创建的语句，确定已售出产品项（`prod_id`）为"BR01"的总数。
+【问题】修改创建的语句，确定已售出产品项（`prod_id`）为"BR01"的总数
 
 答案：
 
@@ -685,7 +685,7 @@ WHERE prod_id = 'BR01'
 
 ### 确定 Products 表中价格不超过 10 美元的最贵产品的价格
 
-`Products` 表如下，`prod_price` 代表商品的价格。
+`Products` 表如下，`prod_price` 代表商品的价格
 
 | prod_price |
 | ---------- |
@@ -693,7 +693,7 @@ WHERE prod_id = 'BR01'
 | 600        |
 | 1000       |
 
-【问题】编写 SQL 语句，确定 `Products` 表中价格不超过 10 美元的最贵产品的价格（`prod_price`）。将计算所得的字段命名为 `max_price`。
+【问题】编写 SQL 语句，确定 `Products` 表中价格不超过 10 美元的最贵产品的价格（`prod_price`）。将计算所得的字段命名为 `max_price`
 
 答案：
 
@@ -707,22 +707,22 @@ WHERE prod_price <= 10
 
 `GROUP BY`：
 
-- `GROUP BY` 子句将记录分组到汇总行中。
-- `GROUP BY` 为每个组返回一个记录。
-- `GROUP BY` 通常还涉及聚合`COUNT`，`MAX`，`SUM`，`AVG` 等。
-- `GROUP BY` 可以按一列或多列进行分组。
-- `GROUP BY` 按分组字段进行排序后，`ORDER BY` 可以以汇总字段来进行排序。
+- `GROUP BY` 子句将记录分组到汇总行中
+- `GROUP BY` 为每个组返回一个记录
+- `GROUP BY` 通常还涉及聚合`COUNT`，`MAX`，`SUM`，`AVG` 等
+- `GROUP BY` 可以按一列或多列进行分组
+- `GROUP BY` 按分组字段进行排序后，`ORDER BY` 可以以汇总字段来进行排序
 
 `HAVING`：
 
-- `HAVING` 用于对汇总的 `GROUP BY` 结果进行过滤。
-- `HAVING` 必须要与 `GROUP BY` 连用。
-- `WHERE` 和 `HAVING` 可以在相同的查询中。
+- `HAVING` 用于对汇总的 `GROUP BY` 结果进行过滤
+- `HAVING` 必须要与 `GROUP BY` 连用
+- `WHERE` 和 `HAVING` 可以在相同的查询中
 
 `HAVING` vs `WHERE`：
 
-- `WHERE`：过滤指定的行，后面不能加聚合函数（分组函数）。
-- `HAVING`：过滤分组，必须要与 `GROUP BY` 连用，不能单独使用。
+- `WHERE`：过滤指定的行，后面不能加聚合函数（分组函数）
+- `HAVING`：过滤分组，必须要与 `GROUP BY` 连用，不能单独使用
 
 ### 返回每个订单号各有多少行数
 
@@ -736,7 +736,7 @@ WHERE prod_price <= 10
 | a004      |
 | a007      |
 
-【问题】编写 SQL 语句，返回每个订单号（`order_num`）各有多少行数（`order_lines`），并按 `order_lines` 对结果进行升序排序。
+【问题】编写 SQL 语句，返回每个订单号（`order_num`）各有多少行数（`order_lines`），并按 `order_lines` 对结果进行升序排序
 
 答案：
 
@@ -751,7 +751,7 @@ ORDER BY order_lines
 
 1. `count(*)`,`count(列名)`都可以，区别在于，`count(列名)`是统计非 NULL 的行数；
 2. `order by` 最后执行，所以可以使用列别名；
-3. 分组聚合一定不要忘记加上 `group by` ,不然只会有一行结果。
+3. 分组聚合一定不要忘记加上 `group by` ,不然只会有一行结果
 
 ### 每个供应商成本最低的产品
 
@@ -765,7 +765,7 @@ ORDER BY order_lines
 | b0019   | 6980       |
 | b0019   | 20         |
 
-【问题】编写 SQL 语句，返回名为 `cheapest_item` 的字段，该字段包含每个供应商成本最低的产品（使用 `Products` 表中的 `prod_price`），然后从最低成本到最高成本对结果进行升序排序。
+【问题】编写 SQL 语句，返回名为 `cheapest_item` 的字段，该字段包含每个供应商成本最低的产品（使用 `Products` 表中的 `prod_price`），然后从最低成本到最高成本对结果进行升序排序
 
 答案：
 
@@ -778,7 +778,7 @@ ORDER BY cheapest_item
 
 ### 返回订单数量总和不小于 100 的所有订单的订单号
 
-`OrderItems` 代表订单商品表，包括：订单号 `order_num` 和订单数量 `quantity`。
+`OrderItems` 代表订单商品表，包括：订单号 `order_num` 和订单数量 `quantity`
 
 | order_num | quantity |
 | --------- | -------- |
@@ -790,7 +790,7 @@ ORDER BY cheapest_item
 | a2        | 19       |
 | a7        | 5        |
 
-【问题】请编写 SQL 语句，返回订单数量总和不小于 100 的所有订单号，最后结果按照订单号升序排序。
+【问题】请编写 SQL 语句，返回订单数量总和不小于 100 的所有订单号，最后结果按照订单号升序排序
 
 答案：
 
@@ -813,12 +813,12 @@ ORDER BY a.order_num
 
 知识点：
 
-- `where`：过滤过滤指定的行，后面不能加聚合函数（分组函数）。
-- `having`：过滤分组，与 `group by` 连用，不能单独使用。
+- `where`：过滤过滤指定的行，后面不能加聚合函数（分组函数）
+- `having`：过滤分组，与 `group by` 连用，不能单独使用
 
 ### 计算总和
 
-`OrderItems` 表代表订单信息，包括字段：订单号 `order_num` 和 `item_price` 商品售出价格、`quantity` 商品数量。
+`OrderItems` 表代表订单信息，包括字段：订单号 `order_num` 和 `item_price` 商品售出价格、`quantity` 商品数量
 
 | order_num | item_price | quantity |
 | --------- | ---------- | -------- |
@@ -830,7 +830,7 @@ ORDER BY a.order_num
 | a2        | 1          | 19       |
 | a7        | 7          | 5        |
 
-【问题】编写 SQL 语句，根据订单号聚合，返回订单总价不小于 1000 的所有订单号，最后的结果按订单号进行升序排序。
+【问题】编写 SQL 语句，根据订单号聚合，返回订单总价不小于 1000 的所有订单号，最后的结果按订单号进行升序排序
 
 提示：总价 = item_price 乘以 quantity
 
@@ -878,16 +878,16 @@ ORDER BY items, order_num;
 
 ## 使用子查询
 
-子查询是嵌套在较大查询中的 SQL 查询，也称内部查询或内部选择，包含子查询的语句也称为外部查询或外部选择。简单来说，子查询就是指将一个 `SELECT` 查询（子查询）的结果作为另一个 SQL 语句（主查询）的数据来源或者判断条件。
+子查询是嵌套在较大查询中的 SQL 查询，也称内部查询或内部选择，包含子查询的语句也称为外部查询或外部选择。简单来说，子查询就是指将一个 `SELECT` 查询（子查询）的结果作为另一个 SQL 语句（主查询）的数据来源或者判断条件
 
-子查询可以嵌入 `SELECT`、`INSERT`、`UPDATE` 和 `DELETE` 语句中，也可以和 `=`、`<`、`>`、`IN`、`BETWEEN`、`EXISTS` 等运算符一起使用。
+子查询可以嵌入 `SELECT`、`INSERT`、`UPDATE` 和 `DELETE` 语句中，也可以和 `=`、`<`、`>`、`IN`、`BETWEEN`、`EXISTS` 等运算符一起使用
 
 子查询常用在 `WHERE` 子句和 `FROM` 子句后边：
 
-- 当用于 `WHERE` 子句时，根据不同的运算符，子查询可以返回单行单列、多行单列、单行多列数据。子查询就是要返回能够作为 WHERE 子句查询条件的值。
-- 当用于 `FROM` 子句时，一般返回多行多列数据，相当于返回一张临时表，这样才符合 `FROM` 后面是表的规则。这种做法能够实现多表联合查询。
+- 当用于 `WHERE` 子句时，根据不同的运算符，子查询可以返回单行单列、多行单列、单行多列数据。子查询就是要返回能够作为 WHERE 子句查询条件的值
+- 当用于 `FROM` 子句时，一般返回多行多列数据，相当于返回一张临时表，这样才符合 `FROM` 后面是表的规则。这种做法能够实现多表联合查询
 
-> 注意：MySQL 数据库从 4.1 版本才开始支持子查询，早期版本是不支持的。
+> 注意：MySQL 数据库从 4.1 版本才开始支持子查询，早期版本是不支持的
 
 用于 `WHERE` 子句的子查询的基本语法如下：
 
@@ -900,8 +900,8 @@ FROM table1 [, table2 ]
 [WHERE])
 ```
 
-- 子查询需要放在括号`( )`内。
-- `operator` 表示用于 `WHERE` 子句的运算符，可以是比较运算符（如 `=`, `<`, `>`, `<>` 等）或逻辑运算符（如 `IN`, `NOT IN`, `EXISTS`, `NOT EXISTS` 等），具体根据需求来确定。
+- 子查询需要放在括号`( )`内
+- `operator` 表示用于 `WHERE` 子句的运算符，可以是比较运算符（如 `=`, `<`, `>`, `<>` 等）或逻辑运算符（如 `IN`, `NOT IN`, `EXISTS`, `NOT EXISTS` 等），具体根据需求来确定
 
 用于 `FROM` 子句的子查询的基本语法如下：
 
@@ -914,9 +914,9 @@ FROM (SELECT column_name [, column_name ]
 WHERE condition;
 ```
 
-- 用于 `FROM` 的子查询返回的结果相当于一张临时表，所以需要使用 AS 关键字为该临时表起一个名字。
-- 子查询需要放在括号 `( )` 内。
-- 可以指定多个临时表名，并使用 `JOIN` 语句连接这些表。
+- 用于 `FROM` 的子查询返回的结果相当于一张临时表，所以需要使用 AS 关键字为该临时表起一个名字
+- 子查询需要放在括号 `( )` 内
+- 可以指定多个临时表名，并使用 `JOIN` 语句连接这些表
 
 ### 返回购买价格为 10 美元或以上产品的顾客列表
 
@@ -946,7 +946,7 @@ WHERE condition;
 | a2        | cust1   |
 | a7        | cust7   |
 
-【问题】使用子查询，返回购买价格为 10 美元或以上产品的顾客列表，结果无需排序。
+【问题】使用子查询，返回购买价格为 10 美元或以上产品的顾客列表，结果无需排序
 
 答案：
 
@@ -982,7 +982,7 @@ WHERE order_num IN (SELECT DISTINCT order_num
 
 【问题】
 
-编写 SQL 语句，使用子查询来确定哪些订单（在 `OrderItems` 中）购买了 `prod_id` 为 "BR01" 的产品，然后从 `Orders` 表中返回每个产品对应的顾客 ID（`cust_id`）和订单日期（`order_date`），按订购日期对结果进行升序排序。
+编写 SQL 语句，使用子查询来确定哪些订单（在 `OrderItems` 中）购买了 `prod_id` 为 "BR01" 的产品，然后从 `Orders` 表中返回每个产品对应的顾客 ID（`cust_id`）和订单日期（`order_date`），按订购日期对结果进行升序排序
 
 答案：
 
@@ -1033,9 +1033,9 @@ ORDER BY order_date
 | cust1   | <cust1@cust.com>  |
 | cust2   | <cust2@cust.com>  |
 
-【问题】返回购买 `prod_id` 为 `BR01` 的产品的所有顾客的电子邮件（`Customers` 表中的 `cust_email`），结果无需排序。
+【问题】返回购买 `prod_id` 为 `BR01` 的产品的所有顾客的电子邮件（`Customers` 表中的 `cust_email`），结果无需排序
 
-提示：这涉及 `SELECT` 语句，最内层的从 `OrderItems` 表返回 `order_num`，中间的从 `Customers` 表返回 `cust_id`。
+提示：这涉及 `SELECT` 语句，最内层的从 `OrderItems` 表返回 `order_num`，中间的从 `Customers` 表返回 `cust_id`
 
 答案：
 
@@ -1064,9 +1064,9 @@ WHERE b.prod_id = 'BR01'
 
 ### 返回每个顾客不同订单的总金额
 
-我们需要一个顾客 ID 列表，其中包含他们已订购的总金额。
+我们需要一个顾客 ID 列表，其中包含他们已订购的总金额
 
-`OrderItems` 表代表订单信息，`OrderItems` 表有订单号：`order_num` 和商品售出价格：`item_price`、商品数量：`quantity`。
+`OrderItems` 表代表订单信息，`OrderItems` 表有订单号：`order_num` 和商品售出价格：`item_price`、商品数量：`quantity`
 
 | order_num | item_price | quantity |
 | --------- | ---------- | -------- |
@@ -1089,7 +1089,7 @@ WHERE b.prod_id = 'BR01'
 
 【问题】
 
-编写 SQL 语句，返回顾客 ID（`Orders` 表中的 `cust_id`），并使用子查询返回 `total_ordered` 以便返回每个顾客的订单总数，将结果按金额从大到小排序。
+编写 SQL 语句，返回顾客 ID（`Orders` 表中的 `cust_id`），并使用子查询返回 `total_ordered` 以便返回每个顾客的订单总数，将结果按金额从大到小排序
 
 答案：
 
@@ -1136,7 +1136,7 @@ ORDER BY total_ordered DESC
 
 【问题】
 
-编写 SQL 语句，从 `Products` 表中检索所有的产品名称（`prod_name`），以及名为 `quant_sold` 的计算列，其中包含所售产品的总数（在 `OrderItems` 表上使用子查询和 `SUM(quantity)` 检索）。
+编写 SQL 语句，从 `Products` 表中检索所有的产品名称（`prod_name`），以及名为 `quant_sold` 的计算列，其中包含所售产品的总数（在 `OrderItems` 表上使用子查询和 `SUM(quantity)` 检索）
 
 答案：
 
@@ -1159,9 +1159,9 @@ GROUP BY p.prod_name（这里不能用 p.prod_id，会报错）
 
 ## 连接表
 
-JOIN 是「连接」的意思，顾名思义，SQL JOIN 子句用于将两个或者多个表联合起来进行查询。
+JOIN 是「连接」的意思，顾名思义，SQL JOIN 子句用于将两个或者多个表联合起来进行查询
 
-连接表时需要在每个表中选择一个字段，并对这些字段的值进行比较，值相同的两条记录将合并为一条。**连接表的本质就是将不同表的记录合并起来，形成一张新表。当然，这张新表只是临时的，它仅存在于本次查询期间**。
+连接表时需要在每个表中选择一个字段，并对这些字段的值进行比较，值相同的两条记录将合并为一条。**连接表的本质就是将不同表的记录合并起来，形成一张新表。当然，这张新表只是临时的，它仅存在于本次查询期间**
 
 使用 `JOIN` 连接两个表的基本语法如下：
 
@@ -1172,9 +1172,9 @@ JOIN table2
 ON table1.common_column1 = table2.common_column2;
 ```
 
-`table1.common_column1 = table2.common_column2` 是连接条件，只有满足此条件的记录才会合并为一行。您可以使用多个运算符来连接表，例如 =、>、<、<>、<=、>=、!=、`between`、`like` 或者 `not`，但是最常见的是使用 =。
+`table1.common_column1 = table2.common_column2` 是连接条件，只有满足此条件的记录才会合并为一行。您可以使用多个运算符来连接表，例如 =、>、<、<>、<=、>=、!=、`between`、`like` 或者 `not`，但是最常见的是使用 =
 
-当两个表中有同名的字段时，为了帮助数据库引擎区分是哪个表的字段，在书写同名字段名时需要加上表名。当然，如果书写的字段名在两个表中是唯一的，也可以不使用以上格式，只写字段名即可。
+当两个表中有同名的字段时，为了帮助数据库引擎区分是哪个表的字段，在书写同名字段名时需要加上表名。当然，如果书写的字段名在两个表中是唯一的，也可以不使用以上格式，只写字段名即可
 
 另外，如果两张表的关联字段名相同，也可以使用 `USING`子句来代替 `ON`，举个例子：
 
@@ -1196,10 +1196,10 @@ ORDER BY c.cust_name
 
 **`ON` 和 `WHERE` 的区别**：
 
-- 连接表时，SQL 会根据连接条件生成一张新的临时表。`ON` 就是连接条件，它决定临时表的生成。
-- `WHERE` 是在临时表生成以后，再对临时表中的数据进行过滤，生成最终的结果集，这个时候已经没有 JOIN-ON 了。
+- 连接表时，SQL 会根据连接条件生成一张新的临时表。`ON` 就是连接条件，它决定临时表的生成
+- `WHERE` 是在临时表生成以后，再对临时表中的数据进行过滤，生成最终的结果集，这个时候已经没有 JOIN-ON 了
 
-所以总结来说就是：**SQL 先根据 ON 生成一张临时表，然后再根据 WHERE 对临时表进行筛选**。
+所以总结来说就是：**SQL 先根据 ON 生成一张临时表，然后再根据 WHERE 对临时表进行筛选**
 
 SQL 允许在 `JOIN` 左边加上一些修饰性的关键词，从而形成不同类型的连接，如下表所示：
 
@@ -1212,7 +1212,7 @@ SQL 允许在 `JOIN` 左边加上一些修饰性的关键词，从而形成不�
 | SELF JOIN                                | 将一个表连接到自身，就像该表是两个表一样。为了区分两个表，在 SQL 语句中需要至少重命名一个表。 |
 | CROSS JOIN                               | 交叉连接，从两个或者多个连接表中返回记录集的笛卡尔积。                                        |
 
-下图展示了 LEFT JOIN、RIGHT JOIN、INNER JOIN、OUTER JOIN 相关的 7 种用法。
+下图展示了 LEFT JOIN、RIGHT JOIN、INNER JOIN、OUTER JOIN 相关的 7 种用法
 
 ![](https://oss.javaguide.cn/github/javaguide/csdn/d1794312b448516831369f869814ab39.png)
 
@@ -1259,7 +1259,7 @@ ORDER BY c.cust_name;
 | a5        | cust221  |
 | a7        | cust2217 |
 
-【问题】编写 SQL 语句，返回 `Customers` 表中的顾客名称（`cust_name`）和 `Orders` 表中的相关订单号（`order_num`），并按顾客名称再按订单号对结果进行升序排序。你可以尝试用两个不同的写法，一个使用简单的等连接语法，另外一个使用 INNER JOIN。
+【问题】编写 SQL 语句，返回 `Customers` 表中的顾客名称（`cust_name`）和 `Orders` 表中的相关订单号（`order_num`），并按顾客名称再按订单号对结果进行升序排序。你可以尝试用两个不同的写法，一个使用简单的等连接语法，另外一个使用 INNER JOIN
 
 答案：
 
@@ -1313,7 +1313,7 @@ ORDER BY c.cust_name,o.order_num;
 | a5        | 15       | 25         |
 | a7        | 7        | 7          |
 
-【问题】除了返回顾客名称和订单号，返回 `Customers` 表中的顾客名称（`cust_name`）和 `Orders` 表中的相关订单号（`order_num`），添加第三列 `OrderTotal`，其中包含每个订单的总价，并按顾客名称再按订单号对结果进行升序排序。
+【问题】除了返回顾客名称和订单号，返回 `Customers` 表中的顾客名称（`cust_name`）和 `Orders` 表中的相关订单号（`order_num`），添加第三列 `OrderTotal`，其中包含每个订单的总价，并按顾客名称再按订单号对结果进行升序排序
 
 ```sql
 # 简单的等连接语法
@@ -1334,9 +1334,9 @@ GROUP BY c.cust_name
 ORDER BY c.cust_name,o.order_num
 ```
 
-这是错误的！只对 `cust_name` 进行聚类确实符合题意，但是不符合 `GROUP BY` 的语法。
+这是错误的！只对 `cust_name` 进行聚类确实符合题意，但是不符合 `GROUP BY` 的语法
 
-select 语句中，如果没有 `GROUP BY` 语句，那么 `cust_name`、`order_num` 会返回若干个值，而 `sum(quantity * item_price)` 只返回一个值，通过 `group by` `cust_name` 可以让 `cust_name` 和 `sum(quantity * item_price)` 一一对应起来，或者说**聚类**，所以同样的，也要对 `order_num` 进行聚类。
+select 语句中，如果没有 `GROUP BY` 语句，那么 `cust_name`、`order_num` 会返回若干个值，而 `sum(quantity * item_price)` 只返回一个值，通过 `group by` `cust_name` 可以让 `cust_name` 和 `sum(quantity * item_price)` 一一对应起来，或者说**聚类**，所以同样的，也要对 `order_num` 进行聚类
 
 > **一句话，select 中的字段要么都聚类，要么都不聚类**
 
@@ -1364,9 +1364,9 @@ select 语句中，如果没有 `GROUP BY` 语句，那么 `cust_name`、`order_
 
 【问题】
 
-编写 SQL 语句，使用子查询来确定哪些订单（在 `OrderItems` 中）购买了 `prod_id` 为 "BR01" 的产品，然后从 `Orders` 表中返回每个产品对应的顾客 ID（`cust_id`）和订单日期（`order_date`），按订购日期对结果进行升序排序。
+编写 SQL 语句，使用子查询来确定哪些订单（在 `OrderItems` 中）购买了 `prod_id` 为 "BR01" 的产品，然后从 `Orders` 表中返回每个产品对应的顾客 ID（`cust_id`）和订单日期（`order_date`），按订购日期对结果进行升序排序
 
-提示：这一次使用连接和简单的等连接语法。
+提示：这一次使用连接和简单的等连接语法
 
 ```sql
 # 写法 1：子查询
@@ -1423,9 +1423,9 @@ ORDER BY order_date
 | cust1   | <cust1@cust.com>  |
 | cust2   | <cust2@cust.com>  |
 
-【问题】返回购买 `prod_id` 为 BR01 的产品的所有顾客的电子邮件（`Customers` 表中的 `cust_email`），结果无需排序。
+【问题】返回购买 `prod_id` 为 BR01 的产品的所有顾客的电子邮件（`Customers` 表中的 `cust_email`），结果无需排序
 
-提示：涉及到 `SELECT` 语句，最内层的从 `OrderItems` 表返回 `order_num`，中间的从 `Customers` 表返回 `cust_id`，但是必须使用 INNER JOIN 语法。
+提示：涉及到 `SELECT` 语句，最内层的从 `OrderItems` 表返回 `order_num`，中间的从 `Customers` 表返回 `cust_id`，但是必须使用 INNER JOIN 语法
 
 ```sql
 SELECT cust_email
@@ -1471,9 +1471,9 @@ WHERE OrderItems.prod_id = 'BR01'
 | cust221  | an        |
 | cust2217 | hex       |
 
-【问题】编写 SQL 语句，返回订单总价不小于 1000 的客户名称和总额（`OrderItems` 表中的 `order_num`）。
+【问题】编写 SQL 语句，返回订单总价不小于 1000 的客户名称和总额（`OrderItems` 表中的 `order_num`）
 
-提示：需要计算总和（`item_price` 乘以 `quantity`）。按总额对结果进行排序，请使用 `INNER JOIN`语法。
+提示：需要计算总和（`item_price` 乘以 `quantity`）。按总额对结果进行排序，请使用 `INNER JOIN`语法
 
 ```sql
 SELECT cust_name, SUM(item_price * quantity) AS total_price
@@ -1511,7 +1511,7 @@ ORDER BY total_price
 | a5        | cust221  |
 | a7        | cust2217 |
 
-【问题】使用 INNER JOIN 编写 SQL 语句，检索每个顾客的名称（`Customers` 表中的 `cust_name`）和所有的订单号（`Orders` 表中的 `order_num`），最后根据顾客姓名 `cust_name` 升序返回。
+【问题】使用 INNER JOIN 编写 SQL 语句，检索每个顾客的名称（`Customers` 表中的 `cust_name`）和所有的订单号（`Orders` 表中的 `order_num`），最后根据顾客姓名 `cust_name` 升序返回
 
 ```sql
 SELECT cust_name, order_num
@@ -1546,7 +1546,7 @@ ORDER BY cust_name
 | cust2217 | hex       |
 | cust40   | ace       |
 
-【问题】检索每个顾客的名称（`Customers` 表中的 `cust_name`）和所有的订单号（Orders 表中的 `order_num`），列出所有的顾客，即使他们没有下过订单。最后根据顾客姓名 `cust_name` 升序返回。
+【问题】检索每个顾客的名称（`Customers` 表中的 `cust_name`）和所有的订单号（Orders 表中的 `order_num`），列出所有的顾客，即使他们没有下过订单。最后根据顾客姓名 `cust_name` 升序返回
 
 ```sql
 SELECT cust_name, order_num
@@ -1580,7 +1580,7 @@ ORDER BY cust_name
 | a0003   | a19       |
 | a0003   | a5        |
 
-【问题】使用外连接（left join、 right join、full join）联结 `Products` 表和 `OrderItems` 表，返回产品名称（`prod_name`）和与之相关的订单号（`order_num`）的列表，并按照产品名称升序排序。
+【问题】使用外连接（left join、 right join、full join）联结 `Products` 表和 `OrderItems` 表，返回产品名称（`prod_name`）和与之相关的订单号（`order_num`）的列表，并按照产品名称升序排序
 
 ```sql
 SELECT prod_name, order_num
@@ -1616,7 +1616,7 @@ ORDER BY prod_name
 
 【问题】
 
-使用 OUTER JOIN 联结 `Products` 表和 `OrderItems` 表，返回产品名称（`prod_name`）和每一项产品的总订单数（不是订单号），并按产品名称升序排序。
+使用 OUTER JOIN 联结 `Products` 表和 `OrderItems` 表，返回产品名称（`prod_name`）和每一项产品的总订单数（不是订单号），并按产品名称升序排序
 
 ```sql
 SELECT prod_name, COUNT(order_num) AS orders
@@ -1648,9 +1648,9 @@ ORDER BY prod_name
 | a0003   | prod_id_vivo phone   |
 | a0010   | prod_id_huawei phone |
 
-【问题】列出供应商（`Vendors` 表中的 `vend_id`）及其可供产品的数量，包括没有产品的供应商。你需要使用 OUTER JOIN 和 COUNT()聚合函数来计算 `Products` 表中每种产品的数量，最后根据 vend_id 升序排序。
+【问题】列出供应商（`Vendors` 表中的 `vend_id`）及其可供产品的数量，包括没有产品的供应商。你需要使用 OUTER JOIN 和 COUNT()聚合函数来计算 `Products` 表中每种产品的数量，最后根据 vend_id 升序排序
 
-注意：`vend_id` 列会显示在多个表中，因此在每次引用它时都需要完全限定它。
+注意：`vend_id` 列会显示在多个表中，因此在每次引用它时都需要完全限定它
 
 ```sql
 SELECT vend_id, COUNT(prod_id) AS prod_id
@@ -1663,15 +1663,15 @@ ORDER BY vend_id
 
 ## 组合查询
 
-`UNION` 运算符将两个或更多查询的结果组合起来，并生成一个结果集，其中包含来自 `UNION` 中参与查询的提取行。
+`UNION` 运算符将两个或更多查询的结果组合起来，并生成一个结果集，其中包含来自 `UNION` 中参与查询的提取行
 
 `UNION` 基本规则：
 
-- 所有查询的列数和列顺序必须相同。
-- 每个查询中涉及表的列的数据类型必须相同或兼容。
-- 通常返回的列名取自第一个查询。
+- 所有查询的列数和列顺序必须相同
+- 每个查询中涉及表的列的数据类型必须相同或兼容
+- 通常返回的列名取自第一个查询
 
-默认地，`UNION` 操作符选取不同的值。如果允许重复的值，请使用 `UNION ALL`。
+默认地，`UNION` 操作符选取不同的值。如果允许重复的值，请使用 `UNION ALL`
 
 ```sql
 SELECT column_name(s) FROM table1
@@ -1679,12 +1679,12 @@ UNION ALL
 SELECT column_name(s) FROM table2;
 ```
 
-`UNION` 结果集中的列名总是等于 `UNION` 中第一个 `SELECT` 语句中的列名。
+`UNION` 结果集中的列名总是等于 `UNION` 中第一个 `SELECT` 语句中的列名
 
 `JOIN` vs `UNION`：
 
-- `JOIN` 中连接表的列可能不同，但在 `UNION` 中，所有查询的列数和列顺序必须相同。
-- `UNION` 将查询之后的行放在一起（垂直放置），但 `JOIN` 将查询之后的列放在一起（水平放置），即它构成一个笛卡尔积。
+- `JOIN` 中连接表的列可能不同，但在 `UNION` 中，所有查询的列数和列顺序必须相同
+- `UNION` 将查询之后的行放在一起（垂直放置），但 `JOIN` 将查询之后的列放在一起（水平放置），即它构成一个笛卡尔积
 
 ### 将两个 SELECT 语句结合起来（一）
 
@@ -1701,7 +1701,7 @@ SELECT column_name(s) FROM table2;
 | a0003   | 5        |
 | BNBG    | 10002    |
 
-【问题】将两个 `SELECT` 语句结合起来，以便从 `OrderItems` 表中检索产品 id（`prod_id`）和 `quantity`。其中，一个 `SELECT` 语句过滤数量为 100 的行，另一个 `SELECT` 语句过滤 id 以 BNBG 开头的产品，最后按产品 id 对结果进行升序排序。
+【问题】将两个 `SELECT` 语句结合起来，以便从 `OrderItems` 表中检索产品 id（`prod_id`）和 `quantity`。其中，一个 `SELECT` 语句过滤数量为 100 的行，另一个 `SELECT` 语句过滤 id 以 BNBG 开头的产品，最后按产品 id 对结果进行升序排序
 
 ```sql
 SELECT prod_id, quantity
@@ -1715,7 +1715,7 @@ WHERE prod_id LIKE 'BNBG%'
 
 ### 将两个 SELECT 语句结合起来（二）
 
-表 `OrderItems` 包含订单产品信息，字段 `prod_id` 代表产品 id、`quantity` 代表产品数量。
+表 `OrderItems` 包含订单产品信息，字段 `prod_id` 代表产品 id、`quantity` 代表产品数量
 
 | prod_id | quantity |
 | ------- | -------- |
@@ -1732,7 +1732,7 @@ WHERE prod_id LIKE 'BNBG%'
 
 答案：
 
-要求只用一条 select 语句，那就用 `or` 不用 `union` 了。
+要求只用一条 select 语句，那就用 `or` 不用 `union` 了
 
 ```sql
 SELECT prod_id, quantity
@@ -1763,10 +1763,10 @@ Customers 表代表顾客信息，cust_name 代表顾客名称
 | lee       |
 | hex       |
 
-【问题】编写 SQL 语句，组合 `Products` 表中的产品名称（`prod_name`）和 `Customers` 表中的顾客名称（`cust_name`）并返回，然后按产品名称对结果进行升序排序。
+【问题】编写 SQL 语句，组合 `Products` 表中的产品名称（`prod_name`）和 `Customers` 表中的顾客名称（`cust_name`）并返回，然后按产品名称对结果进行升序排序
 
 ```sql
-# UNION 结果集中的列名总是等于 UNION 中第一个 SELECT 语句中的列名。
+# UNION 结果集中的列名总是等于 UNION 中第一个 SELECT 语句中的列名
 SELECT prod_name
 FROM Products
 UNION

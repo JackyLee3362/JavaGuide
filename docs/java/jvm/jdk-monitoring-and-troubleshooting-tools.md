@@ -212,22 +212,22 @@ C:\Users\SnailClimb>jstack 9256
 ```powershell
 Found one Java-level deadlock:
 =============================
-"线程 2":
+"线程 2"：
   waiting to lock monitor 0x000000000333e668 (object 0x00000000d5efe1c0, a java.lang.Object),
   which is held by "线程 1"
-"线程 1":
+"线程 1"：
   waiting to lock monitor 0x000000000333be88 (object 0x00000000d5efe1d0, a java.lang.Object),
   which is held by "线程 2"
 
 Java stack information for the threads listed above:
 ===================================================
-"线程 2":
+"线程 2"：
         at DeadLockDemo.lambda$main$1(DeadLockDemo.java:31)
         - waiting to lock <0x00000000d5efe1c0> (a java.lang.Object)
         - locked <0x00000000d5efe1d0> (a java.lang.Object)
         at DeadLockDemo$$Lambda$2/1078694789.run(Unknown Source)
         at java.lang.Thread.run(Thread.java:748)
-"线程 1":
+"线程 1"：
         at DeadLockDemo.lambda$main$0(DeadLockDemo.java:16)
         - waiting to lock <0x00000000d5efe1d0> (a java.lang.Object)
         - locked <0x00000000d5efe1c0> (a java.lang.Object)

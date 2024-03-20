@@ -12,13 +12,13 @@ tag:
 
 **为什么要写这篇文章？**
 
-最近看到网上有一篇关于 SpringBoot 常用注解的文章被转载的比较多，我看了文章内容之后属实觉得质量有点低，并且有点会误导没有太多实际使用经验的人（这些人又占据了大多数）。所以，自己索性花了大概 两天时间简单总结一下了。
+最近看到网上有一篇关于 SpringBoot 常用注解的文章被转载的比较多，我看了文章内容之后属实觉得质量有点低，并且有点会误导没有太多实际使用经验的人（这些人又占据了大多数）。所以，自己索性花了大概 两天时间简单总结一下了
 
 **因为我个人的能力和精力有限，如果有任何不对或者需要完善的地方，请帮忙指出！Guide 感激不尽！**
 
 ### 1. `@SpringBootApplication`
 
-这里先单独拎出`@SpringBootApplication` 注解说一下，虽然我们一般不会主动去使用它。
+这里先单独拎出`@SpringBootApplication` 注解说一下，虽然我们一般不会主动去使用它
 
 _Guide：这个注解是 Spring Boot 项目的基石，创建 SpringBoot 项目之后会默认在主类加上。_
 
@@ -31,7 +31,7 @@ public class SpringSecurityJwtGuideApplication {
 }
 ```
 
-我们可以把 `@SpringBootApplication`看作是 `@Configuration`、`@EnableAutoConfiguration`、`@ComponentScan` 注解的集合。
+我们可以把 `@SpringBootApplication`看作是 `@Configuration`、`@EnableAutoConfiguration`、`@ComponentScan` 注解的集合
 
 ```java
 package org.springframework.boot.autoconfigure;
@@ -61,14 +61,14 @@ public @interface SpringBootConfiguration {
 根据 SpringBoot 官网，这三个注解的作用分别是：
 
 - `@EnableAutoConfiguration`：启用 SpringBoot 的自动配置机制
-- `@ComponentScan`：扫描被`@Component` (`@Repository`,`@Service`,`@Controller`)注解的 bean，注解默认会扫描该类所在的包下所有的类。
+- `@ComponentScan`：扫描被`@Component` (`@Repository`,`@Service`,`@Controller`)注解的 bean，注解默认会扫描该类所在的包下所有的类
 - `@Configuration`：允许在 Spring 上下文中注册额外的 bean 或导入其他配置类
 
 ### 2. Spring Bean 相关
 
 #### 2.1. `@Autowired`
 
-自动导入对象到类中，被注入进的类同样要被 Spring 容器管理比如：Service 类注入到 Controller 类中。
+自动导入对象到类中，被注入进的类同样要被 Spring 容器管理比如：Service 类注入到 Controller 类中
 
 ```java
 @Service
@@ -89,20 +89,20 @@ public class UserController {
 
 我们一般使用 `@Autowired` 注解让 Spring 容器帮我们自动装配 bean。要想把类标识成可用于 `@Autowired` 注解自动装配的 bean 的类,可以采用以下注解实现：
 
-- `@Component`：通用的注解，可标注任意类为 `Spring` 组件。如果一个 Bean 不知道属于哪个层，可以使用`@Component` 注解标注。
-- `@Repository` : 对应持久层即 Dao 层，主要用于数据库相关操作。
-- `@Service` : 对应服务层，主要涉及一些复杂的逻辑，需要用到 Dao 层。
-- `@Controller` : 对应 Spring MVC 控制层，主要用于接受用户请求并调用 Service 层返回数据给前端页面。
+- `@Component`：通用的注解，可标注任意类为 `Spring` 组件。如果一个 Bean 不知道属于哪个层，可以使用`@Component` 注解标注
+- `@Repository` : 对应持久层即 Dao 层，主要用于数据库相关操作
+- `@Service` : 对应服务层，主要涉及一些复杂的逻辑，需要用到 Dao 层
+- `@Controller` : 对应 Spring MVC 控制层，主要用于接受用户请求并调用 Service 层返回数据给前端页面
 
 #### 2.3. `@RestController`
 
-`@RestController`注解是`@Controller`和`@ResponseBody`的合集,表示这是个控制器 bean,并且是将函数的返回值直接填入 HTTP 响应体中,是 REST 风格的控制器。
+`@RestController`注解是`@Controller`和`@ResponseBody`的合集,表示这是个控制器 bean,并且是将函数的返回值直接填入 HTTP 响应体中,是 REST 风格的控制器
 
 _Guide：现在都是前后端分离，说实话我已经很久没有用过`@Controller`。如果你的项目太老了的话，就当我没说。_
 
 单独使用 `@Controller` 不加 `@ResponseBody`的话一般是用在要返回一个视图的情况，这种情况属于比较传统的 Spring MVC 的应用，对应于前后端不分离的情况。`@Controller` +`@ResponseBody` 返回 JSON 或 XML 形式数据
 
-关于`@RestController` 和 `@Controller`的对比，请看这篇文章：[@RestController vs @Controller](https://mp.weixin.qq.com/s?__biz=Mzg2OTA0Njk0OA==&mid=2247485544&idx=1&sn=3cc95b88979e28fe3bfe539eb421c6d8&chksm=cea247a3f9d5ceb5e324ff4b8697adc3e828ecf71a3468445e70221cce768d1e722085359907&token=1725092312&lang=zh_CN#rd)。
+关于`@RestController` 和 `@Controller`的对比，请看这篇文章：[@RestController vs @Controller](https://mp.weixin.qq.com/s?__biz=Mzg2OTA0Njk0OA==&mid=2247485544&idx=1&sn=3cc95b88979e28fe3bfe539eb421c6d8&chksm=cea247a3f9d5ceb5e324ff4b8697adc3e828ecf71a3468445e70221cce768d1e722085359907&token=1725092312&lang=zh_CN#rd)
 
 #### 2.4. `@Scope`
 
@@ -118,14 +118,14 @@ public Person personSingleton() {
 
 **四种常见的 Spring Bean 的作用域：**
 
-- singleton : 唯一 bean 实例，Spring 中的 bean 默认都是单例的。
-- prototype : 每次请求都会创建一个新的 bean 实例。
-- request : 每一次 HTTP 请求都会产生一个新的 bean，该 bean 仅在当前 HTTP request 内有效。
-- session : 每一个 HTTP Session 会产生一个新的 bean，该 bean 仅在当前 HTTP session 内有效。
+- singleton : 唯一 bean 实例，Spring 中的 bean 默认都是单例的
+- prototype : 每次请求都会创建一个新的 bean 实例
+- request : 每一次 HTTP 请求都会产生一个新的 bean，该 bean 仅在当前 HTTP request 内有效
+- session : 每一个 HTTP Session 会产生一个新的 bean，该 bean 仅在当前 HTTP session 内有效
 
 #### 2.5. `@Configuration`
 
-一般用来声明配置类，可以使用 `@Component`注解替代，不过使用`@Configuration`注解声明配置类更加语义化。
+一般用来声明配置类，可以使用 `@Component`注解替代，不过使用`@Configuration`注解声明配置类更加语义化
 
 ```java
 @Configuration
@@ -146,7 +146,7 @@ public class AppConfig {
 - **POST**：在服务器上创建一个新的资源。举个例子：`POST /users`（创建学生）
 - **PUT**：更新服务器上的资源（客户端提供更新后的整个资源）。举个例子：`PUT /users/12`（更新编号为 12 的学生）
 - **DELETE**：从服务器删除特定的资源。举个例子：`DELETE /users/12`（删除编号为 12 的学生）
-- **PATCH**：更新服务器上的资源（客户端提供更改的属性，可以看做作是部分更新），使用的比较少，这里就不举例子了。
+- **PATCH**：更新服务器上的资源（客户端提供更改的属性，可以看做作是部分更新），使用的比较少，这里就不举例子了
 
 #### 3.1. GET 请求
 
@@ -163,7 +163,7 @@ public ResponseEntity<List<User>> getAllUsers() {
 
 `@PostMapping("users")` 等价于`@RequestMapping(value="/users",method=RequestMethod.POST)`
 
-关于`@RequestBody`注解的使用，在下面的「前后端传值」这块会讲到。
+关于`@RequestBody`注解的使用，在下面的「前后端传值」这块会讲到
 
 ```java
 @PostMapping("/users")
@@ -197,7 +197,7 @@ public ResponseEntity deleteUser(@PathVariable(value = "userId") Long userId){
 
 #### 3.5. **PATCH 请求**
 
-一般实际项目中，我们都是 PUT 不够用了之后才用 PATCH 请求去更新数据。
+一般实际项目中，我们都是 PUT 不够用了之后才用 PATCH 请求去更新数据
 
 ```java
   @PatchMapping("/profile")
@@ -213,7 +213,7 @@ public ResponseEntity deleteUser(@PathVariable(value = "userId") Long userId){
 
 #### 4.1. `@PathVariable` 和 `@RequestParam`
 
-`@PathVariable`用于获取路径参数，`@RequestParam`用于获取查询参数。
+`@PathVariable`用于获取路径参数，`@RequestParam`用于获取查询参数
 
 举个简单的例子：
 
@@ -228,11 +228,11 @@ public List<Teacher> getKlassRelatedTeachers(
 
 如果我们请求的 url 是：`/klasses/123456/teachers?type=web`
 
-那么我们服务获取到的数据就是：`klassId=123456,type=web`。
+那么我们服务获取到的数据就是：`klassId=123456,type=web`
 
 #### 4.2. `@RequestBody`
 
-用于读取 Request 请求（可能是 POST,PUT,DELETE,GET 请求）的 body 部分并且**Content-Type 为 application/json** 格式的数据，接收到数据之后会自动将数据绑定到 Java 对象上去。系统会使用`HttpMessageConverter`或者自定义的`HttpMessageConverter`将请求的 body 中的 json 字符串转换为 java 对象。
+用于读取 Request 请求（可能是 POST,PUT,DELETE,GET 请求）的 body 部分并且**Content-Type 为 application/json** 格式的数据，接收到数据之后会自动将数据绑定到 Java 对象上去。系统会使用`HttpMessageConverter`或者自定义的`HttpMessageConverter`将请求的 body 中的 json 字符串转换为 java 对象
 
 我用一个简单的例子来给演示一下基本使用！
 
@@ -268,7 +268,7 @@ public class UserRegisterRequest {
 { "userName": "coder", "fullName": "shuangkou", "password": "123456" }
 ```
 
-这样我们的后端就可以直接把 json 格式的数据映射到我们的 `UserRegisterRequest` 类上。
+这样我们的后端就可以直接把 json 格式的数据映射到我们的 `UserRegisterRequest` 类上
 
 ![](./images/spring-annotations/@RequestBody.png)
 
@@ -293,9 +293,9 @@ library:
   location: 湖北武汉加油中国加油
   books:
     - name: 天才基本法
-      description: 二十二岁的林朝夕在父亲确诊阿尔茨海默病这天，得知自己暗恋多年的校园男神裴之即将出国深造的消息——对方考取的学校，恰是父亲当年为她放弃的那所。
+      description: 二十二岁的林朝夕在父亲确诊阿尔茨海默病这天，得知自己暗恋多年的校园男神裴之即将出国深造的消息——对方考取的学校，恰是父亲当年为她放弃的那所
     - name: 时间的秩序
-      description: 为什么我们记得过去，而非未来？时间「流逝」意味着什么？是我们存在于时间之内，还是时间存在于我们之中？卡洛·罗韦利用诗意的文字，邀请我们思考这一亘古难题——时间的本质。
+      description: 为什么我们记得过去，而非未来？时间「流逝」意味着什么？是我们存在于时间之内，还是时间存在于我们之中？卡洛·罗韦利用诗意的文字，邀请我们思考这一亘古难题——时间的本质
     - name: 了不起的我
       description: 如何养成一个新习惯？如何让心智变得更成熟？如何拥有高质量的关系？ 如何走出人生的艰难时刻？
 ```
@@ -311,7 +311,7 @@ String wuhan2020;
 
 #### 5.2. `@ConfigurationProperties`(常用)
 
-通过`@ConfigurationProperties`读取配置信息并与 bean 绑定。
+通过`@ConfigurationProperties`读取配置信息并与 bean 绑定
 
 ```java
 @Component
@@ -333,7 +333,7 @@ class LibraryProperties {
 }
 ```
 
-你可以像使用普通的 Spring bean 一样，将其注入到类中使用。
+你可以像使用普通的 Spring bean 一样，将其注入到类中使用
 
 #### 5.3. `@PropertySource`（不常用）
 
@@ -352,7 +352,7 @@ class WebSite {
 }
 ```
 
-更多内容请查看我的这篇文章：[《10 分钟搞定 SpringBoot 如何优雅读取配置文件？》](https://mp.weixin.qq.com/s?__biz=Mzg2OTA0Njk0OA==&mid=2247486181&idx=2&sn=10db0ae64ef501f96a5b0dbc4bd78786&chksm=cea2452ef9d5cc384678e456427328600971180a77e40c13936b19369672ca3e342c26e92b50&token=816772476&lang=zh_CN#rd) 。
+更多内容请查看我的这篇文章：[《10 分钟搞定 SpringBoot 如何优雅读取配置文件？》](https://mp.weixin.qq.com/s?__biz=Mzg2OTA0Njk0OA==&mid=2247486181&idx=2&sn=10db0ae64ef501f96a5b0dbc4bd78786&chksm=cea2452ef9d5cc384678e456427328600971180a77e40c13936b19369672ca3e342c26e92b50&token=816772476&lang=zh_CN#rd) 
 
 ### 6. 参数校验
 
@@ -360,15 +360,15 @@ class WebSite {
 
 **JSR(Java Specification Requests）** 是一套 JavaBean 参数校验的标准，它定义了很多常用的校验注解，我们可以直接将这些注解加在我们 JavaBean 的属性上面，这样就可以在需要校验的时候进行校验了，非常方便！
 
-校验的时候我们实际用的是 **Hibernate Validator** 框架。Hibernate Validator 是 Hibernate 团队最初的数据校验框架，Hibernate Validator 4.x 是 Bean Validation 1.0（JSR 303）的参考实现，Hibernate Validator 5.x 是 Bean Validation 1.1（JSR 349）的参考实现，目前最新版的 Hibernate Validator 6.x 是 Bean Validation 2.0（JSR 380）的参考实现。
+校验的时候我们实际用的是 **Hibernate Validator** 框架。Hibernate Validator 是 Hibernate 团队最初的数据校验框架，Hibernate Validator 4.x 是 Bean Validation 1.0（JSR 303）的参考实现，Hibernate Validator 5.x 是 Bean Validation 1.1（JSR 349）的参考实现，目前最新版的 Hibernate Validator 6.x 是 Bean Validation 2.0（JSR 380）的参考实现
 
 SpringBoot 项目的 spring-boot-starter-web 依赖中已经有 hibernate-validator 包，不需要引用相关依赖。如下图所示（通过 idea 插件—Maven Helper 生成）：
 
-**注**：更新版本的 spring-boot-starter-web 依赖中不再有 hibernate-validator 包（如 2.3.11.RELEASE），需要自己引入 `spring-boot-starter-validation` 依赖。
+**注**：更新版本的 spring-boot-starter-web 依赖中不再有 hibernate-validator 包（如 2.3.11.RELEASE），需要自己引入 `spring-boot-starter-validation` 依赖
 
 ![](https://oss.javaguide.cn/2021/03/c7bacd12-1c1a-4e41-aaaf-4cad840fc073.png)
 
-非 SpringBoot 项目需要自行引入相关依赖包，这里不多做讲解，具体可以查看我的这篇文章：《[如何在 Spring/Spring Boot 中做参数校验？你需要了解的都在这里！](https://mp.weixin.qq.com/s?__biz=Mzg2OTA0Njk0OA==&mid=2247485783&idx=1&sn=a407f3b75efa17c643407daa7fb2acd6&chksm=cea2469cf9d5cf8afbcd0a8a1c9cc4294d6805b8e01bee6f76bb2884c5bc15478e91459def49&token=292197051&lang=zh_CN#rd)》。
+非 SpringBoot 项目需要自行引入相关依赖包，这里不多做讲解，具体可以查看我的这篇文章：《[如何在 Spring/Spring Boot 中做参数校验？你需要了解的都在这里！](https://mp.weixin.qq.com/s?__biz=Mzg2OTA0Njk0OA==&mid=2247485783&idx=1&sn=a407f3b75efa17c643407daa7fb2acd6&chksm=cea2469cf9d5cf8afbcd0a8a1c9cc4294d6805b8e01bee6f76bb2884c5bc15478e91459def49&token=292197051&lang=zh_CN#rd)》
 
 👉 需要注意的是：**所有的注解，推荐使用 JSR 注解，即`javax.validation.constraints`，而不是`org.hibernate.validator.constraints`**
 
@@ -381,7 +381,7 @@ SpringBoot 项目的 spring-boot-starter-web 依赖中已经有 hibernate-valida
 - `@AssertTrue` 被注释的元素必须为 true
 - `@AssertFalse` 被注释的元素必须为 false
 - `@Pattern(regex=,flag=)`被注释的元素必须符合指定的正则表达式
-- `@Email` 被注释的元素必须是 Email 格式。
+- `@Email` 被注释的元素必须是 Email 格式
 - `@Min(value)`被注释的元素必须是一个数字，其值必须大于等于指定的最小值
 - `@Max(value)`被注释的元素必须是一个数字，其值必须小于等于指定的最大值
 - `@DecimalMin(value)`被注释的元素必须是一个数字，其值必须大于等于指定的最小值
@@ -418,7 +418,7 @@ public class Person {
 }
 ```
 
-我们在需要验证的参数上加上了`@Valid`注解，如果验证失败，它将抛出`MethodArgumentNotValidException`。
+我们在需要验证的参数上加上了`@Valid`注解，如果验证失败，它将抛出`MethodArgumentNotValidException`
 
 ```java
 @RestController
@@ -449,18 +449,18 @@ public class PersonController {
 }
 ```
 
-更多关于如何在 Spring 项目中进行参数校验的内容，请看《[如何在 Spring/Spring Boot 中做参数校验？你需要了解的都在这里！](https://mp.weixin.qq.com/s?__biz=Mzg2OTA0Njk0OA==&mid=2247485783&idx=1&sn=a407f3b75efa17c643407daa7fb2acd6&chksm=cea2469cf9d5cf8afbcd0a8a1c9cc4294d6805b8e01bee6f76bb2884c5bc15478e91459def49&token=292197051&lang=zh_CN#rd)》这篇文章。
+更多关于如何在 Spring 项目中进行参数校验的内容，请看《[如何在 Spring/Spring Boot 中做参数校验？你需要了解的都在这里！](https://mp.weixin.qq.com/s?__biz=Mzg2OTA0Njk0OA==&mid=2247485783&idx=1&sn=a407f3b75efa17c643407daa7fb2acd6&chksm=cea2469cf9d5cf8afbcd0a8a1c9cc4294d6805b8e01bee6f76bb2884c5bc15478e91459def49&token=292197051&lang=zh_CN#rd)》这篇文章
 
 ### 7. 全局处理 Controller 层异常
 
-介绍一下我们 Spring 项目必备的全局处理 Controller 层异常。
+介绍一下我们 Spring 项目必备的全局处理 Controller 层异常
 
 **相关注解：**
 
 1. `@ControllerAdvice` :注解定义全局异常处理类
 2. `@ExceptionHandler` :注解声明异常处理方法
 
-如何使用呢？拿我们在第 5 节参数校验这块来举例子。如果方法参数不对的话就会抛出`MethodArgumentNotValidException`，我们来处理这个异常。
+如何使用呢？拿我们在第 5 节参数校验这块来举例子。如果方法参数不对的话就会抛出`MethodArgumentNotValidException`，我们来处理这个异常
 
 ```java
 @ControllerAdvice
@@ -486,7 +486,7 @@ public class GlobalExceptionHandler {
 
 #### 8.1. 创建表
 
-`@Entity`声明一个类对应一个数据库实体。
+`@Entity`声明一个类对应一个数据库实体
 
 `@Table` 设置表名
 
@@ -505,9 +505,9 @@ public class Role {
 
 #### 8.2. 创建主键
 
-`@Id`：声明一个字段为主键。
+`@Id`：声明一个字段为主键
 
-使用`@Id`声明之后，我们还需要定义主键的生成策略。我们可以使用 `@GeneratedValue` 指定主键生成策略。
+使用`@Id`声明之后，我们还需要定义主键的生成策略。我们可以使用 `@GeneratedValue` 指定主键生成策略
 
 **1.通过 `@GeneratedValue`直接使用 JPA 内置提供的四种主键生成策略来指定主键生成策略。**
 
@@ -559,7 +559,7 @@ public @interface GeneratedValue {
 }
 ```
 
-一般使用 MySQL 数据库的话，使用`GenerationType.IDENTITY`策略比较普遍一点（分布式系统的话需要另外考虑使用分布式 ID）。
+一般使用 MySQL 数据库的话，使用`GenerationType.IDENTITY`策略比较普遍一点（分布式系统的话需要另外考虑使用分布式 ID）
 
 **2.通过 `@GenericGenerator`声明一个主键策略，然后 `@GeneratedValue`使用这个策略**
 
@@ -615,7 +615,7 @@ public class DefaultIdentifierGeneratorFactory
 
 #### 8.3. 设置字段类型
 
-`@Column` 声明字段。
+`@Column` 声明字段
 
 **示例：**
 
@@ -626,7 +626,7 @@ public class DefaultIdentifierGeneratorFactory
 private String userName;
 ```
 
-设置字段类型并且加默认值，这个还是挺常用的。
+设置字段类型并且加默认值，这个还是挺常用的
 
 ```java
 @Column(columnDefinition = "tinyint(1) default 1")
@@ -635,9 +635,9 @@ private Boolean enabled;
 
 #### 8.4. 指定不持久化特定字段
 
-`@Transient`：声明不需要与数据库映射的字段，在保存的时候不需要保存进数据库 。
+`@Transient`：声明不需要与数据库映射的字段，在保存的时候不需要保存进数据库 
 
-如果我们想让`secrect` 这个字段不被持久化，可以使用 `@Transient`关键字声明。
+如果我们想让`secrect` 这个字段不被持久化，可以使用 `@Transient`关键字声明
 
 ```java
 @Entity(name="USER")
@@ -658,11 +658,11 @@ final String secrect = "Satish"; // not persistent because of final
 transient String secrect; // not persistent because of transient
 ```
 
-一般使用注解的方式比较多。
+一般使用注解的方式比较多
 
 #### 8.5. 声明大字段
 
-`@Lob`:声明某个字段为大字段。
+`@Lob`:声明某个字段为大字段
 
 ```java
 @Lob
@@ -682,7 +682,7 @@ private String content;
 
 #### 8.6. 创建枚举类型的字段
 
-可以使用枚举类型的字段，不过枚举字段要用`@Enumerated`注解修饰。
+可以使用枚举类型的字段，不过枚举字段要用`@Enumerated`注解修饰
 
 ```java
 public enum Gender {
@@ -711,11 +711,11 @@ public class Role {
 }
 ```
 
-数据库里面对应存储的是 MALE/FEMALE。
+数据库里面对应存储的是 MALE/FEMALE
 
 #### 8.7. 增加审计功能
 
-只要继承了 `AbstractAuditBase`的类都会默认加上下面四个字段。
+只要继承了 `AbstractAuditBase`的类都会默认加上下面四个字段
 
 ```java
 @Data
@@ -746,7 +746,7 @@ public abstract class AbstractAuditBase {
 
 ```
 
-我们对应的审计功能对应地配置类可能是下面这样的（Spring Security 项目）:
+我们对应的审计功能对应地配置类可能是下面这样的（Spring Security 项目）：
 
 ```java
 
@@ -768,13 +768,13 @@ public class AuditSecurityConfiguration {
 1. `@CreatedDate`: 表示该字段为创建时间字段，在这个实体被 insert 的时候，会设置值
 2. `@CreatedBy` :表示该字段为创建人，在这个实体被 insert 的时候，会设置值
 
-   `@LastModifiedDate`、`@LastModifiedBy`同理。
+   `@LastModifiedDate`、`@LastModifiedBy`同理
 
-`@EnableJpaAuditing`：开启 JPA 审计功能。
+`@EnableJpaAuditing`：开启 JPA 审计功能
 
 #### 8.8. 删除/修改数据
 
-`@Modifying` 注解提示 JPA 该操作是修改操作,注意还要配合`@Transactional`注解使用。
+`@Modifying` 注解提示 JPA 该操作是修改操作,注意还要配合`@Transactional`注解使用
 
 ```java
 @Repository
@@ -793,7 +793,7 @@ public interface UserRepository extends JpaRepository<User, Integer> {
 - `@ManyToOne` 声明多对一关系
 - `@ManyToMany` 声明多对多关系
 
-更多关于 Spring Boot JPA 的文章请看我的这篇文章：[一文搞懂如何在 Spring Boot 正确中使用 JPA](https://mp.weixin.qq.com/s?__biz=Mzg2OTA0Njk0OA==&mid=2247485689&idx=1&sn=061b32c2222869932be5631fb0bb5260&chksm=cea24732f9d5ce24a356fb3675170e7843addbfcc79ee267cfdb45c83fc7e90babf0f20d22e1&token=292197051&lang=zh_CN#rd) 。
+更多关于 Spring Boot JPA 的文章请看我的这篇文章：[一文搞懂如何在 Spring Boot 正确中使用 JPA](https://mp.weixin.qq.com/s?__biz=Mzg2OTA0Njk0OA==&mid=2247485689&idx=1&sn=061b32c2222869932be5631fb0bb5260&chksm=cea24732f9d5ce24a356fb3675170e7843addbfcc79ee267cfdb45c83fc7e90babf0f20d22e1&token=292197051&lang=zh_CN#rd) 
 
 ### 9. 事务 `@Transactional`
 
@@ -807,14 +807,14 @@ public void save() {
 
 ```
 
-我们知道 Exception 分为运行时异常 RuntimeException 和非运行时异常。在`@Transactional`注解中如果不配置`rollbackFor`属性,那么事务只会在遇到`RuntimeException`的时候才会回滚,加上`rollbackFor=Exception.class`,可以让事务在遇到非运行时异常时也回滚。
+我们知道 Exception 分为运行时异常 RuntimeException 和非运行时异常。在`@Transactional`注解中如果不配置`rollbackFor`属性,那么事务只会在遇到`RuntimeException`的时候才会回滚,加上`rollbackFor=Exception.class`,可以让事务在遇到非运行时异常时也回滚
 
-`@Transactional` 注解一般可以作用在`类`或者`方法`上。
+`@Transactional` 注解一般可以作用在`类`或者`方法`上
 
-- **作用于类**：当把`@Transactional` 注解放在类上时，表示所有该类的 public 方法都配置相同的事务属性信息。
-- **作用于方法**：当类配置了`@Transactional`，方法也配置了`@Transactional`，方法的事务会覆盖类的事务配置信息。
+- **作用于类**：当把`@Transactional` 注解放在类上时，表示所有该类的 public 方法都配置相同的事务属性信息
+- **作用于方法**：当类配置了`@Transactional`，方法也配置了`@Transactional`，方法的事务会覆盖类的事务配置信息
 
-更多关于 Spring 事务的内容请查看我的这篇文章：[可能是最漂亮的 Spring 事务管理详解](./spring-transaction.md) 。
+更多关于 Spring 事务的内容请查看我的这篇文章：[可能是最漂亮的 Spring 事务管理详解](./spring-transaction.md) 
 
 ### 10. json 数据处理
 
@@ -851,7 +851,7 @@ public class User {
 
 #### 10.2. 格式化 json 数据
 
-`@JsonFormat`一般用来格式化 json 数据。
+`@JsonFormat`一般用来格式化 json 数据
 
 比如：
 
@@ -957,6 +957,6 @@ public abstract class TestBase {
 
 _暂时总结到这里吧！虽然花了挺长时间才写完，不过可能还是会一些常用的注解的被漏掉，所以，我将文章也同步到了 Github 上去，Github 地址： 欢迎完善！_
 
-本文已经收录进我的 75K Star 的 Java 开源项目 JavaGuide：[https://github.com/Snailclimb/JavaGuide](https://github.com/Snailclimb/JavaGuide)。
+本文已经收录进我的 75K Star 的 Java 开源项目 JavaGuide：[https://github.com/Snailclimb/JavaGuide](https://github.com/Snailclimb/JavaGuide)
 
 <!-- @include: @article-footer.snippet.md -->

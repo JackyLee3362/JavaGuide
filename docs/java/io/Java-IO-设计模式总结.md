@@ -16,7 +16,7 @@ tag:
 
 对于字节流来说， `FilterInputStream` （对应输入流）和`FilterOutputStream`（对应输出流）是装饰器模式的核心，分别用于增强 `InputStream` 和`OutputStream`子类对象的功能
 
-我们常见的`BufferedInputStream`(字节缓冲输入流)、`DataInputStream` 等等都是`FilterInputStream` 的子类，`BufferedOutputStream`（字节缓冲输出流）、`DataOutputStream`等等都是`FilterOutputStream`的子类
+我们常见的`BufferedInputStream`（字节缓冲输入流）、`DataInputStream` 等等都是`FilterInputStream` 的子类，`BufferedOutputStream`（字节缓冲输出流）、`DataOutputStream`等等都是`FilterOutputStream`的子类
 
 举个例子，我们可以通过 `BufferedInputStream`（字节缓冲输入流）来增强 `FileInputStream` 的功能
 
@@ -52,15 +52,15 @@ try (BufferedInputStream bis = new BufferedInputStream(new FileInputStream("inpu
 }
 ```
 
-这个时候，你可以会想了：**为啥我们直接不弄一个`BufferedFileInputStream`（字符缓冲文件输入流）呢？**
+这个时候，你可以会想了：**为啥我们直接不弄一个 `BufferedFileInputStream`（字符缓冲文件输入流）呢？**
 
 ```java
 BufferedFileInputStream bfis = new BufferedFileInputStream("input.txt");
 ```
 
-如果 `InputStream`的子类比较少的话，这样做是没问题的。不过， `InputStream`的子类实在太多，继承关系也太复杂了。如果我们为每一个子类都定制一个对应的缓冲输入流，那岂不是太麻烦了
+如果 `InputStream` 的子类比较少的话，这样做是没问题的。不过， `InputStream`的子类实在太多，继承关系也太复杂了。如果我们为每一个子类都定制一个对应的缓冲输入流，那岂不是太麻烦了
 
-如果你对 IO 流比较熟悉的话，你会发现`ZipInputStream` 和`ZipOutputStream` 还可以分别增强 `BufferedInputStream` 和 `BufferedOutputStream` 的能力
+如果你对 IO 流比较熟悉的话，你会发现 `ZipInputStream` 和 `ZipOutputStream` 还可以分别增强 `BufferedInputStream` 和 `BufferedOutputStream` 的能力
 
 ```java
 BufferedInputStream bis = new BufferedInputStream(new FileInputStream(fileName));
@@ -70,7 +70,7 @@ BufferedOutputStream bos = new BufferedOutputStream(new FileOutputStream(fileNam
 ZipOutputStream zipOut = new ZipOutputStream(bos);
 ```
 
-`ZipInputStream` 和`ZipOutputStream` 分别继承自`InflaterInputStream` 和`DeflaterOutputStream`
+`ZipInputStream` 和 `ZipOutputStream` 分别继承自 `InflaterInputStream` 和`DeflaterOutputStream`
 
 ```java
 public
@@ -85,7 +85,7 @@ class DeflaterOutputStream extends FilterOutputStream {
 
 这也是装饰器模式很重要的一个特征，那就是可以对原始类嵌套使用多个装饰器
 
-为了实现这一效果，装饰器类需要跟原始类继承相同的抽象类或者实现相同的接口。上面介绍到的这些 IO 相关的装饰类和原始类共同的父类是 `InputStream` 和`OutputStream`
+为了实现这一效果，装饰器类需要跟原始类继承相同的抽象类或者实现相同的接口。上面介绍到的这些 IO 相关的装饰类和原始类共同的父类是 `InputStream` 和 `OutputStream`
 
 对于字符流来说，`BufferedReader` 可以用来增加 `Reader` （字符输入流）子类的功能，`BufferedWriter` 可以用来增加 `Writer` （字符输出流）子类的功能
 
@@ -99,11 +99,11 @@ IO 流中的装饰器模式应用的例子实在是太多了，不需要特意�
 
 **适配器（Adapter Pattern）模式** 主要用于接口互不兼容的类的协调工作，你可以将其联想到我们日常经常使用的电源适配器
 
-适配器模式中存在被适配的对象或者类称为 **适配者(Adaptee)** ，作用于适配者的对象或者类称为**适配器(Adapter)** 。适配器分为对象适配器和类适配器。类适配器使用继承关系来实现，对象适配器使用组合关系来实现
+适配器模式中存在被适配的对象或者类称为 **适配者（Adaptee）** ，作用于适配者的对象或者类称为**适配器(Adapter)** 。适配器分为对象适配器和类适配器。类适配器使用继承关系来实现，对象适配器使用组合关系来实现
 
 IO 流中的字符流和字节流的接口不同，它们之间可以协调工作就是基于适配器模式来做的，更准确点来说是对象适配器。通过适配器，我们可以将字节流对象适配成一个字符流对象，这样我们可以直接通过字节流对象来读取或者写入字符数据
 
-`InputStreamReader` 和 `OutputStreamWriter` 就是两个适配器(Adapter)， 同时，它们两个也是字节流和字符流之间的桥梁。`InputStreamReader` 使用 `StreamDecoder` （流解码器）对字节进行解码，**实现字节流到字符流的转换，** `OutputStreamWriter` 使用`StreamEncoder`（流编码器）对字符进行编码，实现字符流到字节流的转换
+`InputStreamReader` 和 `OutputStreamWriter` 就是两个适配器（Adapter)， 同时，它们两个也是字节流和字符流之间的桥梁。`InputStreamReader` 使用 `StreamDecoder` （流解码器）对字节进行解码，**实现字节流到字符流的转换，** `OutputStreamWriter` 使用`StreamEncoder`（流编码器）对字符进行编码，实现字符流到字节流的转换
 
 `InputStream` 和 `OutputStream` 的子类是被适配者， `InputStreamReader` 和 `OutputStreamWriter`是适配器
 
@@ -317,5 +317,3 @@ class PollingWatchService
 - Patterns in Java APIs：<http://cecs.wright.edu/~tkprasad/courses/ceg860/paper/node26.html>
 - 装饰器模式：通过剖析 Java IO 类库源码学习装饰器模式：<https://time.geekbang.org/column/article/204845>
 - sun.nio 包是什么，是 java 代码么？ - RednaxelaFX <https://www.zhihu.com/question/29237781/answer/43653953>
-
-<!-- @include: @article-footer.snippet.md -->

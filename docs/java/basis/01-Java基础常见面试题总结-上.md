@@ -127,7 +127,7 @@ JDK、JRE、JVM、JIT 这四者的关系如下图所示
 
 JDK 9 引入了一种新的编译模式 **AOT(Ahead of Time Compilation)** 。和 JIT 不同的是，这种编译模式会在程序被执行前就将其编译成机器码，属于静态编译（C、 C++，Rust，Go 等语言就是静态编译）。AOT 避免了 JIT 预热等各方面的开销，可以提高 Java 程序的启动速度，避免预热时间长。并且，AOT 还能减少内存占用和增强 Java 程序的安全性（AOT 编译后的代码不容易被反编译和修改），特别适合云原生场景
 
-**JIT 与 AOT 两者的关键指标对比**:
+**JIT 与 AOT 两者的关键指标对比**：
 
 ![JIT vs AOT](https://oss.javaguide.cn/github/javaguide/java/basis/jit-vs-aot.png)
 

@@ -5,9 +5,9 @@ category: 开源项目
 
 <!-- @include: @small-advertisement.snippet.md -->
 
-精选 GitHub 和 Gitee 上优质的 Java 开源项目。
+精选 GitHub 和 Gitee 上优质的 Java 开源项目
 
-灵感来源于[awesome-java](https://github.com/akullpp/awesome-java) 这个项目，可以看作是这个项目的中文本土版本，项目类型更全面且加入了更多中文开源项目。
+灵感来源于[awesome-java](https://github.com/akullpp/awesome-java) 这个项目，可以看作是这个项目的中文本土版本，项目类型更全面且加入了更多中文开源项目
 
 欢迎大家在项目 [issues 区](https://github.com/CodingDocs/awesome-java/issues)推荐自己认可的 Java 开源项目，让我们共同维护一个优质的 Java 开源项目精选集！
 
@@ -16,11 +16,11 @@ category: 开源项目
 
 如果内容对你有帮助的话，欢迎给本项目点个 Star。我会用我的业余时间持续完善这份名单，感谢！
 
-另外，我的公众号还会定期分享优质开源项目，每月一期，每一期我都会精选 5 个高质量的 Java 开源项目。
+另外，我的公众号还会定期分享优质开源项目，每月一期，每一期我都会精选 5 个高质量的 Java 开源项目
 
 目前已经更新到了第 24 期：
 
-1. [一款基于 Spring Boot + Vue 的一站式开源持续测试平台](http://mp.weixin.qq.com/s?__biz=Mzg2OTA0Njk0OA==&mid=2247515383&idx=1&sn=ba7244020c05d966b483d8c302d54e85&chksm=cea1f33cf9d67a2a111bcf6cadc3cc1c44828ba2302cd3e13bbd88349e43d4254808e6434133&scene=21#wechat_redirect)。
+1. [一款基于 Spring Boot + Vue 的一站式开源持续测试平台](http://mp.weixin.qq.com/s?__biz=Mzg2OTA0Njk0OA==&mid=2247515383&idx=1&sn=ba7244020c05d966b483d8c302d54e85&chksm=cea1f33cf9d67a2a111bcf6cadc3cc1c44828ba2302cd3e13bbd88349e43d4254808e6434133&scene=21#wechat_redirect)
 2. [用 Java 写个沙盒塔防游戏！已上架 Steam,Apple Store](https://mp.weixin.qq.com/s?__biz=Mzg2OTA0Njk0OA==&mid=2247515981&idx=1&sn=e4b9c06af65f739bdcdf76bdc35d59f6&chksm=cea1f086f9d679908bd6604b1c42d67580160d9789951f3707ad2f5de4d97aa72121d8fe777e&token=435278690&lang=zh_CN&scene=21#wechat_redirect)
 3. [一款基于 Java 的可视化 HTTP API 接口开发神器](https://mp.weixin.qq.com/s?__biz=Mzg2OTA0Njk0OA==&mid=2247516459&idx=1&sn=a86fefe083fa91c83638243d75500a04&chksm=cea1cee0f9d647f69237357e869f52e0903afad62f365e18b04ff1851aeb4c80c8d31a488fee&scene=21&cur_album_id=1345382825083895808#wechat_redirect)
 4. [一款对业务代码无侵入的可视化 Java 进程管理平台](https://mp.weixin.qq.com/s?__biz=Mzg2OTA0Njk0OA==&mid=2247518215&idx=1&sn=91e467f39322d2e7979b85fe235822d2&chksm=cea1c7ccf9d64edaf966c95923d72d337bf5e655a773a3d295d65fc92e4535ae5d8b0e6d9d86&token=660789642&lang=zh_CN#rd)

@@ -5,7 +5,7 @@ tag:
   - ZooKeeper
 ---
 
-这篇文章简单给演示一下 ZooKeeper 常见命令的使用以及 ZooKeeper Java 客户端 Curator 的基本使用。介绍到的内容都是最基本的操作，能满足日常工作的基本需要。
+这篇文章简单给演示一下 ZooKeeper 常见命令的使用以及 ZooKeeper Java 客户端 Curator 的基本使用。介绍到的内容都是最基本的操作，能满足日常工作的基本需要
 
 如果文章有任何需要改善和完善的地方，欢迎在评论区指出，共同进步！
 
@@ -29,7 +29,7 @@ docker run -d --name zookeeper -p 2181:2181 zookeeper:3.5.8
 
 **a.进入 ZooKeeper 容器中**
 
-先使用 `docker ps` 查看 ZooKeeper 的 ContainerID，然后使用 `docker exec -it ContainerID /bin/bash` 命令进入容器中。
+先使用 `docker ps` 查看 ZooKeeper 的 ContainerID，然后使用 `docker exec -it ContainerID /bin/bash` 命令进入容器中
 
 **b.先进入 bin 目录,然后通过 `./zkCli.sh -server 127.0.0.1:2181`命令连接 ZooKeeper 服务**
 
@@ -37,7 +37,7 @@ docker run -d --name zookeeper -p 2181:2181 zookeeper:3.5.8
 root@eaf70fc620cb:/apache-zookeeper-3.5.8-bin# cd bin
 ```
 
-如果你看到控制台成功打印出如下信息的话，说明你已经成功连接 ZooKeeper 服务。
+如果你看到控制台成功打印出如下信息的话，说明你已经成功连接 ZooKeeper 服务
 
 ![连接 ZooKeeper 服务](https://oss.javaguide.cn/github/javaguide/distributed-system/zookeeper/connect-zooKeeper-service.png)
 
@@ -70,7 +70,7 @@ Created /node1/node1.1
 
 ### 获取节点的数据(get 命令)
 
-`get` 命令可以获取指定节点的数据内容和节点的状态,可以看出我们通过 `set` 命令已经将节点数据内容改为 "set node1"。
+`get` 命令可以获取指定节点的数据内容和节点的状态,可以看出我们通过 `set` 命令已经将节点数据内容改为 "set node1"
 
 ```shell
 [zk: zookeeper(CONNECTED) 12] get -s /node1
@@ -126,14 +126,14 @@ dataLength = 11
 numChildren = 1
 ```
 
-上面显示的一些信息比如 cversion、aclVersion、numChildren 等等，我在上面 「[ZooKeeper 相关概念总结(入门)](https://javaguide.cn/distributed-system/distributed-process-coordination/zookeeper/zookeeper-intro.html)」 这篇文章中已经介绍到。
+上面显示的一些信息比如 cversion、aclVersion、numChildren 等等，我在上面 「[ZooKeeper 相关概念总结(入门)](https://javaguide.cn/distributed-system/distributed-process-coordination/zookeeper/zookeeper-intro.html)」 这篇文章中已经介绍到
 
 ### 查看节点信息和状态(ls2 命令)
 
 `ls2` 命令更像是 `ls` 命令和 `stat` 命令的结合。 `ls2` 命令返回的信息包括 2 部分：
 
 1. 子节点列表
-2. 当前节点的 stat 信息。
+2. 当前节点的 stat 信息
 
 ```shell
 [zk: 127.0.0.1:2181(CONNECTED) 7] ls2 /node1
@@ -154,23 +154,23 @@ numChildren = 1
 
 ### 删除节点(delete 命令)
 
-这个命令很简单，但是需要注意的一点是如果你要删除某一个节点，那么这个节点必须无子节点才行。
+这个命令很简单，但是需要注意的一点是如果你要删除某一个节点，那么这个节点必须无子节点才行
 
 ```shell
 [zk: 127.0.0.1:2181(CONNECTED) 3] delete /node1/node1.1
 ```
 
-在后面我会介绍到 Java 客户端 API 的使用以及开源 ZooKeeper 客户端 ZkClient 和 Curator 的使用。
+在后面我会介绍到 Java 客户端 API 的使用以及开源 ZooKeeper 客户端 ZkClient 和 Curator 的使用
 
 ## ZooKeeper Java 客户端 Curator 简单使用
 
-Curator 是 Netflix 公司开源的一套 ZooKeeper Java 客户端框架，相比于 Zookeeper 自带的客户端 zookeeper 来说，Curator 的封装更加完善，各种 API 都可以比较方便地使用。
+Curator 是 Netflix 公司开源的一套 ZooKeeper Java 客户端框架，相比于 Zookeeper 自带的客户端 zookeeper 来说，Curator 的封装更加完善，各种 API 都可以比较方便地使用
 
 ![](https://oss.javaguide.cn/github/javaguide/distributed-system/zookeeper/curator.png)
 
 下面我们就来简单地演示一下 Curator 的使用吧！
 
-Curator4.0+版本对 ZooKeeper 3.5.x 支持比较好。开始之前，请先将下面的依赖添加进你的项目。
+Curator4.0+版本对 ZooKeeper 3.5.x 支持比较好。开始之前，请先将下面的依赖添加进你的项目
 
 ```xml
 <dependency>
@@ -216,16 +216,16 @@ zkClient.start();
 
 我们在 [ZooKeeper 常见概念解读](./zookeeper-intro.md) 中介绍到，我们通常是将 znode 分为 4 大类：
 
-- **持久（PERSISTENT）节点**：一旦创建就一直存在即使 ZooKeeper 集群宕机，直到将其删除。
-- **临时（EPHEMERAL）节点**：临时节点的生命周期是与 **客户端会话（session）** 绑定的，**会话消失则节点消失** 。并且，临时节点 **只能做叶子节点** ，不能创建子节点。
-- **持久顺序（PERSISTENT_SEQUENTIAL）节点**：除了具有持久（PERSISTENT）节点的特性之外， 子节点的名称还具有顺序性。比如 `/node1/app0000000001`、`/node1/app0000000002` 。
-- **临时顺序（EPHEMERAL_SEQUENTIAL）节点**：除了具备临时（EPHEMERAL）节点的特性之外，子节点的名称还具有顺序性。
+- **持久（PERSISTENT）节点**：一旦创建就一直存在即使 ZooKeeper 集群宕机，直到将其删除
+- **临时（EPHEMERAL）节点**：临时节点的生命周期是与 **客户端会话（session）** 绑定的，**会话消失则节点消失** 。并且，临时节点 **只能做叶子节点** ，不能创建子节点
+- **持久顺序（PERSISTENT_SEQUENTIAL）节点**：除了具有持久（PERSISTENT）节点的特性之外， 子节点的名称还具有顺序性。比如 `/node1/app0000000001`、`/node1/app0000000002` 
+- **临时顺序（EPHEMERAL_SEQUENTIAL）节点**：除了具备临时（EPHEMERAL）节点的特性之外，子节点的名称还具有顺序性
 
-你在使用的 ZooKeeper 的时候，会发现 `CreateMode` 类中实际有 7 种 znode 类型 ，但是用的最多的还是上面介绍的 4 种。
+你在使用的 ZooKeeper 的时候，会发现 `CreateMode` 类中实际有 7 种 znode 类型 ，但是用的最多的还是上面介绍的 4 种
 
 **a.创建持久化节点**
 
-你可以通过下面两种方式创建持久化的节点。
+你可以通过下面两种方式创建持久化的节点
 
 ```java
 //注意:下面的代码会报错，下文说了具体原因
@@ -233,9 +233,9 @@ zkClient.create().forPath("/node1/00001");
 zkClient.create().withMode(CreateMode.PERSISTENT).forPath("/node1/00002");
 ```
 
-但是，你运行上面的代码会报错，这是因为的父节点`node1`还未创建。
+但是，你运行上面的代码会报错，这是因为的父节点`node1`还未创建
 
-你可以先创建父节点 `node1` ，然后再执行上面的代码就不会报错了。
+你可以先创建父节点 `node1` ，然后再执行上面的代码就不会报错了
 
 ```java
 zkClient.create().forPath("/node1");

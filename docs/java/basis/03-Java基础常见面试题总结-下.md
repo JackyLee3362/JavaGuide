@@ -519,9 +519,9 @@ JDK 自带的序列化方式一般不会用 ，因为序列化效率低并且存
 
 关于 I/O 的详细解读，请看下面这几篇文章，里面涉及到的知识点和面试题更全面
 
-- [Java IO 基础知识总结](../io/io-basis.md)
-- [Java IO 设计模式总结](../io/io-design-patterns.md)
-- [Java IO 模型详解](../io/io-model.md)
+- [Java IO 基础知识总结](../io/Java-IO-基础知识总结.md)
+- [Java IO 设计模式总结](../io/Java-IO-设计模式总结.md)
+- [Java IO 模型详解](../io/Java-IO-模型详解.md)
 
 ### Java IO 流了解吗？
 
@@ -543,11 +543,11 @@ Java IO 流的 40 多个类都是从如下 4 个抽象类基类中派生出来�
 
 ### Java IO 中的设计模式有哪些？
 
-参考答案：[Java IO 设计模式总结](../io/io-design-patterns.md)
+参考答案：[Java IO 设计模式总结](../io/Java-IO-设计模式总结.md)
 
 ### BIO、NIO 和 AIO 的区别？
 
-参考答案：[Java IO 模型详解](../io/io-model.md)
+参考答案：[Java IO 模型详解](../io/Java-IO-模型详解.md)
 
 ## 语法糖
 

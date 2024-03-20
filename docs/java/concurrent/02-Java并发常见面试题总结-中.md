@@ -16,7 +16,7 @@ head:
 
 ## JMM(Java 内存模型)
 
-JMM（Java 内存模型）相关的问题比较多，也比较重要，于是我单独抽了一篇文章来总结 JMM 相关的知识点和问题：[JMM（Java 内存模型）详解](./jmm.md)
+JMM（Java 内存模型）相关的问题比较多，也比较重要，于是我单独抽了一篇文章来总结 JMM 相关的知识点和问题：[JMM（Java 内存模型）详解](./JMM-Java-内存模型-详解.md)
 
 ## volatile 关键字
 
@@ -695,7 +695,7 @@ public long tryOptimisticRead() {
 
 ## Atomic 原子类
 
-Atomic 原子类部分的内容我单独写了一篇文章来总结：[Atomic 原子类总结](./atomic-classes.md)
+Atomic 原子类部分的内容我单独写了一篇文章来总结：[Atomic 原子类总结](./Atomic-原子类总结.md)
 
 ## 参考
 

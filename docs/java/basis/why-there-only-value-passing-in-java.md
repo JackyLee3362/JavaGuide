@@ -154,7 +154,7 @@ xiaoLi:小李
 
 怎么回事？？？两个引用类型的形参互换并没有影响实参啊！
 
-`swap` 方法的参数 `person1` 和 `person2` 只是拷贝的实参 `xiaoZhang` 和 `xiaoLi` 的地址。因此， `person1` 和 `person2` 的互换只是拷贝的两个地址的互换罢了，并不会影响到实参 `xiaoZhang` 和 `xiaoLi` 
+`swap` 方法的参数 `person1` 和 `person2` 只是拷贝的实参 `xiaoZhang` 和 `xiaoLi` 的地址。因此， `person1` 和 `person2` 的互换只是拷贝的两个地址的互换罢了，并不会影响到实参 `xiaoZhang` 和 `xiaoLi`
 
 ![](https://oss.javaguide.cn/github/javaguide/java/basis/java-value-passing-03.png)
 

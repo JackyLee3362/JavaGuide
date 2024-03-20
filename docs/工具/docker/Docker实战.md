@@ -7,28 +7,28 @@ tag:
 
 ## Docker 介绍
 
-开始之前，还是简单介绍一下 Docker，更多 Docker 概念介绍可以看前一篇文章[Docker 核心概念总结](./Docker核心概念总结.md)。
+开始之前，还是简单介绍一下 Docker，更多 Docker 概念介绍可以看前一篇文章[Docker 核心概念总结](./Docker核心概念总结.md)
 
 ### 什么是 Docker？
 
-说实话关于 Docker 是什么并不太好说，下面我通过四点向你说明 Docker 到底是个什么东西。
+说实话关于 Docker 是什么并不太好说，下面我通过四点向你说明 Docker 到底是个什么东西
 
-- Docker 是世界领先的软件容器平台，基于 **Go 语言** 进行开发实现。
-- Docker 能够自动执行重复性任务，例如搭建和配置开发环境，从而解放开发人员。
-- 用户可以方便地创建和使用容器，把自己的应用放入容器。容器还可以进行版本管理、复制、分享、修改，就像管理普通的代码一样。
-- Docker 可以**对进程进行封装隔离，属于操作系统层面的虚拟化技术。** 由于隔离的进程独立于宿主和其它的隔离的进程，因此也称其为容器。
+- Docker 是世界领先的软件容器平台，基于 **Go 语言** 进行开发实现
+- Docker 能够自动执行重复性任务，例如搭建和配置开发环境，从而解放开发人员
+- 用户可以方便地创建和使用容器，把自己的应用放入容器。容器还可以进行版本管理、复制、分享、修改，就像管理普通的代码一样
+- Docker 可以**对进程进行封装隔离，属于操作系统层面的虚拟化技术。** 由于隔离的进程独立于宿主和其它的隔离的进程，因此也称其为容器
 
-官网地址：<https://www.docker.com/> 。
+官网地址：<https://www.docker.com/> 
 
 ![认识容器](https://oss.javaguide.cn/github/javaguide/tools/docker/container.png)
 
 ### 为什么要用 Docker?
 
-Docker 可以让开发者打包他们的应用以及依赖包到一个轻量级、可移植的容器中，然后发布到任何流行的 Linux 机器上，也可以实现虚拟化。
+Docker 可以让开发者打包他们的应用以及依赖包到一个轻量级、可移植的容器中，然后发布到任何流行的 Linux 机器上，也可以实现虚拟化
 
-容器是完全使用沙箱机制，相互之间不会有任何接口（类似 iPhone 的 app），更重要的是容器性能开销极低。
+容器是完全使用沙箱机制，相互之间不会有任何接口（类似 iPhone 的 app），更重要的是容器性能开销极低
 
-传统的开发流程中，我们的项目通常需要使用 MySQL、Redis、FastDFS 等等环境，这些环境都是需要我们手动去进行下载并配置的，安装配置流程极其复杂，而且不同系统下的操作也不一样。
+传统的开发流程中，我们的项目通常需要使用 MySQL、Redis、FastDFS 等等环境，这些环境都是需要我们手动去进行下载并配置的，安装配置流程极其复杂，而且不同系统下的操作也不一样
 
 Docker 的出现完美地解决了这一问题，我们可以在容器中安装 MySQL、Redis 等软件环境，使得应用和环境架构分开，它的优势在于：
 
@@ -36,7 +36,7 @@ Docker 的出现完美地解决了这一问题，我们可以在容器中安装 
 2. 对进程进行封装隔离，容器与容器之间互不影响，更高效地利用系统资源
 3. 可以通过镜像复制多个一致的容器
 
-另外，[《Docker 从入门到实践》](https://yeasy.gitbook.io/docker_practice/introduction/why) 这本开源书籍中也已经给出了使用 Docker 的原因。
+另外，[《Docker 从入门到实践》](https://yeasy.gitbook.io/docker_practice/introduction/why) 这本开源书籍中也已经给出了使用 Docker 的原因
 
 ![](https://oss.javaguide.cn/github/javaguide/tools/docker/20210412220015698.png)
 
@@ -52,7 +52,7 @@ Docker 的出现完美地解决了这一问题，我们可以在容器中安装 
 
 ![安装 Docker](https://oss.javaguide.cn/github/javaguide/tools/docker/docker-install-windows-download.png)
 
-在此处点击`Download for Windows`即可进行下载。
+在此处点击`Download for Windows`即可进行下载
 
 如果你的电脑是`Windows 10 64位专业版`的操作系统，则在安装 Docker 之前需要开启一下`Hyper-V`，开启方式如下。打开控制面板，选择程序：
 
@@ -66,7 +66,7 @@ Docker 的出现完美地解决了这一问题，我们可以在容器中安装 
 
 ![开启 Hyper-V](https://oss.javaguide.cn/github/javaguide/tools/docker/docker-windows-hyperv-check.png)
 
-完成更改后需要重启一下计算机。
+完成更改后需要重启一下计算机
 
 开启了`Hyper-V`后，我们就可以对 Docker 进行安装了，打开安装程序后，等待片刻点击`Ok`即可：
 
@@ -76,9 +76,9 @@ Docker 的出现完美地解决了这一问题，我们可以在容器中安装 
 
 ![安装 Docker](https://oss.javaguide.cn/github/javaguide/tools/docker/docker-windows-hyperv-wsl2.png)
 
-它的意思是询问我们是否使用 WSL2，这是基于 Windows 的一个 Linux 子系统，这里我们取消即可，它就会使用我们之前勾选的`Hyper-V`虚拟机。
+它的意思是询问我们是否使用 WSL2，这是基于 Windows 的一个 Linux 子系统，这里我们取消即可，它就会使用我们之前勾选的`Hyper-V`虚拟机
 
-因为是图形界面的操作，这里就不介绍 Docker Desktop 的具体用法了。
+因为是图形界面的操作，这里就不介绍 Docker Desktop 的具体用法了
 
 ### Mac
 
@@ -90,9 +90,9 @@ brew install --cask docker
 
 ### Linux
 
-下面来看看 Linux 中如何安装 Docker，这里以 CentOS7 为例。
+下面来看看 Linux 中如何安装 Docker，这里以 CentOS7 为例
 
-在测试或开发环境中，Docker 官方为了简化安装流程，提供了一套便捷的安装脚本，执行这个脚本后就会自动地将一切准备工作做好，并且把 Docker 的稳定版本安装在系统中。
+在测试或开发环境中，Docker 官方为了简化安装流程，提供了一套便捷的安装脚本，执行这个脚本后就会自动地将一切准备工作做好，并且把 Docker 的稳定版本安装在系统中
 
 ```shell
 curl -fsSL get.docker.com -o get-docker.sh
@@ -132,13 +132,13 @@ systemctl enable docker
 
 ### 总结
 
-通俗点说，一个镜像就代表一个软件；而基于某个镜像运行就是生成一个程序实例，这个程序实例就是容器；而仓库是用来存储 Docker 中所有镜像的。
+通俗点说，一个镜像就代表一个软件；而基于某个镜像运行就是生成一个程序实例，这个程序实例就是容器；而仓库是用来存储 Docker 中所有镜像的
 
-其中仓库又分为远程仓库和本地仓库，和 Maven 类似，倘若每次都从远程下载依赖，则会大大降低效率，为此，Maven 的策略是第一次访问依赖时，将其下载到本地仓库，第二次、第三次使用时直接用本地仓库的依赖即可，Docker 的远程仓库和本地仓库的作用也是类似的。
+其中仓库又分为远程仓库和本地仓库，和 Maven 类似，倘若每次都从远程下载依赖，则会大大降低效率，为此，Maven 的策略是第一次访问依赖时，将其下载到本地仓库，第二次、第三次使用时直接用本地仓库的依赖即可，Docker 的远程仓库和本地仓库的作用也是类似的
 
 ## Docker 初体验
 
-下面我们来对 Docker 进行一个初步的使用，这里以下载一个 MySQL 的镜像为例`(在CentOS7下进行)`。
+下面我们来对 Docker 进行一个初步的使用，这里以下载一个 MySQL 的镜像为例`(在CentOS7下进行)`
 
 和 GitHub 一样，Docker 也提供了一个 DockerHub 用于查询各种镜像的地址和安装教程，为此，我们先访问 DockerHub：[https://hub.docker.com/](https://hub.docker.com/)
 
@@ -152,7 +152,7 @@ systemctl enable docker
 
 ![MySQL 官方镜像](https://oss.javaguide.cn/github/javaguide/tools/docker/dockerhub-mysql-official-image.png)
 
-右边提供了下载 MySQL 镜像的指令为`docker pull MySQL`，但该指令始终会下载 MySQL 镜像的最新版本。
+右边提供了下载 MySQL 镜像的指令为`docker pull MySQL`，但该指令始终会下载 MySQL 镜像的最新版本
 
 若是想下载指定版本的镜像，则点击下面的`View Available Tags`：
 
@@ -172,7 +172,7 @@ docker pull MySQL:5.7.32
 
 ![阿里云镜像加速](https://oss.javaguide.cn/github/javaguide/tools/docker/docker-aliyun-mirror-admin-accelerator.png)
 
-点击左侧的镜像加速器，并依次执行右侧的配置指令即可。
+点击左侧的镜像加速器，并依次执行右侧的配置指令即可
 
 ```shell
 sudo mkdir -p /etc/docker
@@ -187,9 +187,9 @@ sudo systemctl restart docker
 
 ## Docker 镜像指令
 
-Docker 需要频繁地操作相关的镜像，所以我们先来了解一下 Docker 中的镜像指令。
+Docker 需要频繁地操作相关的镜像，所以我们先来了解一下 Docker 中的镜像指令
 
-若想查看 Docker 中当前拥有哪些镜像，则可以使用 `docker images` 命令。
+若想查看 Docker 中当前拥有哪些镜像，则可以使用 `docker images` 命令
 
 ```shell
 [root@izrcf5u3j3q8xaz ~]# docker images
@@ -200,7 +200,7 @@ nginx         latest    ae2feff98a0c   2 weeks ago     133MB
 hello-world   latest    bf756fb1ae65   12 months ago   13.3kB
 ```
 
-其中`REPOSITORY`为镜像名，`TAG`为版本标志，`IMAGE ID`为镜像 id(唯一的)，`CREATED`为创建时间，注意这个时间并不是我们将镜像下载到 Docker 中的时间，而是镜像创建者创建的时间，`SIZE`为镜像大小。
+其中`REPOSITORY`为镜像名，`TAG`为版本标志，`IMAGE ID`为镜像 id(唯一的)，`CREATED`为创建时间，注意这个时间并不是我们将镜像下载到 Docker 中的时间，而是镜像创建者创建的时间，`SIZE`为镜像大小
 
 该指令能够查询指定镜像名：
 
@@ -234,7 +234,7 @@ d404d78aa797
 docker pull MySQL:5.7
 ```
 
-`docker pull`是固定的，后面写上需要下载的镜像名及版本标志；若是不写版本标志，而是直接执行`docker pull MySQL`，则会下载镜像的最新版本。
+`docker pull`是固定的，后面写上需要下载的镜像名及版本标志；若是不写版本标志，而是直接执行`docker pull MySQL`，则会下载镜像的最新版本
 
 一般在下载镜像前我们需要搜索一下镜像有哪些版本才能对指定版本进行下载，使用指令：
 
@@ -260,7 +260,7 @@ docker search MySQL:5.5
 docker image rm MySQL:5.5
 ```
 
-若是不指定版本，则默认删除的也是最新版本。
+若是不指定版本，则默认删除的也是最新版本
 
 还可以通过指定镜像 id 进行删除：
 
@@ -281,9 +281,9 @@ Error response from daemon: conflict: unable to delete bf756fb1ae65 (must be for
 docker image rm -f bf756fb1ae65
 ```
 
-该指令会将镜像和通过该镜像执行的容器全部删除，谨慎使用。
+该指令会将镜像和通过该镜像执行的容器全部删除，谨慎使用
 
-Docker 还提供了删除镜像的简化版本：`docker rmi 镜像名:版本标志` 。
+Docker 还提供了删除镜像的简化版本：`docker rmi 镜像名:版本标志` 
 
 此时我们即可借助`rmi`和`-q`进行一些联合操作，比如现在想删除所有的 MySQL 镜像，那么你需要查询出 MySQL 镜像的 id，并根据这些 id 一个一个地执行`docker rmi`进行删除，但是现在，我们可以这样：
 
@@ -291,11 +291,11 @@ Docker 还提供了删除镜像的简化版本：`docker rmi 镜像名:版本标
 docker rmi -f $(docker images MySQL -q)
 ```
 
-首先通过`docker images MySQL -q`查询出 MySQL 的所有镜像 id，`-q`表示仅查询 id，并将这些 id 作为参数传递给`docker rmi -f`指令，这样所有的 MySQL 镜像就都被删除了。
+首先通过`docker images MySQL -q`查询出 MySQL 的所有镜像 id，`-q`表示仅查询 id，并将这些 id 作为参数传递给`docker rmi -f`指令，这样所有的 MySQL 镜像就都被删除了
 
 ## Docker 容器指令
 
-掌握了镜像的相关指令之后，我们需要了解一下容器的指令，容器是基于镜像的。
+掌握了镜像的相关指令之后，我们需要了解一下容器的指令，容器是基于镜像的
 
 若需要通过镜像运行一个容器，则使用：
 
@@ -309,11 +309,11 @@ docker run tomcat:8.0-jre8
 docker pull tomcat:8.0-jre8
 ```
 
-下载完成后就可以运行了，运行后查看一下当前运行的容器：`docker ps` 。
+下载完成后就可以运行了，运行后查看一下当前运行的容器：`docker ps` 
 
 ![](https://oss.javaguide.cn/github/javaguide/tools/docker/docker-ps-terminal.png)
 
-其中`CONTAINER_ID`为容器的 id，`IMAGE`为镜像名，`COMMAND`为容器内执行的命令，`CREATED`为容器的创建时间，`STATUS`为容器的状态，`PORTS`为容器内服务监听的端口，`NAMES`为容器的名称。
+其中`CONTAINER_ID`为容器的 id，`IMAGE`为镜像名，`COMMAND`为容器内执行的命令，`CREATED`为容器的创建时间，`STATUS`为容器的状态，`PORTS`为容器内服务监听的端口，`NAMES`为容器的名称
 
 通过该方式运行的 tomcat 是不能直接被外部访问的，因为容器具有隔离性，若是想直接通过 8080 端口访问容器内部的 tomcat，则需要对宿主机端口与容器内的端口进行映射：
 
@@ -321,7 +321,7 @@ docker pull tomcat:8.0-jre8
 docker run -p 8080:8080 tomcat:8.0-jre8
 ```
 
-解释一下这两个端口的作用(`8080:8080`)，第一个 8080 为宿主机端口，第二个 8080 为容器内的端口，外部访问 8080 端口就会通过映射访问容器内的 8080 端口。
+解释一下这两个端口的作用(`8080:8080`)，第一个 8080 为宿主机端口，第二个 8080 为容器内的端口，外部访问 8080 端口就会通过映射访问容器内的 8080 端口
 
 此时外部就可以访问 Tomcat 了：
 
@@ -333,7 +333,7 @@ docker run -p 8080:8080 tomcat:8.0-jre8
 docker run -p 8088:8080 tomcat:8.0-jre8
 ```
 
-则外部需访问 8088 端口才能访问 tomcat，需要注意的是，每次运行的容器都是相互独立的，所以同时运行多个 tomcat 容器并不会产生端口的冲突。
+则外部需访问 8088 端口才能访问 tomcat，需要注意的是，每次运行的容器都是相互独立的，所以同时运行多个 tomcat 容器并不会产生端口的冲突
 
 容器还能够以后台的方式运行，这样就不会占用终端：
 
@@ -347,7 +347,7 @@ docker run -d -p 8080:8080 tomcat:8.0-jre8
 docker run -d -p 8080:8080 --name tomcat01 tomcat:8.0-jre8
 ```
 
-此时的容器名称即为 tomcat01，容器名称必须是唯一的。
+此时的容器名称即为 tomcat01，容器名称必须是唯一的
 
 再来引申一下`docker ps`中的几个指令参数，比如`-a`：
 
@@ -355,9 +355,9 @@ docker run -d -p 8080:8080 --name tomcat01 tomcat:8.0-jre8
 docker ps -a
 ```
 
-该参数会将运行和非运行的容器全部列举出来。
+该参数会将运行和非运行的容器全部列举出来
 
-`-q`参数将只查询正在运行的容器 id：`docker ps -q` 。
+`-q`参数将只查询正在运行的容器 id：`docker ps -q` 
 
 ```shell
 [root@izrcf5u3j3q8xaz ~]# docker ps -q
@@ -367,7 +367,7 @@ f3aac8ee94a3
 4421848ba294
 ```
 
-若是组合使用，则查询运行和非运行的所有容器 id：`docker ps -qa` 。
+若是组合使用，则查询运行和非运行的所有容器 id：`docker ps -qa` 
 
 ```shell
 [root@izrcf5u3j3q8xaz ~]# docker ps -aq
@@ -383,33 +383,33 @@ c2f5d78c5d1a
 d5b6c177c151
 ```
 
-接下来是容器的停止、重启指令，因为非常简单，就不过多介绍了。
+接下来是容器的停止、重启指令，因为非常简单，就不过多介绍了
 
 ```shell
 docker start c2f5d78c5d1a
 ```
 
-通过该指令能够将已经停止运行的容器运行起来，可以通过容器的 id 启动，也可以通过容器的名称启动。
+通过该指令能够将已经停止运行的容器运行起来，可以通过容器的 id 启动，也可以通过容器的名称启动
 
 ```shell
 docker restart c2f5d78c5d1a
 ```
 
-该指令能够重启指定的容器。
+该指令能够重启指定的容器
 
 ```shell
 docker stop c2f5d78c5d1a
 ```
 
-该指令能够停止指定的容器。
+该指令能够停止指定的容器
 
 ```shell
 docker kill c2f5d78c5d1a
 ```
 
-该指令能够直接杀死指定的容器。
+该指令能够直接杀死指定的容器
 
-以上指令都能够通过容器的 id 和容器名称两种方式配合使用。
+以上指令都能够通过容器的 id 和容器名称两种方式配合使用
 
 ---
 
@@ -419,7 +419,7 @@ docker kill c2f5d78c5d1a
 docker rm d5b6c177c151
 ```
 
-需要注意的是容器的 id 无需全部写出来，只需唯一标识即可。
+需要注意的是容器的 id 无需全部写出来，只需唯一标识即可
 
 若是想删除正在运行的容器，则需要添加`-f`参数强制删除：
 
@@ -433,7 +433,7 @@ docker rm -f d5b6c177c151
 docker rm -f $(docker ps -qa)
 ```
 
-先通过`docker ps -qa`查询出所有容器的 id，然后通过`docker rm -f`进行删除。
+先通过`docker ps -qa`查询出所有容器的 id，然后通过`docker rm -f`进行删除
 
 ---
 
@@ -469,7 +469,7 @@ docker top 289cc00dc5ed
 docker exec -it 289cc00dc5ed bash
 ```
 
-此时终端将会进入容器内部，执行的指令都将在容器中生效，在容器内只能执行一些比较简单的指令，如：ls、cd 等，若是想退出容器终端，重新回到 CentOS 中，则执行`exit`即可。
+此时终端将会进入容器内部，执行的指令都将在容器中生效，在容器内只能执行一些比较简单的指令，如：ls、cd 等，若是想退出容器终端，重新回到 CentOS 中，则执行`exit`即可
 
 现在我们已经能够进入容器终端执行相关操作了，那么该如何向 tomcat 容器中部署一个项目呢？
 
@@ -477,7 +477,7 @@ docker exec -it 289cc00dc5ed bash
 docker cp ./test.html 289cc00dc5ed:/usr/local/tomcat/webapps
 ```
 
-通过`docker cp`指令能够将文件从 CentOS 复制到容器中，`./test.html`为 CentOS 中的资源路径，`289cc00dc5ed`为容器 id，`/usr/local/tomcat/webapps`为容器的资源路径，此时`test.html`文件将会被复制到该路径下。
+通过`docker cp`指令能够将文件从 CentOS 复制到容器中，`./test.html`为 CentOS 中的资源路径，`289cc00dc5ed`为容器 id，`/usr/local/tomcat/webapps`为容器的资源路径，此时`test.html`文件将会被复制到该路径下
 
 ```shell
 [root@izrcf5u3j3q8xaz ~]# docker exec -it 289cc00dc5ed bash
@@ -493,7 +493,7 @@ root@289cc00dc5ed:/usr/local/tomcat/webapps#
 docker cp 289cc00dc5ed:/usr/local/tomcat/webapps/test.html ./
 ```
 
-所以现在若是想要部署项目，则先将项目上传到 CentOS，然后将项目从 CentOS 复制到容器内，此时启动容器即可。
+所以现在若是想要部署项目，则先将项目上传到 CentOS，然后将项目从 CentOS 复制到容器内，此时启动容器即可
 
 ---
 
@@ -507,7 +507,7 @@ docker inspect 923c969b0d91
 
 ## Docker 数据卷
 
-学习了容器的相关指令之后，我们来了解一下 Docker 中的数据卷，它能够实现宿主机与容器之间的文件共享，它的好处在于我们对宿主机的文件进行修改将直接影响容器，而无需再将宿主机的文件再复制到容器中。
+学习了容器的相关指令之后，我们来了解一下 Docker 中的数据卷，它能够实现宿主机与容器之间的文件共享，它的好处在于我们对宿主机的文件进行修改将直接影响容器，而无需再将宿主机的文件再复制到容器中
 
 现在若是想将宿主机中`/opt/apps`目录与容器中`webapps`目录做一个数据卷，则应该这样编写指令：
 
@@ -519,7 +519,7 @@ docker run -d -p 8080:8080 --name tomcat01 -v /opt/apps:/usr/local/tomcat/webapp
 
 ![](https://oss.javaguide.cn/github/javaguide/tools/docker/docker-data-volume-webapp-8080.png)
 
-这就说明我们的数据卷设置成功了，Docker 会将容器内的`webapps`目录与`/opt/apps`目录进行同步，而此时`/opt/apps`目录是空的，导致`webapps`目录也会变成空目录，所以就访问不到了。
+这就说明我们的数据卷设置成功了，Docker 会将容器内的`webapps`目录与`/opt/apps`目录进行同步，而此时`/opt/apps`目录是空的，导致`webapps`目录也会变成空目录，所以就访问不到了
 
 此时我们只需向`/opt/apps`目录下添加文件，就会使得`webapps`目录也会拥有相同的文件，达到文件共享，测试一下：
 
@@ -581,7 +581,7 @@ _data
 docs  examples  host-manager  manager  ROOT
 ```
 
-此时我们只需修改该目录的内容就能能够影响到容器。
+此时我们只需修改该目录的内容就能能够影响到容器
 
 ---
 

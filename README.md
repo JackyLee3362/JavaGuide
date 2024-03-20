@@ -59,10 +59,10 @@
 
 ### IO
 
-- [IO 基础知识总结](./docs/java/io/io-basis.md)
-- [IO 设计模式总结](./docs/java/io/io-design-patterns.md)
-- [IO 模型详解](./docs/java/io/io-model.md)
-- [NIO 核心知识总结](./docs/java/io/nio-basis.md)
+- [IO 基础知识总结](./docs/java/io/Java-IO-基础知识总结.md)
+- [IO 设计模式总结](./docs/java/io/Java-IO-设计模式总结.md)
+- [IO 模型详解](./docs/java/io/Java-IO-模型详解.md)
+- [NIO 核心知识总结](./docs/java/io/Java-NIO-核心知识总结.md)
 
 ### 并发
 
@@ -74,13 +74,13 @@
 
 **重要知识点详解**：
 
-- [JMM（Java 内存模型）详解](./docs/java/concurrent/jmm.md)
-- **线程池**：[Java 线程池详解](./docs/java/concurrent/java-thread-pool-summary.md)、[Java 线程池最佳实践](./docs/java/concurrent/java-thread-pool-best-practices.md)
+- [JMM（Java 内存模型）详解](./docs/java/concurrent/JMM-Java-内存模型-详解.md)
+- **线程池**：[Java 线程池详解](./docs/java/concurrent/Java-线程池详解.md)、[Java 线程池最佳实践](./docs/java/concurrent/Java-线程池最佳实践.md)
 - [ThreadLocal 详解](./docs/java/concurrent/ThreadLocal-详解.md)
-- [Java 并发容器总结](./docs/java/concurrent/java-concurrent-collections.md)
-- [Atomic 原子类总结](./docs/java/concurrent/atomic-classes.md)
-- [AQS 详解](./docs/java/concurrent/aqs.md)
-- [CompletableFuture 详解](./docs/java/concurrent/completablefuture-intro.md)
+- [Java 并发容器总结](./docs/java/concurrent/Java-常见并发容器总结.md)
+- [Atomic 原子类总结](./docs/java/concurrent/Atomic-原子类总结.md)
+- [AQS 详解](./docs/java/concurrent/AQS-详解.md)
+- [CompletableFuture 详解](./docs/java/concurrent/CompletableFuture-详解.md)
 
 ### JVM (必看 :+1:)
 
@@ -175,7 +175,7 @@ JVM 这部分内容主要参考 [JVM 虚拟机规范-Java8](https://docs.oracle.
 
 ### 基础
 
-- [数据库基础知识总结](./docs/数据库/basis.md)
+- [数据库基础知识总结](./docs/数据库/数据库基础知识总结.md)
 - [NoSQL 基础知识总结](./docs/数据库/nosql.md)
 - [字符集详解](./docs/数据库/character-set.md)
 - SQL :
@@ -191,7 +191,7 @@ JVM 这部分内容主要参考 [JVM 虚拟机规范-Java8](https://docs.oracle.
 
 **重要知识点：**
 
-- [MySQL 索引详解](./docs/数据库/mysql/mysql-index.md)
+- [MySQL 索引详解](./docs/数据库/mysql/MySQL索引详解.md)
 - [MySQL 事务隔离级别图文详解)](./docs/数据库/mysql/MySQL事务隔离级别详解.md)
 - [MySQL 三大日志(binlog、redo log 和 undo log)详解](./docs/数据库/mysql/MySQL三大日志详解.md)
 - [InnoDB 存储引擎对 MVCC 的实现](./docs/数据库/mysql/innodb-implementation-of-mvcc.md)
@@ -382,7 +382,7 @@ JVM 这部分内容主要参考 [JVM 虚拟机规范-Java8](https://docs.oracle.
 
 ## 高可用
 
-[高可用系统设计指南](./docs/高可用/high-availability-system-design.md)
+[高可用系统设计指南](./docs/高可用/高可用系统设计指南.md)
 
 ### 冗余设计
 
@@ -394,11 +394,11 @@ JVM 这部分内容主要参考 [JVM 虚拟机规范-Java8](https://docs.oracle.
 
 ### 降级&熔断
 
-[降级&熔断详解](./docs/高可用/fallback-and-circuit-breaker.md)
+[降级&熔断详解](./docs/高可用/降级&熔断详解-付费.md)
 
 ### 超时&重试
 
-[超时&重试详解](./docs/高可用/timeout-and-retry.md)
+[超时&重试详解](./docs/高可用/超时&重试详解.md)
 
 ### 集群
 

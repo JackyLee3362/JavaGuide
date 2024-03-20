@@ -544,7 +544,7 @@ map.computeIfAbsent(key, k -> anotherValue);
 
 ## Collections 工具类（不重要）
 
-**`Collections` 工具类常用方法**:
+**`Collections` 工具类常用方法**：
 
 - 排序
 - 查找,替换操作

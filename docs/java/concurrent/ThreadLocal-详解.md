@@ -328,7 +328,7 @@ public class ThreadLocal<T> {
 
 上面已经用图的方式解析了`set()`实现的原理，其实已经很清晰了，我们接着再看下源码：
 
-`java.lang.ThreadLocal`.`ThreadLocalMap.set()`:
+`java.lang.ThreadLocal`.`ThreadLocalMap.set()`：
 
 ```java
 private void set(ThreadLocal<?> key, Object value) {
@@ -402,7 +402,7 @@ private static int prevIndex(int i, int len) {
 
 接着重点看下`replaceStaleEntry()`方法，`replaceStaleEntry()`方法提供替换过期数据的功能，我们可以对应上面**第四种情况**的原理图来再回顾下，具体代码如下：
 
-`java.lang.ThreadLocal.ThreadLocalMap.replaceStaleEntry()`:
+`java.lang.ThreadLocal.ThreadLocalMap.replaceStaleEntry()`：
 
 ```java
 private void replaceStaleEntry(ThreadLocal<?> key, Object value,
@@ -698,7 +698,7 @@ private void resize() {
 
 #### `ThreadLocalMap.get()`源码详解
 
-`java.lang.ThreadLocal.ThreadLocalMap.getEntry()`:
+`java.lang.ThreadLocal.ThreadLocalMap.getEntry()`：
 
 ```java
 private Entry getEntry(ThreadLocal<?> key) {

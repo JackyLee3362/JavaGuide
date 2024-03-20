@@ -7,10 +7,10 @@ tag:
 head:
   - - meta
     - name: keywords
-      content: MySQL基础,MySQL基础架构,MySQL存储引擎,MySQL查询缓存,MySQL事务,MySQL锁等内容。
+      content: MySQL基础,MySQL基础架构,MySQL存储引擎,MySQL查询缓存,MySQL事务,MySQL锁等内容
   - - meta
     - name: description
-      content: 一篇文章总结MySQL常见的知识点和面试题，涵盖MySQL基础、MySQL基础架构、MySQL存储引擎、MySQL查询缓存、MySQL事务、MySQL锁等内容。
+      content: 一篇文章总结MySQL常见的知识点和面试题，涵盖MySQL基础、MySQL基础架构、MySQL存储引擎、MySQL查询缓存、MySQL事务、MySQL锁等内容
 ---
 
 ## MySQL 基础
@@ -238,8 +238,8 @@ mysql> SHOW VARIABLES  LIKE '%storage_engine%';
 
 如果你想要深入了解每个存储引擎以及它们之间的区别，推荐你去阅读以下 MySQL 官方文档对应的介绍（面试不会问这么细，了解即可）：
 
-- InnoDB 存储引擎详细介绍：<https://dev.mysql.com/doc/refman/8.0/en/innodb-storage-engine.html> 
-- 其他存储引擎详细介绍：<https://dev.mysql.com/doc/refman/8.0/en/storage-engines.html> 
+- InnoDB 存储引擎详细介绍：<https://dev.mysql.com/doc/refman/8.0/en/innodb-storage-engine.html>
+- 其他存储引擎详细介绍：<https://dev.mysql.com/doc/refman/8.0/en/storage-engines.html>
 
 ![](assets/image-20220510155143458.png)
 
@@ -249,13 +249,13 @@ MySQL 存储引擎采用的是 **插件式架构** ，支持多种存储引擎�
 
 并且，你还可以根据 MySQL 定义的存储引擎实现标准接口来编写一个属于自己的存储引擎。这些非官方提供的存储引擎可以称为第三方存储引擎，区别于官方存储引擎。像目前最常用的 InnoDB 其实刚开始就是一个第三方存储引擎，后面由于过于优秀，其被 Oracle 直接收购了
 
-MySQL 官方文档也有介绍到如何编写一个自定义存储引擎，地址：<https://dev.mysql.com/doc/internals/en/custom-engine.html> 
+MySQL 官方文档也有介绍到如何编写一个自定义存储引擎，地址：<https://dev.mysql.com/doc/internals/en/custom-engine.html>
 
 ### ❓ MyISAM 和 InnoDB 有什么区别？
 
 > [!TIP]
 >
-> InnoDB 
+> InnoDB
 >
 > 主要记住：支持行级锁、事务、外键、使用 redolog 容灾、MVCC、B+树实现不一样
 >
@@ -301,7 +301,7 @@ MyISAM 不支持，而 InnoDB 支持
 
 MyISAM 不支持，而 InnoDB 支持
 
-使用 InnoDB 的数据库在异常崩溃后，数据库重新启动的时候会保证数据库恢复到崩溃前的状态。这个恢复的过程依赖于 `redo log` 
+使用 InnoDB 的数据库在异常崩溃后，数据库重新启动的时候会保证数据库恢复到崩溃前的状态。这个恢复的过程依赖于 `redo log`
 
 **5.是否支持 MVCC**
 
@@ -315,7 +315,7 @@ MyISAM 不支持，而 InnoDB 支持
 
 InnoDB 引擎中，其数据文件本身就是索引文件。相比 MyISAM，索引文件和数据文件是分离的，其表数据文件本身就是按 B+Tree 组织的一个索引结构，树的叶节点 data 域保存了完整的数据记录
 
-详细区别，推荐你看看我写的这篇文章：[MySQL 索引详解](./mysql-index.md)
+详细区别，推荐你看看我写的这篇文章：[MySQL 索引详解](./MySQL索引详解.md)
 
 **7.性能有差别**
 
@@ -351,7 +351,7 @@ InnoDB 的性能比 MyISAM 更强大，不管是在读写混合模式下还是�
 
 ## MySQL 索引
 
-MySQL 索引相关的问题比较多，对于面试和工作都比较重要，于是，我单独抽了一篇文章专门来总结 MySQL 索引相关的知识点和问题：[MySQL 索引详解](./mysql-index.md） 
+MySQL 索引相关的问题比较多，对于面试和工作都比较重要，于是，我单独抽了一篇文章专门来总结 MySQL 索引相关的知识点和问题：[MySQL 索引详解](./mysql-index.md）
 
 ## MySQL 查询缓存
 
@@ -434,7 +434,7 @@ MySQL 日志常见的面试题有：
 
 **那数据库事务有什么作用呢？**
 
-简单来说，数据库事务可以保证多个对数据库的操作（也就是 SQL 语句）构成一个逻辑上的整体。构成这个逻辑上的整体的这些数据库操作遵循：**要么全部执行成功,要么全部不执行** 
+简单来说，数据库事务可以保证多个对数据库的操作（也就是 SQL 语句）构成一个逻辑上的整体。构成这个逻辑上的整体的这些数据库操作遵循：**要么全部执行成功,要么全部不执行**
 
 ```sql
 # 开启一个事务
@@ -467,9 +467,9 @@ COMMIT;
 > on the database’s atomicity and isolation properties in order to achieve consistency,
 > but it’s not up to the database alone.
 >
-> 翻译过来的意思是：原子性，隔离性和持久性是数据库的属性，而一致性（在 ACID 意义上）是应用程序的属性。应用可能依赖数据库的原子性和隔离属性来实现一致性，但这并不仅取决于数据库。因此，字母 C 不属于 ACID 
+> 翻译过来的意思是：原子性，隔离性和持久性是数据库的属性，而一致性（在 ACID 意义上）是应用程序的属性。应用可能依赖数据库的原子性和隔离属性来实现一致性，但这并不仅取决于数据库。因此，字母 C 不属于 ACID
 
-《Designing Data-Intensive Application（数据密集型应用系统设计）》这本书强推一波，值得读很多遍！豆瓣有接近 90% 的人看了这本书之后给了五星好评。另外，中文翻译版本已经在 GitHub 开源，地址：[https://github.com/Vonng/ddia](https://github.com/Vonng/ddia） 
+《Designing Data-Intensive Application（数据密集型应用系统设计）》这本书强推一波，值得读很多遍！豆瓣有接近 90% 的人看了这本书之后给了五星好评。另外，中文翻译版本已经在 GitHub 开源，地址：[https://github.com/Vonng/ddia](https://github.com/Vonng/ddia）
 
 ![]（assets/ddia.png）
 
@@ -726,7 +726,7 @@ DELETE...
 
 > 不太重要的一个知识点，简单了解即可
 
-关系型数据库设计表的时候，通常会有一列作为自增主键。InnoDB 中的自增主键会涉及一种比较特殊的表级锁— **自增锁（AUTO-INC Locks）** 
+关系型数据库设计表的时候，通常会有一列作为自增主键。InnoDB 中的自增主键会涉及一种比较特殊的表级锁— **自增锁（AUTO-INC Locks）**
 
 ```sql
 CREATE TABLE `sequence_id` （
@@ -753,7 +753,7 @@ CREATE TABLE `sequence_id` （
 
 > 如果 MySQL 采用的格式为 Statement ，那么 MySQL 的主从同步实际上同步的就是一条一条的 SQL 语句
 
-最后，再推荐一篇文章：[为什么 MySQL 的自增主键不单调也不连续](https://draveness.me/whys-the-design-mysql-auto-increment/） 
+最后，再推荐一篇文章：[为什么 MySQL 的自增主键不单调也不连续](https://draveness.me/whys-the-design-mysql-auto-increment/）
 
 ## MySQL 性能优化
 
@@ -845,7 +845,7 @@ mysql> EXPLAIN SELECT `score`,`name` FROM `cus_order` ORDER BY `score` DESC;
 
 ### 常见的数据库优化方法有哪些？
 
-- [索引优化](./mysql-index.md)
+- [索引优化](./MySQL索引详解.md)
 - [读写分离和分库分表](../../high-performance/read-and-write-separation-and-library-subtable.md)
 - [数据冷热分离](../../high-performance/data-cold-hot-separation.md)
 - [SQL 优化](../../high-performance/sql-optimization.md)
