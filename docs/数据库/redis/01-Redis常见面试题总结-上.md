@@ -16,17 +16,19 @@ head:
 
 ### 什么是 Redis？
 
-[Redis](https://redis.io/) （**RE**mote **DI**ctionary **S**erver）是一个基于 C 语言开发的开源 NoSQL 数据库（BSD 许可）。与传统数据库不同的是，Redis 的数据是保存在内存中的（内存数据库，支持持久化），因此读写速度非常快，被广泛应用于分布式缓存方向。并且，Redis 存储的是 KV 键值对数据
+[Redis](https://redis.io/) （**RE**mote **DI**ctionary **S**erver）是一个基于 C 语言开发的开源 NoSQL 数据库（BSD 许可）
+
+与传统数据库不同的是，Redis 的数据是保存在内存中的（内存数据库，支持持久化），因此读写速度非常快，被广泛应用于分布式缓存方向。并且，Redis 存储的是 KV 键值对数据
 
 为了满足不同的业务场景，Redis 内置了多种数据类型实现（比如 String、Hash、Sorted Set、Bitmap、HyperLogLog、GEO）。并且，Redis 还支持事务、持久化、Lua 脚本、多种开箱即用的集群方案（Redis Sentinel、Redis Cluster）
 
-![Redis 数据类型概览](https://oss.javaguide.cn/github/javaguide/database/redis/redis-overview-of-data-types-2023-09-28.jpg)
+![Redis 数据类型概览](assets/redis-overview-of-data-types-2023-09-28.jpg)
 
 Redis 没有外部依赖，Linux 和 OS X 是 Redis 开发和测试最多的两个操作系统，官方推荐生产环境使用 Linux 部署 Redis
 
 个人学习的话，你可以自己本机安装 Redis 或者通过 Redis 官网提供的[在线 Redis 环境](https://try.redis.io/)（少部分命令无法使用）来实际体验 Redis
 
-![try-redis](https://oss.javaguide.cn/github/javaguide/database/redis/try.redis.io.png)
+![try-redis](assets/try.redis.io.png)
 
 全世界有非常多的网站使用到了 Redis ，[techstacks.io](https://techstacks.io/) 专门维护了一个[使用 Redis 的热门站点列表](https://techstacks.io/tech/redis) ，感兴趣的话可以看看
 
@@ -54,7 +56,7 @@ Redis 内部做了非常多的性能优化，比较重要的有下面 3 点：
 
 - Memcached
 
-- [Tendis](https://github.com/Tencent/Tendis)\d):
+- [Tendis](https://github.com/Tencent/Tendis)
   腾讯开源了类似于 Redis 的分布式高性能 KV 存储数据库，例如，腾讯开源的  。Tendis 基于知名开源项目 [RocksDB](https://github.com/facebook/rocksdb) 作为存储引擎 ，100% 兼容 Redis 协议和 Redis4.0 所有数据模型。关于 Redis 和 Tendis 的对比，腾讯官方文章：[Redis vs Tendis：冷热混合存储版架构揭秘](https://mp.weixin.qq.com/s/MeYkfOIdnU6LYlsGb24KjQ) 
 
 - [Dragonfly](https://github.com/dragonflydb/dragonfly)
@@ -150,7 +152,7 @@ Redis 从 4.0 版本开始，支持通过 Module 来扩展其功能以满足特�
 
 目前，被 Redis 官方推荐的 Module 有：
 
-- [RediSearch](https://github.com/RediSearch/RediSearch)：用于实现搜索引擎的模块
+- [RedisSearch](https://github.com/RediSearch/RediSearch)：用于实现搜索引擎的模块
 - [RedisJSON](https://github.com/RedisJSON/RedisJSON)：用于处理 JSON 数据的模块
 - [RedisGraph](https://github.com/RedisGraph/RedisGraph)：用于实现图形数据库的模块
 - [RedisTimeSeries](https://github.com/RedisTimeSeries/RedisTimeSeries)：用于处理时间序列数据的模块
@@ -561,7 +563,7 @@ PFCOUNT PAGE_1:UV
 >
 > RDB + AOF
 
-Redis 持久化机制（RDB 持久化、AOF 持久化、RDB 和 AOF 的混合持久化） 相关的问题比较多，也比较重要，于是我单独抽了一篇文章来总结 Redis 持久化机制相关的知识点和问题：[Redis 持久化机制详解](./07-Redis持久化机制详解.md) 
+Redis 持久化机制（RDB 持久化、AOF 持久化、RDB 和 AOF 的混合持久化） 相关的问题比较多，也比较重要，于是我单独抽了一篇文章来总结 Redis 持久化机制相关的知识点和问题：[Redis 持久化机制详解](07-Redis持久化机制详解.md) 
 
 ## ❓ Redis 线程模型（重要）
 
@@ -576,7 +578,7 @@ Redis 持久化机制（RDB 持久化、AOF 持久化、RDB 和 AOF 的混合持
 > Redis 基于 Reactor 模式开发了自己的网络事件处理器：这个处理器被称为文件事件处理器（file event handler）
 >
 > - 文件事件处理器使用 I/O 多路复用（multiplexing）程序来同时监听多个套接字，并根据套接字目前执行的任务来为套接字关联不同的事件处理器
-> - 当被监听的套接字准备好执行连接应答（accept）、读取（read）、写入（write）、关 闭（close）等操作时，与操作相对应的文件事件就会产生，这时文件事件处理器就会调用套接字之前关联好的事件处理器来处理这些事件
+> - 当被监听的套接字准备好执行连接应答（accept）、读取（read）、写入（write）、关闭（close）等操作时，与操作相对应的文件事件就会产生，这时文件事件处理器就会调用套接字之前关联好的事件处理器来处理这些事件
 >
 > **虽然文件事件处理器以单线程方式运行，但通过使用 I/O 多路复用程序来监听多个套接字**，文件事件处理器既实现了高性能的网络通信模型，又可以很好地与 Redis 服务器中其他同样以单线程方式运行的模块进行对接，这保持了 Redis 内部单线程设计的简单性
 
@@ -653,7 +655,7 @@ io-threads-do-reads yes
 
 - 通过 `bio_close_file` 后台线程来释放 AOF / RDB 等过程中产生的临时文件资源
 - 通过 `bio_aof_fsync` 后台线程调用 `fsync` 函数将系统内核缓冲区还未同步到到磁盘的数据强制刷到磁盘（ AOF 文件）
-- 通过 `bio_lazy_free`后台线程释放大对象（已删除）占用的内存空间.
+- 通过 `bio_lazy_free` 后台线程释放大对象（已删除）占用的内存空间.
 
 在`bio.h` 文件中有定义（Redis 6.0 版本，源码地址：<https://github.com/redis/redis/blob/6.0/src/bio.h>）：
 
@@ -773,5 +775,3 @@ Redis 提供 6 种数据淘汰策略：
 - Redis 命令手册：<https://www.redis.com.cn/commands.html>
 - RedisSearch 终极使用指南，你值得拥有！：<https://mp.weixin.qq.com/s/FA4XVAXJksTOHUXMsayy2g>
 - WHY Redis choose single thread (vs multi threads): [https://medium.com/@jychen7/sharing-redis-single-thread-vs-multi-threads-5870bd44d153](https://medium.com/@jychen7/sharing-redis-single-thread-vs-multi-threads-5870bd44d153)
-
-<!-- @include: @article-footer.snippet.md -->

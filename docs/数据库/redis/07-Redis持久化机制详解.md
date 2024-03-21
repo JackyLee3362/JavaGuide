@@ -17,8 +17,8 @@ head:
 Redis 不同于 Memcached 的很重要一点就是，Redis 支持持久化，而且支持 3 种持久化方式：
 
 - 快照（snap-shotting，RDB）
-- 只追加文件（append-only file, AOF）
-- RDB 和 AOF 的混合持久化(Redis 4.0 新增)
+- 只追加文件（append-only file，AOF）
+- RDB 和 AOF 的混合持久化（Redis 4.0 新增）
 
 官方文档地址：<https://redis.io/topics/persistence> 
 
@@ -124,7 +124,7 @@ Multi Part AOF 不是重点，了解即可，详细介绍可以看看阿里开�
 - 如果刚执行完命令 Redis 就宕机会导致对应的修改丢失
 - 可能会阻塞后续其他命令的执行（AOF 记录日志是在 Redis 主线程中进行的）
 
-### AOF 重写了解吗？
+### ❓ AOF 重写了解吗？
 
 当 AOF 变得太大时，Redis 能够在后台自动重写 AOF 产生一个新的 AOF 文件，这个新的 AOF 文件和原有的 AOF 文件所保存的数据库状态一样，但体积更小
 
@@ -195,5 +195,3 @@ AOF 校验机制是 Redis 在启动时对 AOF 文件进行检查，以判断文�
 - The difference between AOF and RDB persistence：<https://www.sobyte.net/post/2022-04/redis-rdb-and-aof/>
 - Redis AOF 持久化详解 - 程序员历小冰：<http://remcarpediem.net/article/376c55d8/>
 - Redis RDB 与 AOF 持久化 · Analyze：<https://wingsxdu.com/posts/database/redis/rdb-and-aof/>
-
-<!-- @include: @article-footer.snippet.md -->

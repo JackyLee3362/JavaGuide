@@ -421,7 +421,7 @@ JDK 默认垃圾收集器（使用 `java -XX:+PrintCommandLineFlags -version` �
 
 Serial（串行）收集器是最基本、历史最悠久的垃圾收集器了。大家看名字就知道这个收集器是一个单线程收集器了。它的 **「单线程」** 的意义不仅仅意味着它只会使用一条垃圾收集线程去完成垃圾收集工作，更重要的是它在进行垃圾收集工作的时候必须暂停其他所有的工作线程（ **"Stop The World"** ），直到它收集结束
 
-**新生代采用「标记-复制」算法，老年代采用「标记-整理」算法。**
+**新生代采用「标记-复制」算法，老年代采用「标记-整理」算法**
 
 ![Serial 收集器](assets/serial-garbage-collector-1709972187526-7-1710296955778-26.png)
 
@@ -453,11 +453,8 @@ Parallel Scavenge 收集器也是使用「标记-复制」算法的多线程收�
 
 ```bash
 -XX:+UseParallelGC
-
     使用 Parallel 收集器+ 老年代串行
-
 -XX:+UseParallelOldGC
-
     使用 Parallel 收集器+ 老年代并行
 ```
 
@@ -505,7 +502,12 @@ JDK1.8 默认使用的是 Parallel Scavenge + Parallel Old，如果指定了-XX:
 >
 > 陈铭松，响应时间优先
 >
-> 「标记-清除」算法
+> 「标记 - 清除」算法
+>
+> 1. 初始标记（stop the world）
+> 2. 并发标记
+> 3. 重新标记（stop the world）
+> 4. 并发清除
 
 **CMS（Concurrent Mark Sweep）收集器是一种以获取==最短回收停顿时间==为目标的收集器。它非常符合在注重用户体验的应用上使用。**
 
@@ -524,13 +526,20 @@ JDK1.8 默认使用的是 Parallel Scavenge + Parallel Old，如果指定了-XX:
 
 从它的名字就可以看出它是一款优秀的垃圾收集器，主要优点：**并发收集、低停顿**。但是它有下面三个明显的缺点：
 
-- **对 CPU 资源敏感；**
-- **无法处理==浮动垃圾==；**
-- **它使用的回收算法-「标记-清除」算法会导致收集结束时会有大量空间碎片产生。**
+- **对 CPU 资源敏感**
+- **无法处理==浮动垃圾==**
+- **它使用的回收算法 -「标记-清除」算法会导致收集结束时会有大量空间碎片产生**
 
 **从 JDK9 开始，CMS 收集器已被弃用。**
 
 ### G1 收集器
+
+> [!TIP]
+>
+> 1. 初始标记（stop the world）
+> 2. 并发标记
+> 3. 最终标记（stop the world）
+> 4. 筛选回收（stop the world）
 
 **G1 (Garbage-First) 是一款面向服务器的垃圾收集器，主要针对配备多颗处理器及大容量内存的机器。 以极高概率满足 GC 停顿时间要求的同时，还具备高吞吐量性能特征。**
 
@@ -582,5 +591,3 @@ java -XX:+UseZGC -XX:+ZGenerational className
 
 - 《深入理解 Java 虚拟机：JVM 高级特性与最佳实践（第二版》
 - The Java® Virtual Machine Specification - Java SE 8 Edition：<https://docs.oracle.com/javase/specs/jvms/se8/html/index.html>
-
-<!-- @include: @article-footer.snippet.md -->
