@@ -35,15 +35,15 @@ Java 堆是垃圾收集器管理的主要区域，因此也被称作 **GC 堆（
 
 在 JDK 7 版本及 JDK 7 版本之前，堆内存被通常分为下面三部分：
 
-1. 新生代内存(Young Generation)
-2. 老生代(Old Generation)
-3. 永久代(Permanent Generation)
+1. 新生代内存（Young Generation）
+2. 老生代（Old Generation）
+3. 永久代（Permanent Generation）
 
 下图所示的 Eden 区、两个 Survivor 区 S0 和 S1 都属于新生代，中间一层属于老年代，最下面一层属于永久代
 
 ![堆内存结构](assets/hotspot-heap-structure-1710296924449-1.png)
 
-**JDK 8 版本之后 PermGen (永久代) 已被 Metaspace (元空间) 取代，元空间使用的是直接内存** 
+**JDK 8 版本之后 PermGen（永久代）已被 Metaspace （元空间）取代，元空间使用的是直接内存** 
 
 关于堆空间结构更详细的介绍，可以回过头看看 [Java 内存区域详解](./Java内存区域详解-重点.md) 这篇文章
 
@@ -116,7 +116,7 @@ public class GCTest {
 
 既然虚拟机采用了分代收集的思想来管理内存，那么内存回收时就必须能识别哪些对象应放在新生代，哪些对象应放在老年代中。为了做到这一点，虚拟机给每个对象一个对象年龄（Age）计数器
 
-大部分情况，对象都会首先在 Eden 区域分配。如果对象在 Eden 出生并经过第一次 Minor GC 后仍然能够存活，并且能被 Survivor 容纳的话，将被移动到 Survivor 空间（s0 或者 s1）中，并将对象年龄设为 1(Eden 区->Survivor 区后对象的初始年龄变为 1)
+大部分情况，对象都会首先在 Eden 区域分配。如果对象在 Eden 出生并经过第一次 Minor GC 后仍然能够存活，并且能被 Survivor 容纳的话，将被移动到 Survivor 空间（s0 或者 s1）中，并将对象年龄设为 1（Eden 区->Survivor 区后对象的初始年龄变为 1）
 
 对象在 Survivor 中每熬过一次 MinorGC,年龄就增加 1 岁，当它的年龄增加到一定程度（默认为 15 岁），就会被晋升到老年代中。对象晋升到老年代的年龄阈值，可以通过参数 `-XX:MaxTenuringThreshold` 来设置
 
@@ -130,20 +130,20 @@ public class GCTest {
 >
 > ```c++
 > uint ageTable::compute_tenuring_threshold(size_t survivor_capacity) {
-> //survivor_capacity是survivor空间的大小
-> size_t desired_survivor_size = (size_t)((((double)survivor_capacity)*TargetSurvivorRatio)/100);
-> size_t total = 0;
-> uint age = 1;
-> while (age < table_size) {
-> //sizes数组是每个年龄段对象大小
-> total += sizes[age];
-> if (total > desired_survivor_size) {
-> break;
-> }
-> age++;
+>     //survivor_capacity是survivor空间的大小
+>     size_t desired_survivor_size = (size_t)((((double)survivor_capacity)*TargetSurvivorRatio)/100);
+>     size_t total = 0;
+>     uint age = 1;
+>     while (age < table_size) {
+>     //sizes数组是每个年龄段对象大小
+>     total += sizes[age];
+>     if (total > desired_survivor_size) {
+>         break;
+>     }
+>     age++;
 > }
 > uint result = age < MaxTenuringThreshold ? age : MaxTenuringThreshold;
-> ...
+>     // ...
 > }
 > 
 > ```
